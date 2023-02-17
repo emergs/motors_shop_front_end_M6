@@ -16,12 +16,13 @@ const schema = yup.object().shape({
 });
 
 const FormExample: React.FC = () => {
-  const { control, handleSubmit } = useForm<FormValues>({
+  const { control, handleSubmit, reset } = useForm<FormValues>({
     resolver: yupResolver(schema),
   });
 
   const onSubmit = (data: FormValues) => {
     console.log(data);
+    reset();
   };
 
   return (
@@ -30,8 +31,8 @@ const FormExample: React.FC = () => {
         label='Nome'
         name='firstName'
         type='text'
+        placeholder='Digite seu nome'
         control={control}
-        fontSize='16px'
         height='40px'
         width='50%'
       />
@@ -39,8 +40,8 @@ const FormExample: React.FC = () => {
         label='Sobre Nome'
         name='lastName'
         type='text'
+        placeholder='Digite seu sobrenome'
         control={control}
-        fontSize='16px'
         height='40px'
         width='50%'
       />

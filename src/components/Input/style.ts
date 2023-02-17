@@ -3,19 +3,28 @@ import styled from "styled-components";
 export const StyledLabel = styled.label`
   display: flex;
   flex-direction: column;
+  gap: 8px;
   text-align: left;
-  color: black;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--grey-1);
 
   input {
-    color: black;
-    padding: 0 16px 0 16px;
-    background-color: #f8f9fa;
-    border: 1.5px solid black;
-    border-radius: 4px;
+    padding: 0 16px;
+    font-size: 14px;
     outline: none;
+    border: 1.5px solid var(--grey-7);
+    border-radius: 4px;
+    color: var(--grey-1);
+    background-color: var(--grey-9);
+
+    ::placeholder {
+      color: var(--grey-3);
+      font-size: 14px;
+    }
 
     :focus {
-      border: 1.5px solid #5126ea;
+      border: 1.5px solid var(--color-brand-2);
     }
   }
 

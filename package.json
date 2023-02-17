@@ -14,7 +14,12 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.1",
     "styled-components": "^5.3.6",
+<<<<<<< HEAD
     "yup": "^1.0.0",
+=======
+    "yup": "^1.0.0"
+
+>>>>>>> feat-input-component-refactor
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

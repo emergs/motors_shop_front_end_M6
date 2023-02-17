@@ -8,8 +8,8 @@ const Input: React.FC<InputProps> = ({
   label,
   name,
   type,
+  placeholder,
   control,
-  fontSize,
   height,
   width,
 }) => {
@@ -26,7 +26,7 @@ const Input: React.FC<InputProps> = ({
           const schema = yup.string().required().trim();
           await schema.validate(value);
           return true;
-        } catch (err: any) {
+        } catch (err: yup.ValidationError | any) {
           return err.message;
         }
       },
@@ -37,8 +37,9 @@ const Input: React.FC<InputProps> = ({
     <StyledLabel htmlFor={name} style={{ width }}>
       {label}
       <input
-        style={{ fontSize, height }}
+        style={{ height }}
         type={type}
+        placeholder={placeholder}
         id={name}
         ref={ref}
         {...inputProps}
