@@ -1,9 +1,11 @@
 import "./App.css";
 import FormExample from "./components/Input/formExample";
+import RoutesMain from "./routes";
 
-function App() {
-
-  return <div className='App'></div>;
+const App = () => {
+  return <>
+    <RoutesMain />
+  </>
 
 }
 
