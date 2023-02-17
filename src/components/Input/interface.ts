@@ -2,8 +2,8 @@ export interface InputProps {
   label: string;
   name: string;
   type: string;
+  placeholder?: string;
   control: any;
-  fontSize?: string;
   width?: string;
   height?: string;
 }
