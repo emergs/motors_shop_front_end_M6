@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { elementsMenu } from "../../utils";
+import Button from "../Button";
 import { NavigationStyled } from "./style";
+import imgLogo from "../../assets/logo.svg"
+import FiMenu from "react-icons/fi"
 
 const Header = () => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
@@ -8,12 +11,14 @@ const Header = () => {
   return (
     <NavigationStyled>
       <a href="/" className="brand-name">
-        MacroSoft
+        <img src={imgLogo} alt="logo" />
       </a>
-      <button
+      <Button
         className="hamburger"
         onClick={() => setIsNavExpanded(!isNavExpanded)}
-      ></button>
+      >
+        Menu
+      </Button>
       <div
         className={
           isNavExpanded ? "navigation-menu expanded" : "navigation-menu"
@@ -27,6 +32,14 @@ const Header = () => {
               </li>
             );
           })}
+          <span>
+          </span>
+          <li >
+            <a href="/" className="login">Fazer Login</a>
+          </li>
+          <li>
+            <a href="/" className="register">Cadastrar</a>
+          </li>
         </ul>
       </div>
     </NavigationStyled>
