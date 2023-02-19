@@ -46,4 +46,11 @@ export const GlobalStyle = createGlobalStyle`
     --random-11 :#5700e3;
     --random-12 :#30007d;
   }
+
+  *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+  }
 `;

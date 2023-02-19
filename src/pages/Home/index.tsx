@@ -1,6 +1,11 @@
+import Header from "../../components/Header"
+import { HomePage } from "./style"
+
 const Home = () => {
   return (
-    <>Home</>
+    <HomePage>
+      <Header />
+    </HomePage>
   )
 }
 
