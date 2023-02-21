@@ -45,6 +45,32 @@ export const GlobalStyle = createGlobalStyle`
     --random-10 :#6100ff;
     --random-11 :#5700e3;
     --random-12 :#30007d;
+
+    //Typography
+
+    --heading-1-700 : 44px 700 'Lexend', sans-serif;
+    --heading-2-600 : 36px 600 'Lexend', sans-serif;
+    --heading-3-600 : 32px 600 'Lexend', sans-serif;
+    --heading-3-500 : 32px 500 'Lexend', sans-serif;
+    --heading-4-600 : 28px 600 'Lexend', sans-serif;
+    --heading-4-500 : 28px 500 'Lexend', sans-serif;
+    --heading-5-600 : 24px 600 'Lexend', sans-serif;
+    --heading-5-500 : 24px 500 'Lexend', sans-serif;
+    --heading-6-600 : 20px 600 'Lexend', sans-serif;
+    --heading-6-500 : 20px 500 'Lexend', sans-serif;
+    --heading-7-600 : 16px 600 'Lexend', sans-serif;
+    --heading-7-500 : 16px 500 'Lexend', sans-serif;
+
+    --body-1-400: 16px 400 'Inter',sans-serif;
+    --body-1-600: 16px 600 'Inter',sans-serif;
+    --body-2-400: 14px 400 'Inter',sans-serif;
+    --body-2-500: 14px 500 'Inter',sans-serif;
+
+    --button-big-text: 16px 600 'Inter',sans-serif;
+    --button-medium-text:14px 600 'Inter',sans-serif;
+    --input-placeholder:16px 400 'Inter',sans-serif;
+    --input-label:14px 500 'Inter',sans-serif;
+
   }
 
   *{
