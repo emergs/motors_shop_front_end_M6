@@ -21,8 +21,9 @@ const Home = () => {
         <Auction />
       </HomeContent>
       <Footer />
+      {/* <ModalCreateAd /> descomentar para abrir/testar modal*/}
     </HomePage>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
