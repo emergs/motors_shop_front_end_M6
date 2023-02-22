@@ -12,6 +12,9 @@ const Input: React.FC<InputProps> = ({
   control,
   height,
   width,
+  inputMode,
+  className,
+  onClick,
 }) => {
   const {
     field: { ref, ...inputProps },
@@ -34,12 +37,15 @@ const Input: React.FC<InputProps> = ({
   });
 
   return (
-    <StyledLabel htmlFor={name} style={{ width }}>
+    <StyledLabel htmlFor={name} style={{ width }} key={name}>
       {label}
       <input
         style={{ height }}
         type={type}
         placeholder={placeholder}
+        inputMode={inputMode}
+        className={className}
+        onClick={onClick}
         id={name}
         ref={ref}
         {...inputProps}

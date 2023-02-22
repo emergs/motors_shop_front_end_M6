@@ -1,9 +1,12 @@
 export interface InputProps {
-  label: string;
+  label?: string;
   name: string;
   type: string;
   placeholder?: string;
   control: any;
   width?: string;
   height?: string;
+  className?: string;
+  inputMode?: React.HTMLAttributes<HTMLLIElement>["inputMode"];
+  onClick?: React.DOMAttributes<HTMLInputElement>["onClick"];
 }

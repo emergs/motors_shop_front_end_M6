@@ -11,7 +11,7 @@ export const StyledLabel = styled.label`
 
   input {
     padding: 0 16px;
-    font-size: 14px;
+    font-size: 16px;
     outline: none;
     border: 1.5px solid var(--grey-7);
     border-radius: 4px;
@@ -20,7 +20,7 @@ export const StyledLabel = styled.label`
 
     ::placeholder {
       color: var(--grey-3);
-      font-size: 14px;
+      font-size: 16px;
     }
 
     :focus {
