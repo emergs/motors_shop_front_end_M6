@@ -3,6 +3,7 @@ import Footer from "../../components/Footer"
 import Header from "../../components/Header"
 import { HomeContent, HomePage } from "./style"
 import Auction from "../../components/Auction"
+import ModalCreateAd from "../../components/Modais/ModalCreateAd";
 
 const Home = () => {
 
