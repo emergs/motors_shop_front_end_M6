@@ -1,6 +1,6 @@
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import ModalEditAd from "../../components/Modais/ModalEditAd";
+import ModalCreateAd from "../../components/Modais/ModalCreateAd";
 import { HomePage } from "./style";
 
 const Home = () => {
@@ -8,7 +8,7 @@ const Home = () => {
     <HomePage>
       <Header />
       <Footer />
-      {/* <ModalEditAd /> descomentar para abrir/testar o modal */}
+      {/* <ModalCreateAd /> descomentar para abrir/testar modal*/}
     </HomePage>
   );
 };
