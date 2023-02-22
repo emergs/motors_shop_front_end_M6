@@ -4,17 +4,14 @@ import * as yup from "yup";
 import { InputProps } from "./interface";
 import { StyledLabel } from "./style";
 
-const Input: React.FC<InputProps> = ({
+const Textarea: React.FC<InputProps> = ({
   label,
   name,
-  type,
   placeholder,
   control,
   height,
   width,
-  inputMode,
   className,
-  onClick,
 }) => {
   const {
     field: { ref, ...inputProps },
@@ -37,26 +34,19 @@ const Input: React.FC<InputProps> = ({
   });
 
   return (
-    <StyledLabel
-      htmlFor={name}
-      style={{ width }}
-      key={name}
-      className={className}
-    >
+    <StyledLabel htmlFor={name} style={{ width }}>
       {label}
-      <input
+      <textarea
         style={{ height }}
-        type={type}
         placeholder={placeholder}
-        inputMode={inputMode}
-        onClick={onClick}
+        className={className}
         id={name}
         ref={ref}
         {...inputProps}
-      />
+      ></textarea>
       {invalid && <span>{error?.message}</span>}
     </StyledLabel>
   );
 };
 
-export default Input;
+export default Textarea;

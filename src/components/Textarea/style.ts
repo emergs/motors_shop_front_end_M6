@@ -9,8 +9,9 @@ export const StyledLabel = styled.label`
   font-weight: 500;
   color: var(--grey-1);
 
-  input {
-    padding: 0 16px;
+  textarea {
+    resize: none;
+    padding: 16px;
     font-size: 16px;
     outline: none;
     border: 1.5px solid var(--grey-7);
