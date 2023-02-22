@@ -11,7 +11,6 @@ export const StyledFormEditAd = styled.form`
   border-radius: 8px;
   background-color: white;
   gap: 1.1rem;
-  margin: 0 auto;
   animation: scale-in 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
   h5 {
@@ -49,6 +48,7 @@ export const StyledFormEditAd = styled.form`
     div {
       display: flex;
       justify-content: space-between;
+      gap: 0.5rem;
 
       input {
         min-width: 152px;
@@ -124,6 +124,22 @@ export const StyledFormEditAd = styled.form`
       :hover {
         background-color: #4529e6;
         border: 1.5px solid #4529e6;
+      }
+    }
+  }
+
+  @media (max-width: 550px) {
+    margin: 1rem;
+    .form-data-number {
+      flex-wrap: wrap;
+      gap: 1rem;
+
+      label {
+        min-width: 45%;
+      }
+
+      .input-data-price {
+        min-width: 100%;
       }
     }
   }

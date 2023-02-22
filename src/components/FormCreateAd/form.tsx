@@ -109,6 +109,7 @@ const FormCreateAd = () => {
           inputMode='numeric'
         />
         <Input
+          className='input-data-price'
           label='Preço'
           type='text'
           name='price'

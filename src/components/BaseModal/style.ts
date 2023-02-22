@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   min-height: 100vh;
-  max-width: 100vw;
+  width: 100%;
   z-index: 1;
   padding: 80px 0;
   position: absolute;
@@ -10,7 +10,6 @@ export const Container = styled.div`
   left: 0;
   right: 0;
   display: flex;
-  align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.75);
 

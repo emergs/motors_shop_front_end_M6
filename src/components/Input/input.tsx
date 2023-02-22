@@ -37,14 +37,18 @@ const Input: React.FC<InputProps> = ({
   });
 
   return (
-    <StyledLabel htmlFor={name} style={{ width }} key={name}>
+    <StyledLabel
+      htmlFor={name}
+      style={{ width }}
+      key={name}
+      className={className}
+    >
       {label}
       <input
         style={{ height }}
         type={type}
         placeholder={placeholder}
         inputMode={inputMode}
-        className={className}
         onClick={onClick}
         id={name}
         ref={ref}
