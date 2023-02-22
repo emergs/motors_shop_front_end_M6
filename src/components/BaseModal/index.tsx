@@ -1,7 +1,7 @@
-import { ReactNode, ReactPortal } from "react";
+import { Props } from "./interface";
 import { Container } from "./style";
 
-function BaseModal({ children }: any) {
+function BaseModal({ children }: Props) {
   return <Container>{children}</Container>;
 }
 
