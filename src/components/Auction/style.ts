@@ -14,6 +14,7 @@ const AuctionStyled = styled.section`
     display: flex;
     gap:0.5rem;
     overflow: scroll;
+    margin-bottom: 67px;
   }
 
   .card{
@@ -148,6 +149,49 @@ const AuctionStyled = styled.section`
     color: var(--white-fixed);
     width: 26px;
     height: 14px;
+  }
+
+  @media(min-width: 768px) {
+    ul{
+      margin-bottom: 200px;
+    }
+    .card{
+      width: 735px;
+      height: 388px;
+    }
+    .card-info{
+      width: 735px;
+      padding: 24px 41px 20px 36px;
+    }
+    .card-time{
+      
+    }
+    .card-info h3{
+      margin-top: 69px;
+      min-height: 0;
+    }
+    .card-info p{
+      margin-top: 16px;
+      -webkit-line-clamp: 1;
+    }
+    .card-info-owner{
+      margin-top: 20px;
+    }
+    .card-year-km-price{
+      display: flex;
+      justify-content: space-between;
+      margin-top: 24px;
+    }
+    .card-year-km{
+      margin-top: 0;
+    }
+    .card-price{
+      margin-top: 0;
+    }
+    .card-auction{
+      width: 735px;
+    }
+
   }
 `
 

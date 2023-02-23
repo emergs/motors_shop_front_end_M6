@@ -14,7 +14,7 @@ const Home = () => {
         <div className="main">
           <h1>Velocidade e experiência em um lugar feito para você</h1>
           <span>Um ambiente feito para você explorar o seu melhor</span>
-          <div className="buttons-group">
+          <div className="main-buttons-group">
             <Button>Carros</Button>
             <Button>Motos</Button>
           </div>

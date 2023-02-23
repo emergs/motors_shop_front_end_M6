@@ -27,6 +27,11 @@ const NavigationStyled = styled.div`
     /* background-color: ; */
   }
 
+  Button svg{
+    width: 25px;
+    height: 25px;
+  }
+
   .navigation-menu ul {
     position: absolute;
     top: 80px;

@@ -29,7 +29,7 @@ const HomeContent = styled.section`
     text-align: center;
   }
 
-  .main .buttons-group{
+  .main-buttons-group{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -37,15 +37,35 @@ const HomeContent = styled.section`
     gap: 0.75rem;
   }
 
-  .main .buttons-group button{
+  .main-buttons-group button{
     width: 93.6%;
     height: 3rem;
     font:var(--button-big-text);
     color: var(--grey-10);
     border: 1.5px solid var(--grey-10);
     background-color: var(--color-brand-2);
+    cursor: pointer;
   }
 
+  @media(min-width:768px) {
+    .main{
+      padding: 0px 425px;
+      display: flex;
+      justify-content: center;
+    }
+    .main h1{
+      font: var(--heading-1-700);
+      min-width: 381px;
+    }
+    .main span{
+      min-width: 381px;
+    }
+    .main-buttons-group{
+      display: flex;
+      flex-direction: row;
+      width: 381px;
+    }
+  }
 
 `
 export { HomePage, HomeContent }
