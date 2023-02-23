@@ -5,6 +5,8 @@ export const PageContainer = styled.div`
   flex-direction: column;
   justify-content: center;
 
+  gap: 50px;
+
   width: 100vw;
   height: auto;
 
