@@ -18,6 +18,7 @@ export interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
   hoverBorder?: string;
   hoverBorderRadius?: string;
   hoverOutline?: string;
+  padding?: string;
 }
 
 export const StyledButton = styled.button<IButtonProps>`
@@ -37,6 +38,7 @@ export const StyledButton = styled.button<IButtonProps>`
 
   outline: ${({ outline }) => outline};
 
+  padding: ${({ padding }) => padding};
   &:hover {
     background-color: ${({ hoverBackground }) => hoverBackground};
     color: ${({ hoverColor }) => hoverColor};
