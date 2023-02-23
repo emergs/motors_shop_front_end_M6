@@ -5,12 +5,14 @@ const Button = ({
   width,
   height,
   hoverColor,
-  backgroundColor,
+  backgroundColor = "transparent",
   hoverBackground,
   outline = "none",
   borderRadius = "5px",
-  border = "none",
-  hoverBorder = "none",
+  border = "1px solid transparent",
+  hoverBorder = "1px solid transparent",
+  color,
+  padding = "10px 5px",
   onClick,
 }: IButtonProps) => {
   return (
@@ -24,6 +26,8 @@ const Button = ({
       borderRadius={borderRadius}
       border={border}
       outline={outline}
+      color={color}
+      padding={padding}
       onClick={onClick}
     >
       {children}
