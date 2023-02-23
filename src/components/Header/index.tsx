@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <NavigationStyled>
-      <a href="/" className="brand-name">
+      <a href="/home" className="brand-name">
         <img src={imgLogo} alt="logo" />
       </a>
       <Button
@@ -29,7 +29,7 @@ const Header = () => {
           {elementsMenu.map((e) => {
             return (
               <li>
-                <a href="/home">{e.name}</a>
+                <a href={e.anchor}>{e.name}</a>
               </li>
             );
           })}

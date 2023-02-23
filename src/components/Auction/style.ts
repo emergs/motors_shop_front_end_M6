@@ -23,6 +23,7 @@ const AuctionStyled = styled.section`
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.29) 0%, #000000 100%);
     display: flex;
     flex-direction: column;
+    position: relative;
   }
 
   .card-info{
@@ -64,9 +65,11 @@ const AuctionStyled = styled.section`
   }
 
   .card img{
-    width:287px;
-    height: 155.4px;
-    z-index: 1;
+    position: absolute;
+    top: 116px;
+    width: 87.5%;
+    height: 155px;
+    z-index: -1;
   }
 
   .card p{
@@ -158,6 +161,7 @@ const AuctionStyled = styled.section`
     .card{
       width: 735px;
       height: 388px;
+      position: relative;
     }
     .card-info{
       width: 735px;
@@ -169,6 +173,14 @@ const AuctionStyled = styled.section`
     .card-info h3{
       margin-top: 69px;
       min-height: 0;
+    }
+    .card img{
+      position: absolute;
+      top: 6.65px;
+      left: 52.36px;
+      width: 79.18%;
+      height: 315px;
+      z-index: -1;
     }
     .card-info p{
       margin-top: 16px;
@@ -190,6 +202,9 @@ const AuctionStyled = styled.section`
     }
     .card-auction{
       width: 735px;
+      display: flex;
+      justify-content: space-between;
+      padding:0 36px;
     }
 
   }
