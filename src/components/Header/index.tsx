@@ -3,7 +3,7 @@ import { elementsMenu } from "../../utils";
 import Button from "../Button";
 import { NavigationStyled } from "./style";
 import imgLogo from "../../assets/logo.svg"
-import FiMenu from "react-icons/fi"
+import { FiMenu } from "react-icons/fi"
 
 const Header = () => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
@@ -14,10 +14,11 @@ const Header = () => {
         <img src={imgLogo} alt="logo" />
       </a>
       <Button
+        backgroundColor="inherit"
         className="hamburger"
         onClick={() => setIsNavExpanded(!isNavExpanded)}
       >
-        Menu
+        <FiMenu />
       </Button>
       <div
         className={
