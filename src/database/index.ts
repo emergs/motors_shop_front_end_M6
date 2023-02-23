@@ -28,9 +28,7 @@ export const vehicles = [
     "km": "0",
     "price": "78.500,00",
     "time_auction": "2:00:00",
-    "img": {
-      "1": `${img_mercedes_a200}`
-    }
+    "img": [`${img_mercedes_a200}`]
   },
   {
     "name": "BMW M8",
@@ -41,9 +39,8 @@ export const vehicles = [
     "km": "0",
     "price": "180.000,00",
     "time_auction": "2:00:00",
-    "img": {
-      "1": `${img_bmw}`
-    }
+    "img": [`${img_bmw}`]
+
   },
   {
     "name": "Renault Captur",
@@ -54,9 +51,8 @@ export const vehicles = [
     "km": "100.000",
     "price": "68.500,00",
     "time_auction": "2:00:00",
-    "img": {
-      "1": `${img_captur}`
-    }
+    "img": [`${img_captur}`]
+
   },
   {
     "name": "Chevrolet Cruze",
@@ -67,9 +63,8 @@ export const vehicles = [
     "km": "0",
     "price": "60.500,00",
     "time_auction": "2:00:00",
-    "img": {
-      "1": `${img_cruze}`
-    }
+    "img": [`${img_cruze}`]
+
   },
   {
     "name": "Ford Expedition",
@@ -80,9 +75,8 @@ export const vehicles = [
     "km": "0",
     "price": "78.500,00",
     "time_auction": "2:00:00",
-    "img": {
-      "1": `${img_ford_expedition}`
-    }
+    "img": [`${img_ford_expedition}`]
+
   },
   {
     "name": "Ford Ka",
@@ -93,9 +87,8 @@ export const vehicles = [
     "km": "0",
     "price": "78.500,00",
     "time_auction": "2:00:00",
-    "img": {
-      "1": `${img_ka}`
-    }
+    "img": [`${img_ka}`]
+
   },
   {
     "name": "Nissan Kicks",
@@ -106,9 +99,8 @@ export const vehicles = [
     "km": "0",
     "price": "78.500,00",
     "time_auction": "2:00:00",
-    "img": {
-      "1": `${img_kicks}`
-    }
+    "img": [`${img_kicks}`]
+
   },
   {
     "name": "Mercedes Benz A300",
@@ -119,9 +111,8 @@ export const vehicles = [
     "km": "0",
     "price": "78.500,00",
     "time_auction": "2:00:00",
-    "img": {
-      "1": `${img_mercedes}`
-    }
+    "img": [`${img_mercedes}`]
+
   },
   {
     "name": "Mercedes Benz A400",
@@ -132,9 +123,8 @@ export const vehicles = [
     "km": "0",
     "price": "78.500,00",
     "time_auction": "2:00:00",
-    "img": {
-      "1": `${img_mercedes2}`
-    }
+    "img": [`${img_mercedes2}`]
+
   },
   {
     "name": "Moto1",
@@ -145,9 +135,8 @@ export const vehicles = [
     "km": "0",
     "price": "78.500,00",
     "time_auction": "2:00:00",
-    "img": {
-      "1": `${img_moto1}`
-    }
+    "img": [`${img_moto1}`]
+
   },
   {
     "name": "Moto 2",
@@ -158,9 +147,8 @@ export const vehicles = [
     "km": "0",
     "price": "78.500,00",
     "time_auction": "2:00:00",
-    "img": {
-      "1": `${img_moto2}`
-    }
+    "img": [`${img_moto2}`]
+
   },
   {
     "name": "Moto3",
@@ -171,9 +159,8 @@ export const vehicles = [
     "km": "0",
     "price": "78.500,00",
     "time_auction": "2:00:00",
-    "img": {
-      "1": `${img_moto3}`
-    }
+    "img": [`${img_moto3}`]
+
   },
   {
     "name": "Moto 4",
@@ -184,9 +171,8 @@ export const vehicles = [
     "km": "0",
     "price": "78.500,00",
     "time_auction": "2:00:00",
-    "img": {
-      "1": `${img_moto4}`
-    }
+    "img": [`${img_moto4}`]
+
   },
   {
     "name": "Moto 5",
@@ -197,9 +183,8 @@ export const vehicles = [
     "km": "0",
     "price": "78.500,00",
     "time_auction": "2:00:00",
-    "img": {
-      "1": `${img_moto5}`
-    }
+    "img": [`${img_moto5}`]
+
   },
   {
     "name": "Moto 6",
@@ -210,9 +195,8 @@ export const vehicles = [
     "km": "0",
     "price": "78.500,00",
     "time_auction": "2:00:00",
-    "img": {
-      "1": `${img_moto6}`
-    }
+    "img": [`${img_moto6}`]
+
   },
   {
     "name": "Moto 7",
@@ -223,9 +207,8 @@ export const vehicles = [
     "km": "0",
     "price": "78.500,00",
     "time_auction": "2:00:00",
-    "img": {
-      "1": `${img_moto7}`
-    }
+    "img": [`${img_moto7}`]
+
   },
   {
     "name": "Mustang",
@@ -236,9 +219,8 @@ export const vehicles = [
     "km": "0",
     "price": "78.500,00",
     "time_auction": "2:00:00",
-    "img": {
-      "1": `${img_mustang}`
-    }
+    "img": [`${img_mustang}`]
+
   },
   {
     "name": "Porche",
@@ -249,9 +231,8 @@ export const vehicles = [
     "km": "0",
     "price": "78.500,00",
     "time_auction": "2:00:00",
-    "img": {
-      "1": `${img_porche}`
-    }
+    "img": [`${img_porche}`]
+
   },
   {
     "name": "Quadriciculo",
@@ -262,8 +243,7 @@ export const vehicles = [
     "km": "0",
     "price": "78.500,00",
     "time_auction": "2:00:00",
-    "img": {
-      "1": `${img_quadriciculo}`
-    }
+    "img": [`${img_quadriciculo}`]
+
   }
 ]
