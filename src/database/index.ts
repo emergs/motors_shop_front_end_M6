@@ -29,6 +29,7 @@ export const vehicles = [
     price: "78.500,00",
     time_auction: "2:00:00",
     img: [`${img_mercedes_a200}`],
+    category: "car",
   },
   {
     name: "BMW M8",
@@ -40,6 +41,7 @@ export const vehicles = [
     price: "180.000,00",
     time_auction: "2:00:00",
     img: [`${img_bmw}`],
+    category: "car",
   },
   {
     name: "Renault Captur",
@@ -51,6 +53,7 @@ export const vehicles = [
     price: "68.500,00",
     time_auction: "2:00:00",
     img: [`${img_captur}`],
+    category: "car",
   },
   {
     name: "Chevrolet Cruze",
@@ -62,6 +65,7 @@ export const vehicles = [
     price: "60.500,00",
     time_auction: "2:00:00",
     img: [`${img_cruze}`],
+    category: "car",
   },
   {
     name: "Ford Expedition",
@@ -73,6 +77,7 @@ export const vehicles = [
     price: "78.500,00",
     time_auction: "2:00:00",
     img: [`${img_ford_expedition}`],
+    category: "car",
   },
   {
     name: "Ford Ka",
@@ -84,6 +89,7 @@ export const vehicles = [
     price: "78.500,00",
     time_auction: "2:00:00",
     img: [`${img_ka}`],
+    category: "car",
   },
   {
     name: "Nissan Kicks",
@@ -95,6 +101,7 @@ export const vehicles = [
     price: "78.500,00",
     time_auction: "2:00:00",
     img: [`${img_kicks}`],
+    category: "car",
   },
   {
     name: "Mercedes Benz A300",
@@ -106,6 +113,7 @@ export const vehicles = [
     price: "78.500,00",
     time_auction: "2:00:00",
     img: [`${img_mercedes}`],
+    category: "car",
   },
   {
     name: "Mercedes Benz A400",
@@ -117,6 +125,7 @@ export const vehicles = [
     price: "78.500,00",
     time_auction: "2:00:00",
     img: [`${img_mercedes2}`],
+    category: "car",
   },
   {
     name: "Moto1",
@@ -128,6 +137,7 @@ export const vehicles = [
     price: "78.500,00",
     time_auction: "2:00:00",
     img: [`${img_moto1}`],
+    category: "motorcicle",
   },
   {
     name: "Moto 2",
@@ -139,6 +149,7 @@ export const vehicles = [
     price: "78.500,00",
     time_auction: "2:00:00",
     img: [`${img_moto2}`],
+    category: "motorcicle",
   },
   {
     name: "Moto3",
@@ -150,6 +161,7 @@ export const vehicles = [
     price: "78.500,00",
     time_auction: "2:00:00",
     img: [`${img_moto3}`],
+    category: "motorcicle",
   },
   {
     name: "Moto 4",
@@ -161,6 +173,7 @@ export const vehicles = [
     price: "78.500,00",
     time_auction: "2:00:00",
     img: [`${img_moto4}`],
+    category: "motorcicle",
   },
   {
     name: "Moto 5",
@@ -172,6 +185,7 @@ export const vehicles = [
     price: "78.500,00",
     time_auction: "2:00:00",
     img: [`${img_moto5}`],
+    category: "motorcicle",
   },
   {
     name: "Moto 6",
@@ -183,6 +197,7 @@ export const vehicles = [
     price: "78.500,00",
     time_auction: "2:00:00",
     img: [`${img_moto6}`],
+    category: "motorcicle",
   },
   {
     name: "Moto 7",
@@ -194,6 +209,7 @@ export const vehicles = [
     price: "78.500,00",
     time_auction: "2:00:00",
     img: [`${img_moto7}`],
+    category: "motorcicle",
   },
   {
     name: "Mustang",
@@ -205,6 +221,7 @@ export const vehicles = [
     price: "78.500,00",
     time_auction: "2:00:00",
     img: [`${img_mustang}`],
+    category: "car",
   },
   {
     name: "Porche",
@@ -216,6 +233,7 @@ export const vehicles = [
     price: "78.500,00",
     time_auction: "2:00:00",
     img: [`${img_porche}`],
+    category: "car",
   },
   {
     name: "Quadriciculo",
@@ -227,5 +245,6 @@ export const vehicles = [
     price: "78.500,00",
     time_auction: "2:00:00",
     img: [`${img_quadriciculo}`],
+    category: "motorcicle",
   },
 ];
