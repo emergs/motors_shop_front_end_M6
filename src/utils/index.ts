@@ -1,5 +1,5 @@
 export const elementsMenu = [
-  { name: "Carros" },
-  { name: "Motos" },
-  { name: "Leilão" }
+  { name: "Carros", anchor: "#car" },
+  { name: "Motos", anchor: "#motorcycle" },
+  { name: "Leilão", anchor: "#auction" }
 ];
