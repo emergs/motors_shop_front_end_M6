@@ -2,78 +2,46 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Auction from "../../components/Auction";
 import ModalCreateAd from "../../components/Modais/ModalCreateAd";
-import { PageContainer, List, Card } from "./styles";
+import { PageContainer, List } from "./styles";
 import { vehicles } from "../../database";
 import Button from "../../components/Button";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
+import Card from "../../components/Card";
+import { IVehicle } from "./interfaces";
 
 const AdmPage = () => {
-  const buttonAtributes = {
-    border: "1px solid var(--grey-0)",
-    padding: "10px",
-    hoverBackground: "var(--grey-1)",
-    hoverColor: "var(--white-fixed)",
-  };
+  const motorcicles: IVehicle[] = vehicles.filter(
+    (v) => v.category === "motorcicle"
+  );
+  const cars: IVehicle[] = vehicles.filter((v) => v.category === "car");
+
   return (
     <PageContainer>
       <Header />
       <Auction />
+
       <h2>Carros</h2>
       <List>
-        {vehicles.map((e) =>
-          e.category === "car" ? (
+        {cars && cars.length > 0 ? (
+          cars.map((c) => (
             <li>
-              <Card>
-                <img src={e.img[0]} alt={e.name} />
-                <div className="details-container">
-                  <h3>{e.name}</h3>
-                  <p>
-                    {e.info.length > 90 ? e.info.slice(0, 85) + "..." : e.info}
-                  </p>
-                  <p>
-                    <span>{e.km}</span>
-                    <span>{e.year}</span>
-                    <span>R$ {e.price}</span>
-                  </p>
-                  <div className="button-container">
-                    <Button {...buttonAtributes}>Editar</Button>
-                    <Button {...buttonAtributes}>Ver como</Button>
-                  </div>
-                </div>
-              </Card>
+              <Card {...c} />
             </li>
-          ) : (
-            <Fragment />
-          )
+          ))
+        ) : (
+          <Fragment />
         )}
       </List>
       <h2>Motos</h2>
       <List>
-        {vehicles.map((e) =>
-          e.category === "motorcicle" ? (
+        {motorcicles && motorcicles.length > 0 ? (
+          motorcicles.map((m) => (
             <li>
-              <Card>
-                <img src={e.img[0]} alt={e.name} />
-                <div className="details-container">
-                  <h3>{e.name}</h3>
-                  <p>
-                    {e.info.length > 90 ? e.info.slice(0, 85) + "..." : e.info}
-                  </p>
-                  <p>
-                    <span>{e.km}</span>
-                    <span>{e.year}</span>
-                    <span>R$ {e.price}</span>
-                  </p>
-                  <div className="button-container">
-                    <Button {...buttonAtributes}>Editar</Button>
-                    <Button {...buttonAtributes}>Ver como</Button>
-                  </div>
-                </div>
-              </Card>
+              <Card {...m} />
             </li>
-          ) : (
-            <Fragment />
-          )
+          ))
+        ) : (
+          <Fragment />
         )}
       </List>
       <Footer />
