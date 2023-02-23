@@ -25,12 +25,14 @@ const Auction = () => {
                   <span>{e.owner_initials}</span>
                   <span>{e.owner}</span>
                 </div>
-                <div className="card-year-km">
-                  <span>{e.year}</span>
-                  <span>{e.km} KM</span>
-                </div>
-                <div className="card-price">
-                  <span>R$ {e.price}</span>
+                <div className="card-year-km-price">
+                  <div className="card-year-km">
+                    <span>{e.year}</span>
+                    <span>{e.km} KM</span>
+                  </div>
+                  <div className="card-price">
+                    <span>R$ {e.price}</span>
+                  </div>
                 </div>
               </section>
               <div className="card-auction">
