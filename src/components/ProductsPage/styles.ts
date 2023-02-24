@@ -1,5 +1,26 @@
 import styled from "styled-components";
 
+const colors = [
+    '--random-1',
+    '--random-2',
+    '--random-3',
+    '--random-4',
+    '--random-5',
+    '--random-6',
+    '--random-7',
+    '--random-8',
+    '--random-9',
+    '--random-10',
+    '--random-11',
+    '--random-12'
+  ];
+  
+  // selecione um número aleatório de 0 a 11 para escolher a cor
+  const randomIndex = Math.floor(Math.random() * colors.length);
+  
+  // selecione a cor correspondente com base no índice aleatório
+  const color = `var(${colors[randomIndex]})`;
+
 export const Container = styled.div`
     width: 100%;
     height: 100%;
@@ -250,22 +271,6 @@ export const Comments = styled.div`
                         overflow: hidden;
                         font-weight: bold;
                         text-overflow: ellipsis;
-                    }
-                }
-
-                .commentImage {
-                    height: 35px;
-                    width: 35px;
-                    background-color: var(--color-brand-1);
-                    border-radius: 50%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-
-                    h2 {
-                        font-family: "Inter";
-                        color: var(--white-fixed);
-                        font-size: 14px;
                     }
                 }
             }
