@@ -10,7 +10,7 @@ const RoutesMain = () => {
         <Routes>
             <Route path="/home" element={<Home />} />
             <Route path="/admview" element={<AdmPage />} />
-            <Route path="/product" element={<ProductsPage />} />
+            <Route path="/product/:productId" element={<ProductsPage />} />
             <Route path="*" element={<Navigate to="/home" />} />
         </Routes>
     );
