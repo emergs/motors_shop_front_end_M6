@@ -20,6 +20,7 @@ import img_quadriciculo from "../assets/images/quadriciculo.svg";
 
 export const vehicles = [
   {
+    id: '1',
     name: "Mercedes Benz A200 CGI",
     info: "Tração dianteira. Direção elétrica, 6 marchas, transmissão manual, motor de combustão interna, Velocidade máxima: 225km/h, Potência 163cv, Combustível: Gasolina",
     owner: "Mazuquiebe",
@@ -32,6 +33,7 @@ export const vehicles = [
     category: "car",
   },
   {
+    id: '2',
     name: "BMW M8",
     info: "Tração dianteira. Direção elétrica, 6 marchas, transmissão manual, motor de combustão interna, Velocidade máxima: 225km/h, Potência 163cv, Combustível: Gasolina",
     owner: "Emerson Gonçalves",
@@ -44,6 +46,7 @@ export const vehicles = [
     category: "car",
   },
   {
+    id: '3',
     name: "Renault Captur",
     info: "Tração dianteira. Direção elétrica, 6 marchas, transmissão manual, motor de combustão interna, Velocidade máxima: 225km/h, Potência 163cv, Combustível: Gasolina",
     owner: "Ana Pereira",
@@ -56,6 +59,7 @@ export const vehicles = [
     category: "car",
   },
   {
+    id: '4',
     name: "Chevrolet Cruze",
     info: "Tração dianteira. Direção elétrica, 6 marchas, transmissão manual, motor de combustão interna, Velocidade máxima: 225km/h, Potência 163cv, Combustível: Gasolina",
     owner: "Fernando Henrique",
@@ -68,6 +72,7 @@ export const vehicles = [
     category: "car",
   },
   {
+    id: '5',
     name: "Ford Expedition",
     info: "Tração dianteira. Direção elétrica, 6 marchas, transmissão manual, motor de combustão interna, Velocidade máxima: 225km/h, Potência 163cv, Combustível: Gasolina",
     owner: "Mazuquiebe",
@@ -80,6 +85,7 @@ export const vehicles = [
     category: "car",
   },
   {
+    id: '6',
     name: "Ford Ka",
     info: "Tração dianteira. Direção elétrica, 6 marchas, transmissão manual, motor de combustão interna, Velocidade máxima: 225km/h, Potência 163cv, Combustível: Gasolina",
     owner: "Emerson Gonçalves",
@@ -92,6 +98,7 @@ export const vehicles = [
     category: "car",
   },
   {
+    id: '7',
     name: "Nissan Kicks",
     info: "Tração dianteira. Direção elétrica, 6 marchas, transmissão manual, motor de combustão interna, Velocidade máxima: 225km/h, Potência 163cv, Combustível: Gasolina",
     owner: "Ana Pereira",
@@ -104,6 +111,7 @@ export const vehicles = [
     category: "car",
   },
   {
+    id: '8',
     name: "Mercedes Benz A300",
     info: "Tração dianteira. Direção elétrica, 6 marchas, transmissão manual, motor de combustão interna, Velocidade máxima: 225km/h, Potência 163cv, Combustível: Gasolina",
     owner: "Fernando Henrique",
@@ -116,6 +124,7 @@ export const vehicles = [
     category: "car",
   },
   {
+    id: '9',
     name: "Mercedes Benz A400",
     info: "Tração dianteira. Direção elétrica, 6 marchas, transmissão manual, motor de combustão interna, Velocidade máxima: 225km/h, Potência 163cv, Combustível: Gasolina",
     owner: "Mazuquiebe",
@@ -128,6 +137,7 @@ export const vehicles = [
     category: "car",
   },
   {
+    id: '10',
     name: "Moto1",
     info: "Tração dianteira. Direção elétrica, 6 marchas, transmissão manual, motor de combustão interna, Velocidade máxima: 225km/h, Potência 163cv, Combustível: Gasolina",
     owner: "Emerson Gonçalves",
@@ -140,6 +150,7 @@ export const vehicles = [
     category: "motorcicle",
   },
   {
+    id: '11',
     name: "Moto 2",
     info: "Tração dianteira. Direção elétrica, 6 marchas, transmissão manual, motor de combustão interna, Velocidade máxima: 225km/h, Potência 163cv, Combustível: Gasolina",
     owner: "Ana Pereira",
@@ -152,6 +163,7 @@ export const vehicles = [
     category: "motorcicle",
   },
   {
+    id: '12',
     name: "Moto3",
     info: "Tração dianteira. Direção elétrica, 6 marchas, transmissão manual, motor de combustão interna, Velocidade máxima: 225km/h, Potência 163cv, Combustível: Gasolina",
     owner: "Fernando Henrique",
@@ -164,6 +176,7 @@ export const vehicles = [
     category: "motorcicle",
   },
   {
+    id: '13',
     name: "Moto 4",
     info: "Tração dianteira. Direção elétrica, 6 marchas, transmissão manual, motor de combustão interna, Velocidade máxima: 225km/h, Potência 163cv, Combustível: Gasolina",
     owner: "Mazuquiebe",
@@ -176,6 +189,7 @@ export const vehicles = [
     category: "motorcicle",
   },
   {
+    id: '14',
     name: "Moto 5",
     info: "Tração dianteira. Direção elétrica, 6 marchas, transmissão manual, motor de combustão interna, Velocidade máxima: 225km/h, Potência 163cv, Combustível: Gasolina",
     owner: "Emerson Gonçalves",
@@ -188,6 +202,7 @@ export const vehicles = [
     category: "motorcicle",
   },
   {
+    id: '15',
     name: "Moto 6",
     info: "Tração dianteira. Direção elétrica, 6 marchas, transmissão manual, motor de combustão interna, Velocidade máxima: 225km/h, Potência 163cv, Combustível: Gasolina",
     owner: "Ana Pereira",
@@ -200,6 +215,7 @@ export const vehicles = [
     category: "motorcicle",
   },
   {
+    id: '16',
     name: "Moto 7",
     info: "Tração dianteira. Direção elétrica, 6 marchas, transmissão manual, motor de combustão interna, Velocidade máxima: 225km/h, Potência 163cv, Combustível: Gasolina",
     owner: "Fernando Henrique",
@@ -212,6 +228,7 @@ export const vehicles = [
     category: "motorcicle",
   },
   {
+    id: '17',
     name: "Mustang",
     info: "Tração dianteira. Direção elétrica, 6 marchas, transmissão manual, motor de combustão interna, Velocidade máxima: 225km/h, Potência 163cv, Combustível: Gasolina",
     owner: "Mazuquiebe",
@@ -224,6 +241,7 @@ export const vehicles = [
     category: "car",
   },
   {
+    id: '18',
     name: "Porche",
     info: "Tração dianteira. Direção elétrica, 6 marchas, transmissão manual, motor de combustão interna, Velocidade máxima: 225km/h, Potência 163cv, Combustível: Gasolina",
     owner: "Emerson Gonçalves",
@@ -236,6 +254,7 @@ export const vehicles = [
     category: "car",
   },
   {
+    id: '19',
     name: "Quadriciculo",
     info: "Tração dianteira. Direção elétrica, 6 marchas, transmissão manual, motor de combustão interna, Velocidade máxima: 225km/h, Potência 163cv, Combustível: Gasolina",
     owner: "Ana Pereira",
