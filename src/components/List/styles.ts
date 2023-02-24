@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+`;
+
 export const List = styled.ul`
   display: flex;
   flex-direction: row;
@@ -9,8 +15,8 @@ export const List = styled.ul`
   width: auto;
   height: auto;
 
-  overflow-x: auto;
-  overflow-y: hidden;
+  /* overflow-x: auto; */
+  /* overflow-y: hidden; */
 
   margin-bottom: 100px;
   &::-webkit-scrollbar {
