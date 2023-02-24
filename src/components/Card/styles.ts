@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 import { ICardAtributes } from "./interfaces";
 
-export const CardModel2 = styled.div<ICardAtributes>`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  height: 400px;
-  min-width: 300px;
-  min-height: 400px;
+export const CardModel = styled.div<ICardAtributes>`
+  position: ${({ position }) => position};
+  display: ${({ display }) => display};
+  flex-direction: ${({ flexDirection }) => flexDirection};
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
+  min-width: ${({ minWidth }) => minWidth};
+  min-height: ${({ minHeight }) => minHeight};
 
   margin: 10px;
 
@@ -18,8 +18,8 @@ export const CardModel2 = styled.div<ICardAtributes>`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 50%;
+    width: ${({ imgWidth }) => imgWidth};
+    height: ${({ imgHeight }) => imgHeight};
     background-color: var(--grey-7);
   }
 
@@ -28,24 +28,46 @@ export const CardModel2 = styled.div<ICardAtributes>`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: space-evenly;
-    width: 100%;
-    height: 60%;
+    justify-content: ${({ detailsContainerJustifyContent }) =>
+      detailsContainerJustifyContent};
+    width: ${({ detailsContainerWidth }) => detailsContainerWidth};
+    height: ${({ detailsContainerHeight }) => detailsContainerHeight};
+    background-color: ${({ detailsContainerBackground }) =>
+      detailsContainerBackground};
+    background: ${({ detailsContainerBackground }) =>
+      detailsContainerBackground};
 
     h3 {
       font: var(--heading-7-600);
+      color: ${({ titleColor }) => titleColor};
+      margin-left: 10px;
     }
     p {
       font: var(--body-2-400);
-      color: var(--grey-2);
+      color: ${({ infoColor }) => (infoColor ? infoColor : "var(--grey-2)")};
+      margin-left: 10px;
     }
     .button-container {
       display: inline-flex;
       flex-direction: row;
       width: 100%;
       gap: 10px;
+
+      padding: 10px;
+
+      background-color: ${({ buttonContainerBackground }) =>
+        buttonContainerBackground};
+    }
+    .time {
+      display: ${({ timeDisplay: timeDisplay }) =>
+        timeDisplay ? timeDisplay : "none"};
+      margin-top: 10px;
+      margin-left: 10px;
     }
     span {
+      display: inline-flex;
+      align-items: center;
+
       font: var(--heading-7-500);
 
       color: var(--color-brand-1);
@@ -56,7 +78,7 @@ export const CardModel2 = styled.div<ICardAtributes>`
     }
     span:last-child {
       position: absolute;
-      color: var(--grey-0);
+      color: ${({ priceColor }) => (priceColor ? priceColor : "var(--grey-0)")};
       background-color: transparent;
       right: 0;
     }
