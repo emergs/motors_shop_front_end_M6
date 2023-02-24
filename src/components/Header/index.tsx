@@ -39,7 +39,8 @@ const Header = () => {
             <a href="/" className="login">Fazer Login</a>
           </li>
           <li>
-            <a href="/" className="register">Cadastrar</a>
+            {/* <a href="/" className="register">Cadastrar</a> */}
+            <button>Cadastrar</button>
           </li>
         </ul>
       </div>
