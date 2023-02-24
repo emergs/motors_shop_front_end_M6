@@ -50,8 +50,8 @@ const AdmPage = () => {
       <h2>Leilão</h2>
       <List>
         {vehicles && vehicles.length > 0 ? (
-          vehicles.map((v) => (
-            <li>
+          vehicles.map((v, index) => (
+            <li key={index}>
               <Card
                 position="relative"
                 width={window.innerWidth > 700 ? "600px" : "300px"}
@@ -82,8 +82,8 @@ const AdmPage = () => {
       <h2>Carros</h2>
       <List>
         {cars && cars.length > 0 ? (
-          cars.map((c) => (
-            <li>
+          cars.map((c, index) => (
+            <li key={index}>
               <Card {...c} />
             </li>
           ))
@@ -94,8 +94,8 @@ const AdmPage = () => {
       <h2>Motos</h2>
       <List>
         {motorcicles && motorcicles.length > 0 ? (
-          motorcicles.map((m) => (
-            <li>
+          motorcicles.map((m, index) => (
+            <li key={index}>
               <Card {...m} />
             </li>
           ))
