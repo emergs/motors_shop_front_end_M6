@@ -46,6 +46,8 @@ export const GlobalStyle = createGlobalStyle`
     --random-11 :#5700e3;
     --random-12 :#30007d;
 
+    --transparent-black: linear-gradient(180deg, #0000004a 0%, #000000 100%);
+
     //Typography
 
     --heading-1-700 : 700 44px 'Lexend', sans-serif;
