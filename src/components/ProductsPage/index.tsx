@@ -4,10 +4,13 @@ import Header from "../Header";
 import {
     Comments,
     Container,
+    Form,
     ProductPage,
     RightContent,
     TestDiv,
 } from "./styles";
+import ellipse3 from "../../assets/images/ellipse3.png";
+import Input from "../Input/input";
 
 const ProductsPage = () => {
     return (
@@ -131,19 +134,99 @@ const ProductsPage = () => {
                         </RightContent>
                     </div>
                     <Comments>
-                        <div className="commentsList">
-                            <h2>Comentários</h2>
-                            <ul>
-                                <li>
-                                    <div className="commentImage">
-                                        <h2>JL</h2>
+                        <div className="commentsAll">
+                            <div className="commentsList">
+                                <h2>Comentários</h2>
+                                <ul>
+                                    <li>
+                                        <div className="commentsInfo">
+                                            <div className="commentImage">
+                                                <h2>FA</h2>
+                                            </div>
+                                            <h3>Flávio Augusto</h3>
+                                            <img src={ellipse3} alt="" />
+                                            <span>há 3 dias</span>
+                                        </div>
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of
+                                            the printing and typesetting
+                                            industry. Lorem Ipsum has been the
+                                            industry's standard dummy text ever
+                                            since the 1500s, when an unknown
+                                            printer took a galley of type and
+                                            scrambled it to make a type specimen
+                                            book.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <div className="commentsInfo">
+                                            <div className="commentImage">
+                                                <h2>FH</h2>
+                                            </div>
+                                            <h3>Fernando Henrique</h3>
+                                            <img src={ellipse3} alt="" />
+                                            <span>há 3 dias</span>
+                                        </div>
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of
+                                            the printing and typesetting
+                                            industry. Lorem Ipsum has been the
+                                            industry's standard dummy text ever
+                                            since the 1500s, when an unknown
+                                            printer took a galley of type and
+                                            scrambled it to make a type specimen
+                                            book.
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <div className="commentsInfo">
+                                            <div className="commentImage">
+                                                <h2>JL</h2>
+                                            </div>
+                                            <h3>Julia Lima</h3>
+                                            <img src={ellipse3} alt="" />
+                                            <span>há 3 dias</span>
+                                        </div>
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of
+                                            the printing and typesetting
+                                            industry. Lorem Ipsum has been the
+                                            industry's standard dummy text ever
+                                            since the 1500s, when an unknown
+                                            printer took a galley of type and
+                                            scrambled it to make a type specimen
+                                            book.
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="commentsPost">
+                                <div className="commentsPostInfo">
+                                    <div className="commentPostImage">
+                                        <h2>SL</h2>
                                     </div>
-                                    <h3>Julia Lima</h3>
-                                    <span>. há 3 dias</span>
-                                </li>
-                            </ul>
+                                    <h3>Samuel Leão</h3>
+                                </div>
+                                <Form>
+                                    <textarea
+                                        name=""
+                                        id=""
+                                        placeholder="Carro muito confortável, foi uma ótima experiência de compra..."
+                                    ></textarea>
+                                    <Button
+                                        width="108px"
+                                        height="38px"
+                                        backgroundColor="var(--color-brand-1)"
+                                        color="var(--white-fixed)"
+                                    >
+                                        Comentar
+                                    </Button>
+                                </Form>
+                            </div>
                         </div>
-                        <div className="commentsPost"></div>
+                        <div className="blank">
+                            
+                        </div>
                     </Comments>
 
                     <Footer />
