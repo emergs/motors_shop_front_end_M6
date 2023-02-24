@@ -113,12 +113,13 @@ export const ProductPage = styled.div`
         .kmYear {
             width: 90px;
             display: flex;
-            justify-content: space-evenly;
-
+            justify-content: flex-start;
+            flex-direction: row;
             > p {
                 /* background-color: var(--color-brand-2); */
                 font: var(--body-2-500);
                 color: var(--color-brand-1);
+                margin-left: 10px;
             }
         }
     }
