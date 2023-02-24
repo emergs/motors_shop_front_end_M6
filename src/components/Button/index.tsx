@@ -14,6 +14,12 @@ const Button = ({
   hoverBorder = "1px solid transparent",
   color,
   padding = "10px 5px",
+  position,
+  left,
+  right,
+  top,
+  bottom,
+  zIndex,
   onClick,
 }: IButtonProps) => {
   return (
@@ -29,6 +35,12 @@ const Button = ({
       outline={outline}
       color={color}
       padding={padding}
+      position={position}
+      left={left}
+      right={right}
+      top={top}
+      bottom={bottom}
+      zIndex={zIndex}
       onClick={onClick}
     >
       {children}
