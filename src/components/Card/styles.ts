@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 import { ICardAtributes } from "./interfaces";
 
@@ -11,7 +12,7 @@ export const CardModel = styled.div<ICardAtributes>`
   min-width: ${({ minWidth }) => minWidth};
   min-height: ${({ minHeight }) => minHeight};
 
-  margin: 10px;
+  margin: 30px;
 
   img {
     display: flex;

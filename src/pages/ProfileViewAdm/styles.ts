@@ -37,7 +37,7 @@ export const PageContainer = styled.div`
   .profile-card {
     position: absolute;
     top: 50%;
-    width: 60%;
+    width: 80%;
 
     background-color: var(--white-fixed);
     z-index: 99999;
@@ -94,9 +94,6 @@ export const List = styled.ul`
   &::-webkit-scrollbar-thumb {
     border-radius: 5px;
     background-color: var(--color-brand-4);
-  }
-
-  li {
   }
 `;
 
