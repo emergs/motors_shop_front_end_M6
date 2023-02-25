@@ -65,6 +65,10 @@ const HomeContent = styled.section`
       flex-direction: row;
       width: 381px;
     }
+
+    .main-list-vehicles{
+      margin: 0 60px;
+    }
   }
 
 `

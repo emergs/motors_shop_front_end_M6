@@ -9,12 +9,13 @@ const NavigationStyled = styled.div`
   position: relative;
   border: 1px solid #DEE2E6;
 
-  Button {
+  .hamburger {
     display: block;
     border: 0;
     height: 40px;
     width: 40px;
-    padding: 13px;
+    padding: 0px;
+    background-color: inherit;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
     position: absolute;
@@ -23,11 +24,11 @@ const NavigationStyled = styled.div`
     transform: translateY(-50%);
   }
 
-  Button:hover {
+  .hamburger:hover {
     /* background-color: ; */
   }
 
-  Button svg{
+  .hamburger svg{
     width: 25px;
     height: 25px;
   }
@@ -40,6 +41,7 @@ const NavigationStyled = styled.div`
     display: flex;
     flex-direction: column;
     background-color: white;
+    border:none;
   }
 
   .navigation-menu ul{
@@ -48,10 +50,12 @@ const NavigationStyled = styled.div`
 
   .navigation-menu li {
     list-style-type: none;
-    text-align: center;
+    text-align: start;
+    padding: 0 16px;
   }
   .navigation-menu li a {
-    color: black;
+    font: var(--body-1-600);
+    color: var(--grey-2);
     padding: 1.5rem 0;
     text-decoration: none;
     display: block;
@@ -68,7 +72,28 @@ const NavigationStyled = styled.div`
   
   .navigation-menu.expanded ul {
     display: block;
+    padding-bottom: 32px;
   }
+  .register{
+    width: 100%;
+    height: 48px;
+    font: var(--button-big-text);
+    border: 1.5px solid var(--grey-4);
+    border-radius: 5px;
+    /* margin-bottom: 32px; */
+  }
+
+  .login{
+    font:var(--body-1-600);
+    padding: 32px 0;
+    border: none;
+  }
+
+  .login, .register{
+    background-color: inherit;
+    cursor: pointer;
+  }
+
   @media screen and (min-width: 768px) {
     padding: 0rem 3.75rem;
     color: black;
@@ -101,11 +126,17 @@ const NavigationStyled = styled.div`
       min-width: 300px;
       
     }
+
+    .navigation-menu.expanded ul{
+      padding-bottom: 0px;
+    }
+
     .navigation-menu li {
       list-style-type: none;
       margin: 0rem;
     }
     .navigation-menu li a {
+      font:var(--body-1-600);
       text-decoration: none;
       display: block;
       width: 100%;
@@ -116,14 +147,19 @@ const NavigationStyled = styled.div`
       padding: 0.5rem 2rem;
     }
 
-    Button {
+    .hamburger {
       display: none;
     }
 
-    .register{
-      border: 1px solid #DEE2E6;
-      border-radius: 5px;
+    .register {
+      width: 133px;
     }
+
+    .login{
+      height: 100%;
+      padding: 10px 0;
+    }
+
   }
 
 

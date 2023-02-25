@@ -30,64 +30,59 @@ const Home = () => {
           </div>
         </div>
         <Auction />
-        <h2 id="car">Carros</h2>
-        <List>
-          {vehicles.map((e) =>
-            e.category === "car" ? (
-              <li>
-                <Card>
-                  <img src={e.img[0]} alt={e.name} />
-                  <div className="details-container">
-                    <h3>{e.name}</h3>
-                    <p>
-                      {e.info.length > 90 ? e.info.slice(0, 85) + "..." : e.info}
-                    </p>
-                    <p>
-                      <span>{e.km}</span>
-                      <span>{e.year}</span>
-                      <span>R$ {e.price}</span>
-                    </p>
-                    <div className="button-container">
-                      <Button {...buttonAtributes}>Editar</Button>
-                      <Button {...buttonAtributes}>Ver como</Button>
+        {/* <VehicleList vehicleList={vehicles} /> */}
+        <div className="main-list-vehicles">
+          <h2 id="car">Carros</h2>
+          <List>
+            {vehicles.map((e) =>
+              e.category === "car" ? (
+                <li>
+                  <Card>
+                    <img src={e.img[0]} alt={e.name} />
+                    <div className="details-container">
+                      <h3>{e.name}</h3>
+                      <p>
+                        {e.info.length > 90 ? e.info.slice(0, 85) + "..." : e.info}
+                      </p>
+                      <p>
+                        <span>{e.km}</span>
+                        <span>{e.year}</span>
+                        <span>R$ {e.price}</span>
+                      </p>
                     </div>
-                  </div>
-                </Card>
-              </li>
-            ) : (
-              <Fragment />
-            )
-          )}
-        </List>
-        <h2 id="motorcycle">Motos</h2>
-        <List>
-          {vehicles.map((e) =>
-            e.category === "motorcicle" ? (
-              <li>
-                <Card>
-                  <img src={e.img[0]} alt={e.name} />
-                  <div className="details-container">
-                    <h3>{e.name}</h3>
-                    <p>
-                      {e.info.length > 90 ? e.info.slice(0, 85) + "..." : e.info}
-                    </p>
-                    <p>
-                      <span>{e.km}</span>
-                      <span>{e.year}</span>
-                      <span>R$ {e.price}</span>
-                    </p>
-                    <div className="button-container">
-                      <Button {...buttonAtributes}>Editar</Button>
-                      <Button {...buttonAtributes}>Ver como</Button>
+                  </Card>
+                </li>
+              ) : (
+                <Fragment />
+              )
+            )}
+          </List>
+          <h2 id="motorcycle">Motos</h2>
+          <List>
+            {vehicles.map((e) =>
+              e.category === "motorcicle" ? (
+                <li>
+                  <Card>
+                    <img src={e.img[0]} alt={e.name} />
+                    <div className="details-container">
+                      <h3>{e.name}</h3>
+                      <p>
+                        {e.info.length > 90 ? e.info.slice(0, 85) + "..." : e.info}
+                      </p>
+                      <p>
+                        <span>{e.km}</span>
+                        <span>{e.year}</span>
+                        <span>R$ {e.price}</span>
+                      </p>
                     </div>
-                  </div>
-                </Card>
-              </li>
-            ) : (
-              <Fragment />
-            )
-          )}
-        </List>
+                  </Card>
+                </li>
+              ) : (
+                <Fragment />
+              )
+            )}
+          </List>
+        </div>
       </HomeContent>
       <Footer />
       {/* <ModalCreateAd /> descomentar para abrir/testar modal */}
