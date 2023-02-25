@@ -8,12 +8,14 @@ import Button from "../../components/Button";
 import { Fragment, useEffect, useState } from "react";
 import Card from "../../components/Card";
 import { IVehicle } from "./interfaces";
+import VehicleList from "../../components/List";
 
 const AdmPage = () => {
   const motorcicles: IVehicle[] = vehicles.filter(
     (v) => v.category === "motorcicle"
   );
   const cars: IVehicle[] = vehicles.filter((v) => v.category === "car");
+
   const user = {
     name: "Samuel",
     last_name: "Leão",
@@ -22,6 +24,28 @@ const AdmPage = () => {
     industry. Lorem Ipsum has been the industry's standard dummy text
     ever since the 1500s`,
   };
+
+  const auctionCardAtributes = {
+    position: "relative",
+    width: window.innerWidth > 700 ? "600px" : "300px",
+    minWidth: "300px",
+    imgHeight: "100%",
+    imgWidth: "100%",
+    detailsContainerHeight: "100%",
+    detailsContainerPosition: "absolute",
+    detailsContainerBackground: "var(--transparent-black)",
+    detailsContainerJustifyContent: "space-between",
+    infoColor: "var(--white-fixed)",
+    priceColor: "var(--white-fixed)",
+    titleColor: "var(--white-fixed)",
+    timeDisplay: "inline-flex",
+    buttonContainerBackground: "var(--color-brand-1)",
+    buttonColor: "var(--white-fixed)",
+    buttonBorder: "1px solid var(--white-fixed)",
+    buttonHoverBackground: "var(--white-fixed)",
+    buttonHoverColor: "var(--color-brand-1)",
+  };
+
   return (
     <PageContainer>
       <Header />
@@ -48,61 +72,15 @@ const AdmPage = () => {
         </div>
       </section>
       <h2>Leilão</h2>
-      <List>
-        {vehicles && vehicles.length > 0 ? (
-          vehicles.map((v, index) => (
-            <li key={index}>
-              <Card
-                position="relative"
-                width={window.innerWidth > 700 ? "600px" : "300px"}
-                minWidth="300px"
-                imgHeight="100%"
-                imgWidth="100%"
-                detailsContainerHeight="100%"
-                detailsContainerPosition="absolute"
-                detailsContainerBackground="var(--transparent-black)"
-                detailsContainerJustifyContent="space-between"
-                infoColor="var(--white-fixed)"
-                priceColor="var(--white-fixed)"
-                titleColor="var(--white-fixed)"
-                timeDisplay="inline-flex"
-                buttonContainerBackground="var(--color-brand-1)"
-                buttonColor="var(--white-fixed)"
-                buttonBorder="1px solid var(--white-fixed)"
-                buttonHoverBackground="var(--white-fixed)"
-                buttonHoverColor="var(--color-brand-1)"
-                {...v}
-              />
-            </li>
-          ))
-        ) : (
-          <Fragment />
-        )}
-      </List>
+      <VehicleList
+        vehicleList={vehicles}
+        cardAtributes={auctionCardAtributes}
+      />
+
       <h2>Carros</h2>
-      <List>
-        {cars && cars.length > 0 ? (
-          cars.map((c, index) => (
-            <li key={index}>
-              <Card {...c} />
-            </li>
-          ))
-        ) : (
-          <Fragment />
-        )}
-      </List>
+      <VehicleList vehicleList={cars} />
       <h2>Motos</h2>
-      <List>
-        {motorcicles && motorcicles.length > 0 ? (
-          motorcicles.map((m, index) => (
-            <li key={index}>
-              <Card {...m} />
-            </li>
-          ))
-        ) : (
-          <Fragment />
-        )}
-      </List>
+      <VehicleList vehicleList={motorcicles} />
       <Footer />
       {/* <ModalCreateAd /> descomentar para abrir/testar modal */}
     </PageContainer>
