@@ -13,13 +13,12 @@ const Header = () => {
       <a href="/home" className="brand-name">
         <img src={imgLogo} alt="logo" />
       </a>
-      <Button
-        backgroundColor="inherit"
+      <button
         className="hamburger"
         onClick={() => setIsNavExpanded(!isNavExpanded)}
       >
         <FiMenu />
-      </Button>
+      </button>
       <div
         className={
           isNavExpanded ? "navigation-menu expanded" : "navigation-menu"
@@ -33,13 +32,15 @@ const Header = () => {
               </li>
             );
           })}
+          <hr />
           <span>
           </span>
           <li >
-            <a href="/" className="login">Fazer Login</a>
+            <button className="login">Fazer Login</button>
           </li>
           <li>
-            <a href="/" className="register">Cadastrar</a>
+            {/* <a href="/" className="register">Cadastrar</a> */}
+            <button className="register">Cadastrar</button>
           </li>
         </ul>
       </div>
