@@ -36,7 +36,7 @@ const Home = () => {
           <List>
             {vehicles.map((e) =>
               e.category === "car" ? (
-                <li>
+                <li key={e.id}>
                   <Card>
                     <img src={e.img[0]} alt={e.name} />
                     <div className="details-container">
@@ -61,7 +61,7 @@ const Home = () => {
           <List>
             {vehicles.map((e) =>
               e.category === "motorcicle" ? (
-                <li>
+                <li key={e.id}>
                   <Card>
                     <img src={e.img[0]} alt={e.name} />
                     <div className="details-container">

@@ -8,9 +8,9 @@ const Auction = () => {
     <AuctionStyled id="auction">
       <h2>Leilão</h2>
       <ul>
-        {vehicles.map((e) => {
+        {vehicles.map((e, index) => {
           return (
-            <li className="card">
+            <li key={index} className="card">
               <section className="card-info">
                 <div className="card-time">
                   <span>
