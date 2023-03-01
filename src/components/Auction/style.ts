@@ -3,6 +3,10 @@ import styled from "styled-components";
 const AuctionStyled = styled.section`
   padding: 2.375rem 0.75rem;
 
+  @media(min-width: 768px){
+    padding: 100px 60px;
+  }
+
 
   h2{
     font: var(--heading-5-600);
@@ -13,7 +17,8 @@ const AuctionStyled = styled.section`
     height: 31rem;
     display: flex;
     gap:0.5rem;
-    overflow: scroll;
+    overflow-y: hidden;
+    overflow-x: scroll;
     margin-bottom: 67px;
   }
 
@@ -157,6 +162,7 @@ const AuctionStyled = styled.section`
   @media(min-width: 768px) {
     ul{
       margin-bottom: 200px;
+      height: 388px;
     }
     .card{
       width: 735px;
