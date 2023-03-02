@@ -1,11 +1,13 @@
 import { CommentImage } from "./styles";
 
-export interface IProp {
+export interface IDivProp {
     name: string;
     children?: React.ReactNode;
+    width?: string;
+    height?: string;
 }
 
-const MyDiv = ({ name }: IProp) => {
+const MyDiv = ({ name, width, height }: IDivProp) => {
     const colors = [
         "--random-1",
         "--random-2",
@@ -34,7 +36,7 @@ const MyDiv = ({ name }: IProp) => {
     }
 
     return (
-        <CommentImage color={color}>
+        <CommentImage color={color} width={width} height={height}>
             <h4>{iniciais}</h4>
         </CommentImage>
     );

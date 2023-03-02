@@ -10,21 +10,40 @@ import {
     TestDiv,
 } from "./styles";
 import ellipse3 from "../../assets/images/ellipse3.png";
-import Input from "../Input/input";
-import { CommentImage } from "../NoImageColor/styles";
+import { useForm } from "react-hook-form";
 import MyDiv from "../NoImageColor";
 import { useParams } from "react-router-dom";
 import { vehicles } from "../../database";
 
+interface FormValues {
+  comment: string;
+  
+}
+
 const ProductsPage = () => {
     
     const { productId } = useParams()
-    console.log(productId)
+    // console.log(productId)
+
 
     // const [ car, setCar] = useState({})
 
     let atualCar = vehicles.find((car)=> car.id == productId)
-    console.log(atualCar)
+    // console.log(atualCar)
+    const {register, handleSubmit, reset} = useForm<FormValues>()
+
+    function onHandleSubmit(data: FormValues ){
+      console.log(data)
+
+      // let string = data.toString()
+      // let array = string.split('\n')
+      // console.log(array)
+      const dataBody = {vehicle_id: atualCar?.id, ...data}
+      console.log(dataBody)
+      reset()
+
+      
+    }
     
     let myArr = [
         { id: "0", name: "Fernando Henrique Sousa", abre: "FH", image: null },
@@ -188,13 +207,14 @@ const ProductsPage = () => {
                                     </div>
                                     <h3>Samuel Leão</h3>
                                 </div>
-                                <Form>
+                                <Form onSubmit={handleSubmit(onHandleSubmit)}>
+                                    <label htmlFor="comment"></label>
                                     <textarea
-                                        name=""
-                                        id=""
+                                        id="comment"
+                                        {...register("comment")}
                                         placeholder="Carro muito confortável, foi uma ótima experiência de compra..."
                                     ></textarea>
-                                    <Button
+                                    <Button type="submit"
                                         width="108px"
                                         height="38px"
                                         backgroundColor="var(--color-brand-1)"
