@@ -13,6 +13,7 @@ const Button = ({
   border = "1px solid transparent",
   hoverBorder = "1px solid transparent",
   color,
+  type,
   padding = "10px 5px",
   position,
   left,
@@ -42,6 +43,7 @@ const Button = ({
       bottom={bottom}
       zIndex={zIndex}
       onClick={onClick}
+      type={type}
     >
       {children}
     </StyledButton>

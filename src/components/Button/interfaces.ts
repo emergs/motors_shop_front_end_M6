@@ -6,7 +6,7 @@ export interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
   height?: string;
   backgroundColor?: string;
   color?: string;
-
+  type?: "button" | "submit" | "reset";
   border?: string;
   borderRadius?: string;
   outline?: string;
