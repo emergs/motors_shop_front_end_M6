@@ -9,10 +9,9 @@ import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
+  const navigate = useNavigate()
 
   const { handleOpenModalRegisterUser, handleOpenModalLogin } = useContext(ModalsContext)
-
-  const navigate = useNavigate()
 
   const redirectRegister = () => {
     navigate('/login', { replace: true })
@@ -28,6 +27,20 @@ const Header = () => {
     }, 100)
   }
 
+
+  const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) => {
+    event.preventDefault();
+    const pathname = window.location.pathname;
+    if (pathname != "/home") {
+      navigate('/home')
+    }
+    setTimeout(() => {
+      const targetElement = document.querySelector(href);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 500); // atraso de 500 milissegundos (meio segundo)
+  };
 
   return (
     <NavigationStyled>
@@ -46,10 +59,13 @@ const Header = () => {
         }
       >
         <ul>
-          {elementsMenu.map((e) => {
+          {elementsMenu.map((e, index) => {
             return (
-              <li>
-                <a href={e.anchor}>{e.name}</a>
+              <li key={index}>
+                {/* <a href={e.anchor}>{e.name}</a> */}
+                <a href={e.anchor} onClick={(event) => handleLinkClick(event, e.anchor)}>
+                  {e.name}
+                </a>
               </li>
             );
           })}
@@ -69,4 +85,3 @@ const Header = () => {
 };
 
 export default Header;
-
