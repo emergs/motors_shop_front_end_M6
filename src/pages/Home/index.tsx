@@ -3,10 +3,12 @@ import Footer from "../../components/Footer"
 import Header from "../../components/Header"
 import { HomeContent, HomePage } from "./style"
 import Auction from "../../components/Auction"
-import ModalCreateAd from "../../components/Modais/ModalCreateAd";
+import ModalCreateAd from "../../components/Modais";
 import { Card, List } from "../ProfileViewAdm/styles"
 import { vehicles } from "../../database"
 import { Fragment } from "react"
+import Modalteste from "../../components/Modais"
+import Modals from "../../components/Modais"
 
 const Home = () => {
 
@@ -85,7 +87,6 @@ const Home = () => {
         </div>
       </HomeContent>
       <Footer />
-      {/* <ModalCreateAd /> descomentar para abrir/testar modal */}
     </HomePage>
   );
 };

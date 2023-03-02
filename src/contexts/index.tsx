@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import BuyerProvider from './Buyer';
 import SellerProvider from './Seller';
+import ModalsProvider from './Modals';
 
 interface IProvaiders {
   children: ReactNode;
@@ -8,11 +8,13 @@ interface IProvaiders {
 
 const Providers = ({ children }: IProvaiders) => {
   return (
-    <SellerProvider>
-      <BuyerProvider>
+
+    <ModalsProvider>
+      <SellerProvider>
         {children}
-      </BuyerProvider>
-    </SellerProvider>
+      </SellerProvider>
+    </ModalsProvider>
+
   )
 };
 

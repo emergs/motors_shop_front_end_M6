@@ -1,7 +1,7 @@
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Auction from "../../components/Auction";
-import ModalCreateAd from "../../components/Modais/ModalCreateAd";
+import ModalCreateAd from "../../components/Modais";
 import { PageContainer, List } from "./styles";
 import { vehicles } from "../../database";
 import Button from "../../components/Button";

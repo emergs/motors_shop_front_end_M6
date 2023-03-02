@@ -1,19 +1,37 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { elementsMenu } from "../../utils";
 import Button from "../Button";
 import { NavigationStyled } from "./style";
-import imgLogo from "../../assets/logo.svg";
-import { FiMenu } from "react-icons/fi";
+import imgLogo from "../../assets/logo.svg"
+import { FiMenu } from "react-icons/fi"
+import { ModalsContext } from "../../contexts/Modals";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
   const navigate = useNavigate()
 
+  const { handleOpenModalRegisterUser, handleOpenModalLogin } = useContext(ModalsContext)
+
+  const redirectRegister = () => {
+    navigate('/login', { replace: true })
+    setTimeout(() => {
+      handleOpenModalRegisterUser()
+    }, 100)
+  }
+
+  const redirectLogin = () => {
+    navigate('/login', { replace: true })
+    setTimeout(() => {
+      handleOpenModalLogin()
+    }, 100)
+  }
+
+
   const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) => {
     event.preventDefault();
     const pathname = window.location.pathname;
-    if(pathname != "/home"){
+    if (pathname != "/home") {
       navigate('/home')
     }
     setTimeout(() => {
@@ -23,7 +41,7 @@ const Header = () => {
       }
     }, 500); // atraso de 500 milissegundos (meio segundo)
   };
-  
+
   return (
     <NavigationStyled>
       <a href="/home" className="brand-name">
@@ -52,13 +70,13 @@ const Header = () => {
             );
           })}
           <hr />
-          <span></span>
-          <li>
-            <button className="login">Fazer Login</button>
+          <span>
+          </span>
+          <li >
+            <button className="login" onClick={() => redirectLogin()}>Fazer Login</button>
           </li>
           <li>
-            {/* <a href="/" className="register">Cadastrar</a> */}
-            <button className="register">Cadastrar</button>
+            <button className="register" onClick={() => redirectRegister()}>Cadastrar</button>
           </li>
         </ul>
       </div>
