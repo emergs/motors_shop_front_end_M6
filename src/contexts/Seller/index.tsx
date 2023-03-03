@@ -59,32 +59,20 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
   const { handleOpenModalRegisterUserSuccess, handleCloseModalRegisterUser } =
     useContext(ModalsContext);
 
-  //fazer login
-  const userLogin = async (data: IUserLogin) => {
-    api.post("/login", data).then((res) => {
-      const { token, id, typeUser } = res.data;
-      // const { id } = res.data
-      // const { typeUser} = res.data
-      console.log(res.data);
+    //fazer login
+    const userLogin = async (data: IUserLogin) => {
+        api.post("/login", data).then((res)=>{
+            const { token, id,typeUser} = res.data
+            console.log(res.data)
 
-      window.localStorage.clear();
-      window.localStorage.setItem("@MotorShopTOKEN", token);
-      window.localStorage.setItem("@MotorShopUSERID", id);
-      window.localStorage.setItem("@MotorShopUSERTYPE", typeUser);
-      navigate("../home", { replace: true });
-    });
-    // if (req.status !== 200) console.log("Usuario não encontrado");
-
-    // setUser(req.data)
-    // console.log(req.data);
-    // window.localStorage.clear();
-    // localStorage.setItem("@MotorShopTOKEN", JSON.stringify(req.data.token));
-    // localStorage.setItem("@MotorShopUSERID", JSON.stringify(req.data.id));
-    // localStorage.setItem(
-    //     "@MotorShopUSERTYPE",
-    //     JSON.stringify(req.data.typeUser)
-    // );
-  };
+            window.localStorage.clear()
+            window.localStorage.setItem('@MotorShopTOKEN', token)
+            window.localStorage.setItem('@MotorShopUSERID', id)
+            window.localStorage.setItem('@MotorShopUSERTYPE', typeUser)
+            navigate("../home", { replace: true });
+            
+        })
+    };
 
   //cadastro
   const createUser = async (data: IUserRegister) => {
