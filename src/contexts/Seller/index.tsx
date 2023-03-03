@@ -61,6 +61,7 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
     localStorage.setItem('@MotorShopTOKEN', JSON.stringify(req.data.token))
     localStorage.setItem('@MotorShopUSERID', JSON.stringify(req.data.id))
     localStorage.setItem('@MotorShopUSERTYPE', JSON.stringify(req.data.typeUser))
+    localStorage.setItem('@MotorShopUSERNAME', JSON.stringify(req.data.name))
   }
 
   //cadastro
