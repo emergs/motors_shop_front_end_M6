@@ -59,6 +59,8 @@ export const PageContainer = styled.div`
     span {
       color: var(--white-fixed);
       font: var(--heading-1-700);
+      width: 100%;
+      overflow: hidden;
     }
     h2 {
       font: var(--heading-4-600);
@@ -155,4 +157,20 @@ export const Card = styled.div`
       right: 0;
     }
   }
+`;
+
+export const ModalContainer = styled.div`
+  position: absolute;
+
+  top: 0;
+  z-index: 9999999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  width: 100vw;
+  height: 200vh;
+
+  background-color: #0000004a;
 `;

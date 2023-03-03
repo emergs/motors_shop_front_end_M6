@@ -2,28 +2,53 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Auction from "../../components/Auction";
 import ModalCreateAd from "../../components/Modais";
-import { PageContainer, List } from "./styles";
-import { vehicles } from "../../database";
+import { PageContainer, List, ModalContainer } from "./styles";
+// import { vehicles } from "../../database";
 import Button from "../../components/Button";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import Card from "../../components/Card";
-import { IVehicle } from "./interfaces";
+import { IUser, IVehicle } from "./interfaces";
 import VehicleList from "../../components/List";
+import api from "../../services/api";
+import MyDiv from "../../components/NoImageColor";
+import ReactDOM from "react-dom";
+import FormCreateAd from "../../components/FormCreateAd/form";
+import { SellerContext } from "../../contexts/Seller";
+import { ModalsContext } from "../../contexts/Modals";
 
 const AdmPage = () => {
-  const motorcicles: IVehicle[] = vehicles.filter(
-    (v) => v.category === "motorcicle"
-  );
-  const cars: IVehicle[] = vehicles.filter((v) => v.category === "car");
+  const { user, setUser } = useContext(SellerContext);
+  const { showModalCreateAdd, handleModalCreateAdd } =
+    useContext(ModalsContext);
+  const [vehicles, setVehicles] = useState<IVehicle[]>([]);
+  const [motorcicles, setMotorcicles] = useState<IVehicle[]>([]);
+  const [cars, setCars] = useState<IVehicle[]>([]);
 
-  const user = {
-    name: "Samuel",
-    last_name: "Leão",
-    avatar: null,
-    bio: `Lorem Ipsum is simply dummy text of the printing and typesetting
-    industry. Lorem Ipsum has been the industry's standard dummy text
-    ever since the 1500s`,
-  };
+  useEffect(() => {
+    const token = localStorage.getItem("@MotorShopTOKEN");
+    console.log(token);
+
+    if (token) {
+      const retrieveUser = async () => {
+        await api
+          .get("/users/profile", {
+            headers: { Authorization: `Bearer ${token} ` },
+          })
+          .then((res) => {
+            setUser(res.data);
+            setVehicles(res.data.vehicles);
+            setMotorcicles(
+              res.data.vehicles.filter((v: IVehicle) => v.type === "motorcycle")
+            );
+            setCars(
+              res.data.vehicles.filter((v: IVehicle) => v.type === "car")
+            );
+          })
+          .catch((err) => console.error(err));
+      };
+      retrieveUser();
+    }
+  }, []);
 
   const auctionCardAtributes = {
     position: "relative",
@@ -52,20 +77,22 @@ const AdmPage = () => {
       <section className="profile-cover">
         <div className="profile-card">
           <figure>
-            {user && user.avatar ? (
-              <img src={user.avatar} alt="user profile photo" />
+            {user && user.profileImage ? (
+              <img src={user.profileImage} alt="user profile photo" />
             ) : (
-              <span>{user.name[0] + user.last_name[0]}</span>
+              <span>{user ? user.name : ""}</span>
+              // <></>
             )}
           </figure>
-          <h2>Samuel Leão</h2>
-          <p>{user.bio}</p>
+          <h2>{user.name}</h2>
+          <p>{user.description}</p>
           <Button
             color="var(--color-brand-1)"
             border="2px solid var(--color-brand-1)"
             hoverBackground="var(--color-brand-1)"
             hoverBorder="2px solid var(--color-brand-1)"
             hoverColor="var(--white-fixed)"
+            onClick={() => handleModalCreateAdd()}
           >
             Criar Anúncio
           </Button>
@@ -76,13 +103,23 @@ const AdmPage = () => {
         vehicleList={vehicles}
         cardAtributes={auctionCardAtributes}
       />
-
       <h2>Carros</h2>
       <VehicleList vehicleList={cars} />
       <h2>Motos</h2>
       <VehicleList vehicleList={motorcicles} />
       <Footer />
-      {/* <ModalCreateAd /> descomentar para abrir/testar modal */}
+      <>
+        {showModalCreateAdd ? (
+          ReactDOM.createPortal(
+            <ModalContainer>
+              <FormCreateAd />
+            </ModalContainer>,
+            document.getElementById("root") as HTMLElement
+          )
+        ) : (
+          <></>
+        )}
+      </>
     </PageContainer>
   );
 };

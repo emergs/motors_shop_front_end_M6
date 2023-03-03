@@ -2,15 +2,19 @@ import { CardModel } from "./styles";
 import { ICardProps } from "./interfaces";
 import Button from "../Button";
 import { FiClock } from "react-icons/fi";
+import { Link } from "react-router-dom";
+
 
 const Card = ({
-  img,
-  name,
-  info,
+  id,
+  type,
+  imgCap,
+  title,
+  description,
   km,
   year,
-  price,
-  time_auction,
+  value,
+//   time_auction,
   //atributes
   position = "relative",
   display = "flex",
@@ -47,6 +51,7 @@ const Card = ({
     backgroundColor: buttonBackground,
   };
 
+  
   return (
     <CardModel
       position={position}
@@ -69,21 +74,22 @@ const Card = ({
       buttonContainerBackground={buttonContainerBackground}
       timeDisplay={spanDisplay}
     >
-      <img src={img[0]} alt={name} />
+      <img src={imgCap} alt={title} />
       <div className="details-container">
         <span className="time">
-          <FiClock /> {time_auction}
+          {/* <FiClock /> {time_auction} */}
+          <FiClock /> {"teste"}
         </span>
-        <h3>{name}</h3>
-        <p>{info.length > 85 ? info.slice(0, 75) + "..." : info}</p>
+        <h3>{title}</h3>
+        <p>{description.length > 85 ? description.slice(0, 75) + "..." : description}</p>
         <p>
-          <span>{km}</span>
+          <span>{`km ${km}`}</span>
           <span>{year}</span>
-          <span>R$ {price}</span>
+          <span>R$ {value}</span>
         </p>
         <div className="button-container">
           <Button {...buttonAtributes}>Editar</Button>
-          <Button {...buttonAtributes}>Ver como</Button>
+          <Link to={`/product/${id}`} onClick={() => window.scrollTo(0, 0)}>Ver como</Link>
         </div>
       </div>
     </CardModel>

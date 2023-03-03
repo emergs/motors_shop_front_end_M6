@@ -327,6 +327,7 @@ export const Comments = styled.div`
         }
         .commentsAll {
             max-width: 720px;
+            min-width: 720px;
         }
     }
 `;
