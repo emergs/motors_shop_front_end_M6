@@ -3,27 +3,44 @@ import Header from "../../components/Header";
 import Auction from "../../components/Auction";
 import ModalCreateAd from "../../components/Modais";
 import { PageContainer, List } from "./styles";
-import { vehicles } from "../../database";
+// import { vehicles } from "../../database";
 import Button from "../../components/Button";
 import { Fragment, useEffect, useState } from "react";
 import Card from "../../components/Card";
-import { IVehicle } from "./interfaces";
+import { IUser, IVehicle } from "./interfaces";
 import VehicleList from "../../components/List";
+import api from "../../services/api";
+import MyDiv from "../../components/NoImageColor";
 
 const AdmPage = () => {
-  const motorcicles: IVehicle[] = vehicles.filter(
-    (v) => v.category === "motorcicle"
-  );
-  const cars: IVehicle[] = vehicles.filter((v) => v.category === "car");
+  const [user, setUser] = useState<IUser>({} as IUser);
+  const [vehicles, setVehicles] = useState<IVehicle[]>([]);
+  const [motorcicles, setMotorcicles] = useState<IVehicle[]>([]);
+  const [cars, setCars] = useState<IVehicle[]>([]);
+  useEffect(() => {
+    const token = localStorage.getItem("@MotorShopTOKEN");
 
-  const user = {
-    name: "Samuel",
-    last_name: "Leão",
-    avatar: null,
-    bio: `Lorem Ipsum is simply dummy text of the printing and typesetting
-    industry. Lorem Ipsum has been the industry's standard dummy text
-    ever since the 1500s`,
-  };
+    if (token) {
+      const retrieveUser = async () => {
+        await api
+          .get("/users/profile", {
+            headers: { Authorization: `Bearer ${token} ` },
+          })
+          .then((res) => {
+            setUser(res.data);
+            setVehicles(res.data.vehicles);
+            setMotorcicles(
+              res.data.vehicles.filter((v: IVehicle) => v.type === "motorcicle")
+            );
+            setCars(
+              res.data.vehicles.filter((v: IVehicle) => v.type === "car")
+            );
+          })
+          .catch((err) => console.error(err));
+      };
+      retrieveUser();
+    }
+  }, []);
 
   const auctionCardAtributes = {
     position: "relative",
@@ -52,14 +69,14 @@ const AdmPage = () => {
       <section className="profile-cover">
         <div className="profile-card">
           <figure>
-            {user && user.avatar ? (
-              <img src={user.avatar} alt="user profile photo" />
+            {user && user.profileImage ? (
+              <img src={user.profileImage} alt="user profile photo" />
             ) : (
-              <span>{user.name[0] + user.last_name[0]}</span>
+              <MyDiv name={user.name} />
             )}
           </figure>
-          <h2>Samuel Leão</h2>
-          <p>{user.bio}</p>
+          <h2>{user.name}</h2>
+          <p>{user.description}</p>
           <Button
             color="var(--color-brand-1)"
             border="2px solid var(--color-brand-1)"
