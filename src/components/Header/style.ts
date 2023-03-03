@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { IDropDownProps } from ".";
 
 const NavigationStyled = styled.div`
   padding: 0px 16px;
@@ -173,7 +174,7 @@ const Menu = styled.div`
 
 const NameUser = styled.button`
   background-color: inherit;
-  color: inherit;
+  color: black;
   padding: 12px;
   font-size: 16px;
   border: none;

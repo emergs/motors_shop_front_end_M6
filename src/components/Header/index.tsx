@@ -1,11 +1,12 @@
-import { useContext, useState } from "react";
+import { HTMLAttributes, useContext, useEffect, useState } from "react";
 import { elementsMenu } from "../../utils";
 import Button from "../Button";
-import { NavigationStyled } from "./style";
+import { Dropdown, DropdownItem, Menu, NameUser, NavigationStyled } from "./style";
 import imgLogo from "../../assets/logo.svg"
 import { FiMenu } from "react-icons/fi"
 import { ModalsContext } from "../../contexts/Modals";
 import { useNavigate } from "react-router-dom";
+import { SellerContext } from "../../contexts/Seller";
 
 export interface IDropDownProps extends HTMLAttributes<HTMLDivElement> {
   menuIsOpen: boolean;
@@ -14,20 +15,22 @@ export interface IDropDownProps extends HTMLAttributes<HTMLDivElement> {
 const Header = () => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
   const [menu, setMenu] = useState(false);
-  const navigate = useNavigate()
-  
-  //pegar o user do context de user
-  
-  const { handleOpenModalRegisterUser, handleOpenModalLogin } = useContext(ModalsContext)
+  const [userLength, setUserLength] = useState<number>(0)
 
-  //colocar no utils
-  const seller = ["Editar perfil", "Editar endereço", "Meus anúncios", "Sair"];
-  const buyer = ["Editar perfil", "Editar endereço", "Sair"];
-  
+  const navigate = useNavigate()
+
+  const { user, addCount, resetUser } = useContext(SellerContext)
+
+  const { handleOpenModalRegisterUser, handleOpenModalLogin, handleOpenModalEditProfile, handleOpenModalEditAddress } = useContext(ModalsContext)
+
+  useEffect(() => {
+    setUserLength(Object.keys(user).length)
+  }, [userLength])
+
   const handleClick = () => {
     setMenu(!menu);
   };
-  
+
   const redirectRegister = () => {
     navigate('/login', { replace: true })
     setTimeout(() => {
@@ -40,8 +43,21 @@ const Header = () => {
     setTimeout(() => {
       handleOpenModalLogin()
     }, 100)
+    addCount()
   }
 
+  const logout = () => {
+    navigate('./home', { replace: true })
+    localStorage.removeItem('@MotorShopTOKEN')
+    localStorage.removeItem('@MotorShopUSERID')
+    localStorage.removeItem('@MotorShopUSERTYPE')
+    localStorage.removeItem('@MotorShopUSERNAME')
+    resetUser()
+  }
+
+  const openEditAddress = () => {
+    handleOpenModalRegisterUser()
+  }
 
   const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) => {
     event.preventDefault();
@@ -87,7 +103,7 @@ const Header = () => {
           <hr />
           <span>
           </span>
-           {!user ? (
+          {userLength === 0 ? (
             <>
               <li>
                 <button className="login" onClick={() => redirectLogin()}>Fazer Login</button>
@@ -101,12 +117,20 @@ const Header = () => {
               <NameUser onClick={handleClick}>{user.name}</NameUser>
               <Dropdown menuIsOpen={menu}>
                 {user.typeUser === "seller"
-                  ? seller?.map((elem) => {
-                      return <DropdownItem href="#">{elem}</DropdownItem>;
-                    })
-                  : buyer?.map((elem) => {
-                      return <DropdownItem href="#">{elem}</DropdownItem>;
-                    })}
+                  ?
+                  <ul>
+                    <DropdownItem onClick={() => handleOpenModalEditProfile()}>Editar Perfil</DropdownItem>
+                    <li onClick={() => openEditAddress()}>Editar Endereço</li>
+                    <DropdownItem onClick={() => navigate('./admview', { replace: true })}>Meus Anúncios</DropdownItem>
+                    <DropdownItem onClick={() => navigate('../login')}>Sair</DropdownItem>
+                  </ul>
+                  :
+                  <>
+                    <DropdownItem onClick={() => handleOpenModalEditProfile()}>Editar Perfil</DropdownItem>
+                    <DropdownItem onClick={() => openEditAddress()}>Editar Endereço</DropdownItem>
+                    <DropdownItem onClick={() => logout()}>Sair</DropdownItem>
+                  </>
+                }
               </Dropdown>
             </Menu>
           )}
