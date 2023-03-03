@@ -2,13 +2,18 @@ import { StyledFormEditAd } from "./style";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AiOutlineClose } from "react-icons/ai";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Input from "../Input/input";
 import { FormValues } from "./interface";
 import { schema } from "./validator";
 import Textarea from "../Textarea/textarea";
+import api from "../../services/api";
+import { ModalsContext } from "../../contexts/Modals";
+import Button from "../Button";
 
 const FormCreateAd = () => {
+  const { showModalCreateAdd, handleModalCreateAdd } =
+    useContext(ModalsContext);
   const [activeAd, setActiveAd] = useState<boolean>(true);
   const [activeVehicle, setActiveVehicle] = useState<boolean>(true);
   const [typeAd, setTypeAd] = useState<string>("sale");
@@ -18,12 +23,12 @@ const FormCreateAd = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     const imgs: string[] = [];
     data.ad = typeAd;
     data.vehicle = typeVehicle;
 
-    Object.entries(data).map(item => {
+    Object.entries(data).map((item) => {
       item[0].includes("imgGalery") && imgs.push(item[1]);
     });
 
@@ -41,35 +46,46 @@ const FormCreateAd = () => {
       vehicle,
     };
     console.log(infoRequest);
+
+    const token = localStorage.getItem("");
+    await api
+      .post("/vehicle", data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => console.log(res.data))
+      .catch((err) => console.error(err));
+
     reset();
   };
 
   return (
     <StyledFormEditAd onSubmit={handleSubmit(onSubmit)}>
-      <div className='form-title'>
+      <div className="form-title">
         <h4>Criar anúncio</h4>
-        <AiOutlineClose size={20} />
+        <Button onClick={() => handleModalCreateAdd()}>
+          <AiOutlineClose size={20} />
+        </Button>
       </div>
-      <div className='ad-type'>
+      <div className="ad-type">
         <h5>Tipo de anúncio</h5>
         <div>
           <input
-            name='sale'
-            type='button'
-            defaultValue='Venda'
+            name="sale"
+            type="button"
+            defaultValue="Venda"
             className={activeAd ? "button-color" : "null"}
-            onClick={e => {
+            onClick={(e) => {
               e.preventDefault();
               setActiveAd(true);
               setTypeAd("sale");
             }}
           />
           <input
-            name='auction'
-            type='button'
-            defaultValue='Leilão'
+            name="auction"
+            type="button"
+            defaultValue="Leilão"
             className={activeAd ? "null" : "button-color"}
-            onClick={e => {
+            onClick={(e) => {
               e.preventDefault();
               setActiveAd(false);
               setTypeAd("auction");
@@ -79,75 +95,75 @@ const FormCreateAd = () => {
       </div>
       <h5>Informações do veículo</h5>
       <Input
-        label='Título'
-        type='text'
-        name='title'
+        label="Título"
+        type="text"
+        name="title"
         control={control}
-        width='100%'
-        height='48px'
-        placeholder='Digitar título'
+        width="100%"
+        height="48px"
+        placeholder="Digitar título"
       />
-      <div className='form-data-number'>
+      <div className="form-data-number">
         <Input
-          label='Ano'
-          type='text'
-          name='year'
+          label="Ano"
+          type="text"
+          name="year"
           control={control}
-          width='148px'
-          height='48px'
-          placeholder='Digitar ano'
-          inputMode='numeric'
+          width="148px"
+          height="48px"
+          placeholder="Digitar ano"
+          inputMode="numeric"
         />
         <Input
-          label='Quilometragem'
-          type='text'
-          name='km'
+          label="Quilometragem"
+          type="text"
+          name="km"
           control={control}
-          width='148px'
-          height='48px'
-          placeholder='0'
-          inputMode='numeric'
+          width="148px"
+          height="48px"
+          placeholder="0"
+          inputMode="numeric"
         />
         <Input
-          className='input-data-price'
-          label='Preço'
-          type='text'
-          name='price'
+          className="input-data-price"
+          label="Preço"
+          type="text"
+          name="price"
           control={control}
-          width='148px'
-          height='48px'
-          placeholder='Digitar preço'
-          inputMode='numeric'
+          width="148px"
+          height="48px"
+          placeholder="Digitar preço"
+          inputMode="numeric"
         />
       </div>
       <Textarea
-        label='Descrição'
-        name='description'
+        label="Descrição"
+        name="description"
         control={control}
-        width='100%'
-        height='80px'
-        placeholder='Digitar descrição'
+        width="100%"
+        height="80px"
+        placeholder="Digitar descrição"
       />
-      <div className='ad-type'>
+      <div className="ad-type">
         <h5>Tipo de Veículo</h5>
         <div>
           <input
-            name='car'
-            type='button'
-            defaultValue='Carro'
+            name="car"
+            type="button"
+            defaultValue="Carro"
             className={activeVehicle ? "button-color" : "null"}
-            onClick={e => {
+            onClick={(e) => {
               e.preventDefault();
               setActiveVehicle(true);
               setTypeVehicle("car");
             }}
           />
           <input
-            name='moto'
-            type='button'
-            defaultValue='Moto'
+            name="moto"
+            type="button"
+            defaultValue="Moto"
             className={activeVehicle ? "null" : "button-color"}
-            onClick={e => {
+            onClick={(e) => {
               e.preventDefault();
               setActiveVehicle(false);
               setTypeVehicle("moto");
@@ -156,45 +172,45 @@ const FormCreateAd = () => {
         </div>
       </div>
       <Input
-        label='Imagem da capa'
-        type='url'
-        name='imgCap'
+        label="Imagem da capa"
+        type="url"
+        name="imgCap"
         control={control}
-        width='100%'
-        height='48px'
-        placeholder='Inserir URL da imagem'
+        width="100%"
+        height="48px"
+        placeholder="Inserir URL da imagem"
       />
       <>
-        {cont.map(item => {
+        {cont.map((item) => {
           return (
             <Input
               key={`img${item}`}
               label={`${item}ª imagem da galeria`}
-              type='url'
+              type="url"
               name={`imgGalery${item}`}
               control={control}
-              width='100%'
-              height='48px'
-              placeholder='Inserir URL da imagem'
+              width="100%"
+              height="48px"
+              placeholder="Inserir URL da imagem"
             />
           );
         })}
       </>
       {cont.length < 6 && (
         <button
-          type='button'
-          className='add-field'
-          onClick={() => setCont(array => [...array, cont.length + 1])}
+          type="button"
+          className="add-field"
+          onClick={() => setCont((array) => [...array, cont.length + 1])}
         >
           Adicionar campo para imagem da galeria
         </button>
       )}
 
-      <div className='div-submit'>
-        <button className='button-cancel' type='button'>
+      <div className="div-submit">
+        <button className="button-cancel" type="button">
           Cancelar
         </button>
-        <button className='button-submit' type='submit'>
+        <button className="button-submit" type="submit">
           Criar anúncio
         </button>
       </div>
