@@ -12,8 +12,7 @@ import {
 import ellipse3 from "../../assets/images/ellipse3.png";
 import { useForm } from "react-hook-form";
 import MyDiv from "../NoImageColor";
-import { useParams } from "react-router-dom";
-import { vehicles } from "../../database";
+import {  useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { ICommentProps, IVehicleProps } from "./interfaces";
@@ -28,7 +27,7 @@ const ProductsPage = () => {
     const [vehicle, setVehicle] = useState<IVehicleProps>();
     const [nameSplited, setNameSplited] = useState<string>("");
     const [comments, setComments] = useState<ICommentProps[]>([]);
-
+    
     useEffect(() => {
         const fetchData = async () => {
             const result = await api.get(`/vehicle/${productId}`);
@@ -45,8 +44,7 @@ const ProductsPage = () => {
 
         fetchData();
     }, [setComments]);
-
-    // let vehicle = vehicles.find((car) => car.id == productId);
+    
 
     const { register, handleSubmit, reset } = useForm<FormValues>();
 
@@ -61,6 +59,8 @@ const ProductsPage = () => {
             },
         })
             .then((response) => {
+                console.log(response.data)
+                
                 const fetchData = async () => {
                     const result = await api.get(`/vehicle/${productId}`);
                     // console.log(result.data.comments);
@@ -73,7 +73,8 @@ const ProductsPage = () => {
                     }
                     setNameSplited(iniciais);
                 };
-                fetchData
+                fetchData()
+                
             })
             .catch((error) => {
                 console.log(error);
