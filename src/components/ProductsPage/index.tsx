@@ -173,7 +173,7 @@ const ProductsPage = () => {
                                     <li>
                                         <img
                                             src="https://cdn.discordapp.com/attachments/674032411092320324/1078080333397893181/image.png"
-                                            alt=""
+                                            alt="teste"
                                         />
                                     </li>
                                 </ul>
