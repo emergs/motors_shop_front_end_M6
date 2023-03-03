@@ -65,12 +65,12 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
   useEffect(() => {
 
     const loadUser = async () => {
-      const token = JSON.parse(localStorage.getItem('@MotorShopTOKEN') || '{}')
+      const token = localStorage.getItem('@MotorShopTOKEN') || '{}'
       if (token) {
 
         try {
           api.defaults.headers.common.authorization = `Bearer ${token}`
-          const { data } = await api.get('/profile')
+          const { data } = await api.get('/users/profile')
           setUser(data)
         }
         catch (error) {
@@ -99,7 +99,6 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
   const userLogin = async (data: IUserLogin) => {
     api.post("/login", data).then((res) => {
       const { token, id, typeUser } = res.data
-      console.log(res.data)
 
       window.localStorage.clear()
       window.localStorage.setItem('@MotorShopTOKEN', token)
@@ -134,10 +133,10 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
         address: address,
       };
 
-      console.log(user);
+
       const req = await api.post("/users", user);
-      console.log(req.data);
-      setUser(req.data);
+
+      //setUser(req.data);
       setCount(count + 1);
       // toast.success('Usuário criado com sucesso!')
       navigate("/login", { replace: true });

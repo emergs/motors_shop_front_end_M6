@@ -32,14 +32,11 @@ const Header = () => {
   };
 
   const redirectRegister = () => {
-    navigate('/login', { replace: true })
-    setTimeout(() => {
-      handleOpenModalRegisterUser()
-    }, 100)
+    navigate('/register', { replace: true })
   }
 
   const redirectLogin = () => {
-    navigate('/login', { replace: true })
+    navigate('/login2', { replace: true })
     setTimeout(() => {
       handleOpenModalLogin()
     }, 100)
