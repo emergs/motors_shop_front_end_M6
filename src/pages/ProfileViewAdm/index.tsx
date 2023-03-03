@@ -19,6 +19,7 @@ const AdmPage = () => {
   const [cars, setCars] = useState<IVehicle[]>([]);
   useEffect(() => {
     const token = localStorage.getItem("@MotorShopTOKEN");
+    console.log(token)
 
     if (token) {
       const retrieveUser = async () => {
@@ -30,7 +31,7 @@ const AdmPage = () => {
             setUser(res.data);
             setVehicles(res.data.vehicles);
             setMotorcicles(
-              res.data.vehicles.filter((v: IVehicle) => v.type === "motorcicle")
+              res.data.vehicles.filter((v: IVehicle) => v.type === "motorcycle")
             );
             setCars(
               res.data.vehicles.filter((v: IVehicle) => v.type === "car")
@@ -72,7 +73,8 @@ const AdmPage = () => {
             {user && user.profileImage ? (
               <img src={user.profileImage} alt="user profile photo" />
             ) : (
-              <MyDiv name={user.name} />
+            //   <MyDiv name={user.name} />
+            <></>
             )}
           </figure>
           <h2>{user.name}</h2>
