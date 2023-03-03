@@ -3,12 +3,13 @@ import { useForm } from "react-hook-form";
 import { RiCloseFill } from "react-icons/ri";
 import { IUserLogin, SellerContext } from "../../../contexts/Seller";
 import { ModalsContext } from "../../../contexts/Modals";
-import BaseModal from "../../BaseModal";
+
 import Button from "../../Button";
 import Input from "../../Input/input";
 import { FormBase } from "./style";
 import { FormValues } from "../../FormCreateAd/interface";
 import { useNavigate } from "react-router-dom";
+import BaseLogin from "../../LoginBase";
 
 const LoginModal = () => {
 
@@ -24,7 +25,7 @@ const LoginModal = () => {
   }
 
   return (
-    <BaseModal padding={'44px 28px'}>
+    <BaseLogin padding={'44px 28px'}>
       <button className="close-modal" onClick={() => handleCloseModalLogin()}>
         <RiCloseFill />
       </button>
@@ -51,7 +52,7 @@ const LoginModal = () => {
         </div>
       </FormBase>
 
-    </BaseModal>
+    </BaseLogin>
   );
 };
 
