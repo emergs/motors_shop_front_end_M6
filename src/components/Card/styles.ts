@@ -58,9 +58,16 @@ export const CardModel = styled.div<ICardAtributes>`
 
       background-color: ${({ buttonContainerBackground }) =>
         buttonContainerBackground};
-        a{
-            border: 1px solid var(--grey-0) ;
+      a {
+        text-decoration: none;
+        border: 1px solid var(--grey-0);
+        padding: 10px;
+        background-color: transparent;
+        &:hover {
+          color: var(--white-fixed);
+          background-color: var(--grey-1);
         }
+      }
     }
     .time {
       display: ${({ timeDisplay: timeDisplay }) =>

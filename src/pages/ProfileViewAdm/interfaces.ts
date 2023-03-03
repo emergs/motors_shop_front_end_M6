@@ -18,7 +18,7 @@ export interface IUser {
   phone: string;
   birthdate: string;
   description: string;
-  typeUser: number;
+  typeUser: string;
   createdAt: Date;
   updatedAt: Date;
 }

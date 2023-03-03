@@ -2,24 +2,31 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Auction from "../../components/Auction";
 import ModalCreateAd from "../../components/Modais";
-import { PageContainer, List } from "./styles";
+import { PageContainer, List, ModalContainer } from "./styles";
 // import { vehicles } from "../../database";
 import Button from "../../components/Button";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import Card from "../../components/Card";
 import { IUser, IVehicle } from "./interfaces";
 import VehicleList from "../../components/List";
 import api from "../../services/api";
 import MyDiv from "../../components/NoImageColor";
+import ReactDOM from "react-dom";
+import FormCreateAd from "../../components/FormCreateAd/form";
+import { SellerContext } from "../../contexts/Seller";
+import { ModalsContext } from "../../contexts/Modals";
 
 const AdmPage = () => {
-  const [user, setUser] = useState<IUser>({} as IUser);
+  const { user, setUser } = useContext(SellerContext);
+  const { showModalCreateAdd, handleModalCreateAdd } =
+    useContext(ModalsContext);
   const [vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [motorcicles, setMotorcicles] = useState<IVehicle[]>([]);
   const [cars, setCars] = useState<IVehicle[]>([]);
+
   useEffect(() => {
     const token = localStorage.getItem("@MotorShopTOKEN");
-    console.log(token)
+    console.log(token);
 
     if (token) {
       const retrieveUser = async () => {
@@ -73,8 +80,8 @@ const AdmPage = () => {
             {user && user.profileImage ? (
               <img src={user.profileImage} alt="user profile photo" />
             ) : (
-            //   <MyDiv name={user.name} />
-            <></>
+              <span>{user ? user.name : ""}</span>
+              // <></>
             )}
           </figure>
           <h2>{user.name}</h2>
@@ -85,6 +92,7 @@ const AdmPage = () => {
             hoverBackground="var(--color-brand-1)"
             hoverBorder="2px solid var(--color-brand-1)"
             hoverColor="var(--white-fixed)"
+            onClick={() => handleModalCreateAdd()}
           >
             Criar Anúncio
           </Button>
@@ -95,13 +103,23 @@ const AdmPage = () => {
         vehicleList={vehicles}
         cardAtributes={auctionCardAtributes}
       />
-
       <h2>Carros</h2>
       <VehicleList vehicleList={cars} />
       <h2>Motos</h2>
       <VehicleList vehicleList={motorcicles} />
       <Footer />
-      {/* <ModalCreateAd /> descomentar para abrir/testar modal */}
+      <>
+        {showModalCreateAdd ? (
+          ReactDOM.createPortal(
+            <ModalContainer>
+              <FormCreateAd />
+            </ModalContainer>,
+            document.getElementById("root") as HTMLElement
+          )
+        ) : (
+          <></>
+        )}
+      </>
     </PageContainer>
   );
 };
