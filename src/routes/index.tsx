@@ -7,12 +7,14 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Login2 from "../pages/Login2";
 import AdmPage from "../pages/ProfileViewAdm";
+import Register from "../pages/Register";
 
 const RoutesMain = () => {
   return (
     <Routes>
       <Route path="/home" element={<Home />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
       <Route path="/login2" element={<Login2 />} />
       <Route path="/admview" element={<AdmPage />} />
       <Route path="/product/:productId" element={<ProductsPage />} />

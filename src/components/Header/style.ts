@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { IDropDownProps } from ".";
 
 const NavigationStyled = styled.div`
   padding: 0px 16px;
@@ -165,4 +166,50 @@ const NavigationStyled = styled.div`
 
 `
 
-export { NavigationStyled };
+const Menu = styled.div`
+  position: relative;
+  display: inline-block;
+  width: 100%;
+`;
+
+const NameUser = styled.button`
+  background-color: inherit;
+  color: black;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+`;
+
+const Dropdown = styled.div<IDropDownProps>`
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  padding-left: 0px;
+  width: 100%;
+  @media (min-width: 768px) {
+    display: ${(props) => (props.menuIsOpen ? "block" : "none")};
+    position: absolute;
+    z-index: 1;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  }
+`;
+
+const DropdownItem = styled.a`
+  padding: 12px 0px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  &:hover {
+    background-color: #ddd;
+    @media (min-width: 768px) {
+      color: black;
+      padding: 12px 16px;
+    }
+  }
+`;
+
+export { NavigationStyled, Menu, NameUser, Dropdown, DropdownItem };

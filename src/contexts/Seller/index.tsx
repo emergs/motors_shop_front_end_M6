@@ -40,9 +40,11 @@ interface ISellerProviderProps {
 }
 
 interface ISellerContext {
-  userLogin: (data: IUserLogin) => void;
-  createUser: (data: IUserRegister) => void;
-  user: any;
+  userLogin: (data: IUserLogin) => void,
+  createUser: (data: IUserRegister) => void,
+  user: any,
+  addCount: () => void,
+  resetUser: () => void
   setUser: any;
 }
 
@@ -51,31 +53,61 @@ export const SellerContext = createContext<ISellerContext>(
 );
 
 const SellerProvider = ({ children }: ISellerProviderProps) => {
-  const [user, setUser] = useState<any>({});
-  const [count, setCount] = useState<number>(0);
+  const [user, setUser] = useState<any>({})
+  const [count, setCount] = useState<number>(0)
+  const [loading, setLoading] = useState<boolean>(true)
 
   const navigate = useNavigate();
 
   const { handleOpenModalRegisterUserSuccess, handleCloseModalRegisterUser } =
     useContext(ModalsContext);
 
-    //fazer login
-    const userLogin = async (data: IUserLogin) => {
-        api.post("/login", data).then((res)=>{
-            const { token, id,typeUser} = res.data
-            console.log(res.data)
+  useEffect(() => {
 
-            window.localStorage.clear()
-            window.localStorage.setItem('@MotorShopTOKEN', token)
-            window.localStorage.setItem('@MotorShopUSERID', id)
-            window.localStorage.setItem('@MotorShopUSERTYPE', typeUser)
-            if(typeUser != "seller"){
-                navigate("/home", { replace: true })
-            }else{
-                navigate("/admview", { replace: true })
-            }
-        })
-    };
+    const loadUser = async () => {
+      const token = localStorage.getItem('@MotorShopTOKEN') || '{}'
+      if (token) {
+
+        try {
+          api.defaults.headers.common.authorization = `Bearer ${token}`
+          const { data } = await api.get('/users/profile')
+          setUser(data)
+        }
+        catch (error) {
+          console.error(error);
+          localStorage.removeItem('@MotorShopTOKEN')
+          localStorage.removeItem('@MotorShopUSERID')
+          localStorage.removeItem('@MotorShopUSERTYPE')
+          localStorage.removeItem('@MotorShopUSERNAME')
+        }
+      }
+      setLoading(false)
+    }
+
+    loadUser()
+  }, [count])
+
+  const addCount = () => {
+    setCount(count + 1)
+  }
+
+  const resetUser = () => {
+    setUser({})
+  }
+
+  //fazer login
+  const userLogin = async (data: IUserLogin) => {
+    api.post("/login", data).then((res) => {
+      const { token, id, typeUser } = res.data
+
+      window.localStorage.clear()
+      window.localStorage.setItem('@MotorShopTOKEN', token)
+      window.localStorage.setItem('@MotorShopUSERID', id)
+      window.localStorage.setItem('@MotorShopUSERTYPE', typeUser)
+      navigate("../home", { replace: true });
+
+    })
+  };
 
   //cadastro
   const createUser = async (data: IUserRegister) => {
@@ -101,10 +133,10 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
         address: address,
       };
 
-      console.log(user);
+
       const req = await api.post("/users", user);
-      console.log(req.data);
-      setUser(req.data);
+
+      //setUser(req.data);
       setCount(count + 1);
       // toast.success('Usuário criado com sucesso!')
       navigate("/login", { replace: true });
@@ -116,7 +148,7 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
   };
 
   return (
-    <SellerContext.Provider value={{ userLogin, createUser, user, setUser }}>
+    <SellerContext.Provider value={{ userLogin, createUser, user, addCount, resetUser, setUser }}>
       {children}
     </SellerContext.Provider>
   );
