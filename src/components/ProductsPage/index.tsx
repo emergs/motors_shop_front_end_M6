@@ -12,44 +12,83 @@ import {
 import ellipse3 from "../../assets/images/ellipse3.png";
 import { useForm } from "react-hook-form";
 import MyDiv from "../NoImageColor";
-import { useParams } from "react-router-dom";
-import { vehicles } from "../../database";
+import {  useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import api from "../../services/api";
+import { ICommentProps, IVehicleProps } from "./interfaces";
 
 interface FormValues {
-  comment: string;
-  
+    comment: string;
 }
 
 const ProductsPage = () => {
+    const { productId } = useParams();
+
+    const [vehicle, setVehicle] = useState<IVehicleProps>();
+    const [nameSplited, setNameSplited] = useState<string>("");
+    const [comments, setComments] = useState<ICommentProps[]>([]);
     
-    const { productId } = useParams()
-    // console.log(productId)
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await api.get(`/vehicle/${productId}`);
+            console.log(result.data.comments);
+            setVehicle(result.data);
+            setComments(result.data.comments);
+            let nome = result.data.users.name;
+            let iniciais = "";
+            for (let i = 0; i < nome.length && i < 2; i++) {
+                iniciais += nome[i][0];
+            }
+            setNameSplited(iniciais);
+        };
 
+        fetchData();
+    }, [setComments]);
+    
 
-    // const [ car, setCar] = useState({})
+    const { register, handleSubmit, reset } = useForm<FormValues>();
 
-    let atualCar = vehicles.find((car)=> car.id == productId)
-    // console.log(atualCar)
-    const {register, handleSubmit, reset} = useForm<FormValues>()
+    function onHandleSubmit(data: FormValues) {
+        // console.log(data);
 
-    function onHandleSubmit(data: FormValues ){
-      console.log(data)
+        const token = localStorage.getItem("@MotorShopTOKEN");
 
-      // let string = data.toString()
-      // let array = string.split('\n')
-      // console.log(array)
-      const dataBody = {vehicle_id: atualCar?.id, ...data}
-      console.log(dataBody)
-      reset()
-
-      
+        api.post(`/vehicle/comment/${productId}`, data, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+            .then((response) => {
+                console.log(response.data)
+                
+                const fetchData = async () => {
+                    const result = await api.get(`/vehicle/${productId}`);
+                    // console.log(result.data.comments);
+                    setVehicle(result.data);
+                    setComments(result.data.comments);
+                    let nome = result.data.users.name;
+                    let iniciais = "";
+                    for (let i = 0; i < nome.length && i < 2; i++) {
+                        iniciais += nome[i][0];
+                    }
+                    setNameSplited(iniciais);
+                };
+                fetchData()
+                
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        reset();
     }
-    
-    let myArr = [
-        { id: "0", name: "Fernando Henrique Sousa", abre: "FH", image: null },
-        { id: "1", name: "João Vitor", abre: "JV", image: null },
-        { id: "2", name: "Fabio Augusto", abre: "FA",image: null },
-    ];
+
+    // let myArr = [
+    //     { id: "0", name: "Fernando Henrique Sousa", abre: "FH", image: null },
+    //     { id: "1", name: "João Vitor", abre: "JV", image: null },
+    //     { id: "2", name: "Fabio Augusto", abre: "FA", image: null },
+    // ];
+
+    // let nome = vehicle?.users.name;
 
     return (
         <Container>
@@ -60,23 +99,21 @@ const ProductsPage = () => {
                         <div className="leftContent">
                             <div className="imageMain">
                                 <img
-                                    src={atualCar?.img[0]}
-                                    alt="Imagem do exemplo"
+                                    src={vehicle?.imgCap}
+                                    alt={vehicle?.title}
                                     className="mainImg"
                                 />
                             </div>
 
                             <div className="info">
-                                <h2 className="carName">
-                                    {atualCar?.name}
-                                </h2>
+                                <h2 className="carName">{vehicle?.title}</h2>
                                 <div>
                                     <div className="priceYear">
                                         <div className="kmYear">
-                                            <p>{atualCar?.year}</p>
-                                            <p>{`${atualCar?.km}km`}</p>
+                                            <p>{vehicle?.year}</p>
+                                            <p>{`${vehicle?.km}km`}</p>
                                         </div>
-                                        <h3>{`R$ ${atualCar?.price}`}</h3>
+                                        <h3>{`R$ ${vehicle?.value}`}</h3>
                                     </div>
                                     <Button
                                         width="80px"
@@ -91,9 +128,7 @@ const ProductsPage = () => {
 
                             <div className="description">
                                 <h2>Descrição</h2>
-                                <p>
-                                    {atualCar?.info}
-                                </p>
+                                <p>{vehicle?.description}</p>
                             </div>
                         </div>
                         <RightContent>
@@ -139,21 +174,17 @@ const ProductsPage = () => {
                                     <li>
                                         <img
                                             src="https://cdn.discordapp.com/attachments/674032411092320324/1078080333397893181/image.png"
-                                            alt=""
+                                            alt="teste"
                                         />
                                     </li>
                                 </ul>
                             </div>
                             <div className="advertiser">
                                 <div className="profileImage">
-                                    <h2>SL</h2>
+                                    <h2>{nameSplited}</h2>
                                 </div>
-                                <h3>Samuel Leão</h3>
-                                <p>
-                                    Lorem Ipsum is simply dummy text of the
-                                    printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's
-                                </p>
+                                <h3>{vehicle?.users.name}</h3>
+                                <p>{vehicle?.users.description}</p>
                                 <Button
                                     color="var(--white-fixed)"
                                     backgroundColor="var(--grey-0)"
@@ -170,12 +201,46 @@ const ProductsPage = () => {
                             <div className="commentsList">
                                 <h2>Comentários</h2>
                                 <ul>
-                                    {myArr.map((e) => {
+                                    {comments ? (
+                                        comments.map((e) => {
+                                            return (
+                                                <li key={e.id}>
+                                                    <div className="commentsInfo">
+                                                        {e.users.profileImage !=
+                                                        null ? (
+                                                            <></>
+                                                        ) : (
+                                                            <MyDiv
+                                                                name={
+                                                                    e.users.name
+                                                                }
+                                                            />
+                                                        )}
+
+                                                        <h3>{e.users.name}</h3>
+                                                        <img
+                                                            src={ellipse3}
+                                                            alt=""
+                                                        />
+                                                        <span>há 3 dias</span>
+                                                    </div>
+                                                    <p>{e.comment}</p>
+                                                </li>
+                                            );
+                                        })
+                                    ) : (
+                                        <></>
+                                    )}
+                                    {/* {myArr.map((e) => {
                                         return (
                                             <li key={e.id}>
                                                 <div className="commentsInfo">
-                                                    {e.image ? <></> : <MyDiv name={e.name} />}
-                                                    
+                                                    {e.image ? (
+                                                        <></>
+                                                    ) : (
+                                                        <MyDiv name={e.name} />
+                                                    )}
+
                                                     <h3>{e.name}</h3>
                                                     <img
                                                         src={ellipse3}
@@ -197,15 +262,15 @@ const ProductsPage = () => {
                                                 </p>
                                             </li>
                                         );
-                                    })}
+                                    })} */}
                                 </ul>
                             </div>
                             <div className="commentsPost">
                                 <div className="commentsPostInfo">
                                     <div className="commentPostImage">
-                                        <h2>SL</h2>
+                                        <h2>{nameSplited}</h2>
                                     </div>
-                                    <h3>Samuel Leão</h3>
+                                    <h3>{vehicle?.users.name}</h3>
                                 </div>
                                 <Form onSubmit={handleSubmit(onHandleSubmit)}>
                                     <label htmlFor="comment"></label>
@@ -214,7 +279,8 @@ const ProductsPage = () => {
                                         {...register("comment")}
                                         placeholder="Carro muito confortável, foi uma ótima experiência de compra..."
                                     ></textarea>
-                                    <Button type="submit"
+                                    <Button
+                                        type="submit"
                                         width="108px"
                                         height="38px"
                                         backgroundColor="var(--color-brand-1)"
