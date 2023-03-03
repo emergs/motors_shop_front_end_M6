@@ -7,11 +7,11 @@ interface IModalBody extends HTMLAttributes<HTMLCollection> {
 }
 
 const ModalStyled = styled.main`
-  position: fixed;
-  top: 0;
-  left: 0;
+  /* position: fixed; */
+  /* top: 0; */
+  /* left: 0; */
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -27,7 +27,7 @@ const ModalBody = styled.section<IModalBody>`
   padding: ${({ padding }) => (padding ? padding : "18px 24px")};
   background-color: #fdfdfd;
   border-radius: 4px;
-  position: relative;
+  /* position: relative; */
   overflow: scroll;
   
   ::-webkit-scrollbar{

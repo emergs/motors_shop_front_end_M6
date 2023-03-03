@@ -4,8 +4,8 @@ import ProductsPage from "../components/ProductsPage";
 
 
 import Home from "../pages/Home";
-import Login from "../pages/Login";
-import Login2 from "../pages/Login2";
+import Login from "../pages/OldLogin";
+import LoginUser from "../pages/LoginUser";
 import AdmPage from "../pages/ProfileViewAdm";
 
 const RoutesMain = () => {
@@ -13,7 +13,7 @@ const RoutesMain = () => {
     <Routes>
       <Route path="/home" element={<Home />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/login2" element={<Login2 />} />
+      <Route path="/login2" element={<LoginUser />} />
       <Route path="/admview" element={<AdmPage />} />
       <Route path="/product/:productId" element={<ProductsPage />} />
       <Route path="*" element={<Navigate to="/home" />} />

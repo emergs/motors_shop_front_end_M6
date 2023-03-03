@@ -1,19 +1,20 @@
 import Footer from "../../components/Footer"
 import Header from "../../components/Header"
+import LoginTest from "../../components/LoginTest"
 import Modals from "../../components/Modais"
-import LoginModal from "../../components/Modais/LoginModal"
+
 import { Content } from "./style"
 
-const Login2 = () => {
+const LoginUser = () => {
   return (
     <>
       <Header />
       <Content>
-        <LoginModal/>
+        <LoginTest/>
       </Content>
       <Footer />
     </>
   )
 }
 
-export default Login2
+export default LoginUser
