@@ -13,9 +13,12 @@ import ellipse3 from "../../assets/images/ellipse3.png";
 import { useForm } from "react-hook-form";
 import MyDiv from "../NoImageColor";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import api from "../../services/api";
 import { ICommentProps, IVehicleProps } from "./interfaces";
+import { FiDelete } from "react-icons/fi";
+import KebabMenu from "../kebbabMenu";
+import { SellerContext } from "../../contexts/Seller";
 
 interface FormValues {
     comment: string;
@@ -23,26 +26,42 @@ interface FormValues {
 
 const ProductsPage = () => {
     const { productId } = useParams();
-
-    const [vehicle, setVehicle] = useState<IVehicleProps>();
-    const [nameSplited, setNameSplited] = useState<string>("");
-    const [comments, setComments] = useState<ICommentProps[]>([]);
-    const [loading, setLoading] = useState<Boolean>(true);
-    
+    const {
+        loading,
+        setLoading,
+        vehicle,
+        setVehicle,
+        nameSplited,
+        setNameSplited,
+        comments,
+        setComments,
+        userLoggedId,
+        setUserLoggedId,
+    } = useContext(SellerContext);
+    //   const [vehicle, setVehicle] = useState<IVehicleProps>();
+    //   const [nameSplited, setNameSplited] = useState<string>("");
+    //   const [comments, setComments] = useState<ICommentProps[]>([]);
+    //   const [loading, setLoading] = useState<Boolean>(true);
+    //   const [userLoggedId, setUserLoggedId] = useState<String>('')
 
     useEffect(() => {
         const fetchData = async () => {
             const result = await api.get(`/vehicle/${productId}`);
             // console.log(result.data.users.name);
+            const idLogado = localStorage.getItem("@MotorShopUSERID");
+            if (idLogado) {
+                setUserLoggedId(idLogado);
+            }
+
             setVehicle(result.data);
             setComments(result.data.comments);
-            let nome = result.data.users.name.split(' ');
+            let nome = result.data.users.name.split(" ");
             let iniciais = "";
             for (let i = 0; i < nome.length && i < 2; i++) {
                 iniciais += nome[i][0];
                 // console.log(iniciais);
             }
-            setNameSplited(iniciais)
+            setNameSplited(iniciais);
             setLoading(false);
         };
 
@@ -71,12 +90,12 @@ const ProductsPage = () => {
                     // console.log(result.data.comments);
                     setVehicle(result.data);
                     setComments(result.data.comments);
-                    let nome = result.data.users.name.split(' ');
+                    let nome = result.data.users.name.split(" ");
                     let iniciais = "";
                     for (let i = 0; i < nome.length && i < 2; i++) {
                         iniciais += nome[i][0];
                     }
-                    
+
                     // setNameSplited(iniciais);
                 };
                 fetchData();
@@ -98,7 +117,6 @@ const ProductsPage = () => {
     if (loading) {
         return <div>Carregando...</div>;
     }
-    
 
     return (
         <Container>
@@ -212,7 +230,7 @@ const ProductsPage = () => {
                                 <h2>Comentários</h2>
                                 <ul>
                                     {comments ? (
-                                        comments.map((e) => {
+                                        comments.map((e: ICommentProps) => {
                                             return (
                                                 <li key={e.id}>
                                                     <div className="commentsInfo">
@@ -233,6 +251,15 @@ const ProductsPage = () => {
                                                             alt=""
                                                         />
                                                         <span>há 3 dias</span>
+                                                        {e.users.id ==
+                                                        userLoggedId ? (
+                                                            <KebabMenu 
+                                                                productId={productId}
+                                                                commentId={e.id}
+                                                            />
+                                                        ) : (
+                                                            <></>
+                                                        )}
                                                     </div>
                                                     <p>{e.comment}</p>
                                                 </li>
