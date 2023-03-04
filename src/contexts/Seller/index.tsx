@@ -6,6 +6,10 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  ICommentProps,
+  IVehicleProps,
+} from "../../components/ProductsPage/interfaces";
 import api from "../../services/api";
 import { ModalsContext } from "../Modals";
 
@@ -40,12 +44,22 @@ interface ISellerProviderProps {
 }
 
 interface ISellerContext {
-  userLogin: (data: IUserLogin) => void,
-  createUser: (data: IUserRegister) => void,
-  user: any,
-  addCount: () => void,
-  resetUser: () => void
+  userLogin: (data: IUserLogin) => void;
+  createUser: (data: IUserRegister) => void;
+  user: any;
+  addCount: () => void;
+  resetUser: () => void;
   setUser: any;
+  loading: any
+  setLoading: any
+  vehicle: any
+  setVehicle: any
+  nameSplited: any
+  setNameSplited: any
+  comments: any
+  setComments: any
+  userLoggedId: any
+  setUserLoggedId: any
 }
 
 export const SellerContext = createContext<ISellerContext>(
@@ -53,9 +67,13 @@ export const SellerContext = createContext<ISellerContext>(
 );
 
 const SellerProvider = ({ children }: ISellerProviderProps) => {
-  const [user, setUser] = useState<any>({})
-  const [count, setCount] = useState<number>(0)
-  const [loading, setLoading] = useState<boolean>(true)
+  const [user, setUser] = useState<any>({});
+  const [count, setCount] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [vehicle, setVehicle] = useState<IVehicleProps>();
+  const [nameSplited, setNameSplited] = useState<string>("");
+  const [comments, setComments] = useState<ICommentProps[]>([]);
+  const [userLoggedId, setUserLoggedId] = useState<String>("");
 
   const navigate = useNavigate();
 
@@ -63,51 +81,49 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
     useContext(ModalsContext);
 
   useEffect(() => {
-
     const loadUser = async () => {
-      const token = localStorage.getItem('@MotorShopTOKEN') || '{}'
+      const token = localStorage.getItem("@MotorShopTOKEN") || "{}";
       if (token) {
-
         try {
-          api.defaults.headers.common.authorization = `Bearer ${token}`
-          const { data } = await api.get('/users/profile')
-          setUser(data)
-        }
-        catch (error) {
+          api.defaults.headers.common.authorization = `Bearer ${token}`;
+          const { data } = await api.get("/users/profile");
+          setUser(data);
+        } catch (error) {
           console.error(error);
-          localStorage.removeItem('@MotorShopTOKEN')
-          localStorage.removeItem('@MotorShopUSERID')
-          localStorage.removeItem('@MotorShopUSERTYPE')
-          localStorage.removeItem('@MotorShopUSERNAME')
+          localStorage.removeItem("@MotorShopTOKEN");
+          localStorage.removeItem("@MotorShopUSERID");
+          localStorage.removeItem("@MotorShopUSERTYPE");
+          localStorage.removeItem("@MotorShopUSERNAME");
         }
       }
-      setLoading(false)
-    }
+      setLoading(false);
+    };
 
-    loadUser()
-  }, [count])
+    loadUser();
+  }, [count]);
 
   const addCount = () => {
-    setCount(count + 1)
-  }
+    setCount(count + 1);
+  };
 
   const resetUser = () => {
-    setUser({})
-  }
+    setUser({});
+  };
 
   //fazer login
   const userLogin = async (data: IUserLogin) => {
     api.post("/login", data).then((res) => {
-      const { token, id, typeUser } = res.data
+      const { token, id, typeUser } = res.data;
 
-      window.localStorage.clear()
-      window.localStorage.setItem('@MotorShopTOKEN', token)
-      window.localStorage.setItem('@MotorShopUSERID', id)
-      window.localStorage.setItem('@MotorShopUSERTYPE', typeUser)
-      
-      typeUser == "seller" ? navigate("/admview", { replace: true }) : navigate("/home", { replace: true })
+      window.localStorage.clear();
+      window.localStorage.setItem("@MotorShopTOKEN", token);
+      window.localStorage.setItem("@MotorShopUSERID", id);
+      window.localStorage.setItem("@MotorShopUSERTYPE", typeUser);
 
-    })
+      typeUser == "seller"
+        ? navigate("/admview", { replace: true })
+        : navigate("/home", { replace: true });
+    });
   };
 
   //cadastro
@@ -134,7 +150,6 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
         address: address,
       };
 
-
       const req = await api.post("/users", user);
 
       //setUser(req.data);
@@ -149,7 +164,26 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
   };
 
   return (
-    <SellerContext.Provider value={{ userLogin, createUser, user, addCount, resetUser, setUser }}>
+    <SellerContext.Provider
+      value={{
+        userLogin,
+        createUser,
+        user,
+        addCount,
+        resetUser,
+        setUser,
+        loading,
+        setLoading,
+        vehicle,
+        setVehicle,
+        nameSplited,
+        setNameSplited,
+        comments,
+        setComments,
+        userLoggedId,
+        setUserLoggedId,
+      }}
+    >
       {children}
     </SellerContext.Provider>
   );
