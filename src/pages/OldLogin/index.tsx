@@ -8,7 +8,7 @@ const Login = () => {
     <>
       <Header />
       <Content>
-        <Modals />
+
       </Content>
       <Footer />
     </>

@@ -20,74 +20,77 @@ const Home = () => {
   };
 
   return (
-    <HomePage>
-      <Header />
-      <HomeContent>
-        <div className="main">
-          <h1>Velocidade e experiência em um lugar feito para você</h1>
-          <span>Um ambiente feito para você explorar o seu melhor</span>
-          <div className="main-buttons-group">
-            <Button>Carros</Button>
-            <Button>Motos</Button>
+    <>
+      <HomePage>
+        <Header />
+        <HomeContent>
+          <div className="main">
+            <h1>Velocidade e experiência em um lugar feito para você</h1>
+            <span>Um ambiente feito para você explorar o seu melhor</span>
+            <div className="main-buttons-group">
+              <Button>Carros</Button>
+              <Button>Motos</Button>
+            </div>
           </div>
-        </div>
-        <Auction />
-        {/* <VehicleList vehicleList={vehicles} /> */}
-        <div className="main-list-vehicles">
-          <h2 id="car">Carros</h2>
-          <List>
-            {vehicles.map((e) =>
-              e.category === "car" ? (
-                <li key={e.id}>
-                  <Card>
-                    <img src={e.img[0]} alt={e.name} />
-                    <div className="details-container">
-                      <h3>{e.name}</h3>
-                      <p>
-                        {e.info.length > 90 ? e.info.slice(0, 85) + "..." : e.info}
-                      </p>
-                      <p>
-                        <span>{e.km}</span>
-                        <span>{e.year}</span>
-                        <span>R$ {e.price}</span>
-                      </p>
-                    </div>
-                  </Card>
-                </li>
-              ) : (
-                <Fragment />
-              )
-            )}
-          </List>
-          <h2 id="motorcycle">Motos</h2>
-          <List>
-            {vehicles.map((e) =>
-              e.category === "motorcicle" ? (
-                <li key={e.id}>
-                  <Card>
-                    <img src={e.img[0]} alt={e.name} />
-                    <div className="details-container">
-                      <h3>{e.name}</h3>
-                      <p>
-                        {e.info.length > 90 ? e.info.slice(0, 85) + "..." : e.info}
-                      </p>
-                      <p>
-                        <span>{e.km}</span>
-                        <span>{e.year}</span>
-                        <span>R$ {e.price}</span>
-                      </p>
-                    </div>
-                  </Card>
-                </li>
-              ) : (
-                <Fragment />
-              )
-            )}
-          </List>
-        </div>
-      </HomeContent>
-      <Footer />
-    </HomePage>
+          <Auction />
+          {/* <VehicleList vehicleList={vehicles} /> */}
+          <div className="main-list-vehicles">
+            <h2 id="car">Carros</h2>
+            <List>
+              {vehicles.map((e) =>
+                e.category === "car" ? (
+                  <li key={e.id}>
+                    <Card>
+                      <img src={e.img[0]} alt={e.name} />
+                      <div className="details-container">
+                        <h3>{e.name}</h3>
+                        <p>
+                          {e.info.length > 90 ? e.info.slice(0, 85) + "..." : e.info}
+                        </p>
+                        <p>
+                          <span>{e.km}</span>
+                          <span>{e.year}</span>
+                          <span>R$ {e.price}</span>
+                        </p>
+                      </div>
+                    </Card>
+                  </li>
+                ) : (
+                  <Fragment />
+                )
+              )}
+            </List>
+            <h2 id="motorcycle">Motos</h2>
+            <List>
+              {vehicles.map((e) =>
+                e.category === "motorcicle" ? (
+                  <li key={e.id}>
+                    <Card>
+                      <img src={e.img[0]} alt={e.name} />
+                      <div className="details-container">
+                        <h3>{e.name}</h3>
+                        <p>
+                          {e.info.length > 90 ? e.info.slice(0, 85) + "..." : e.info}
+                        </p>
+                        <p>
+                          <span>{e.km}</span>
+                          <span>{e.year}</span>
+                          <span>R$ {e.price}</span>
+                        </p>
+                      </div>
+                    </Card>
+                  </li>
+                ) : (
+                  <Fragment />
+                )
+              )}
+            </List>
+          </div>
+        </HomeContent>
+        <Footer />
+      </HomePage>
+      <Modals />
+    </>
   );
 };
 

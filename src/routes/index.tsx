@@ -7,6 +7,7 @@ import Home from "../pages/Home";
 import Login from "../pages/OldLogin";
 import LoginUser from "../pages/LoginUser";
 import AdmPage from "../pages/ProfileViewAdm";
+import Register from "../pages/Register";
 
 const RoutesMain = () => {
   return (
@@ -14,6 +15,7 @@ const RoutesMain = () => {
       <Route path="/home" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/login2" element={<LoginUser />} />
+      <Route path="/register" element={<Register />} />
       <Route path="/admview" element={<AdmPage />} />
       <Route path="/product/:productId" element={<ProductsPage />} />
       <Route path="*" element={<Navigate to="/home" />} />
