@@ -104,7 +104,8 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
       window.localStorage.setItem('@MotorShopTOKEN', token)
       window.localStorage.setItem('@MotorShopUSERID', id)
       window.localStorage.setItem('@MotorShopUSERTYPE', typeUser)
-      navigate("../home", { replace: true });
+      
+      typeUser == "seller" ? navigate("/admview", { replace: true }) : navigate("/home", { replace: true })
 
     })
   };
