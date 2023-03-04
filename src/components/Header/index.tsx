@@ -36,11 +36,11 @@ const Header = () => {
   }
 
   const redirectLogin = () => {
-    navigate('/login2', { replace: true })
-    setTimeout(() => {
-      handleOpenModalLogin()
-    }, 100)
-    addCount()
+    navigate('/login', { replace: true })
+    // setTimeout(() => {
+    //   handleOpenModalLogin()
+    // }, 100)
+    // addCount()
   }
 
   const logout = () => {
