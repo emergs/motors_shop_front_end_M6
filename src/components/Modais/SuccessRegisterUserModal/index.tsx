@@ -7,11 +7,10 @@ import { ModalSuccess } from "./style";
 
 const SucessRegisterUserModal = () => {
 
-  const { handleCloseModalRegisterUserSuccess, handleOpenModalLogin } = useContext(ModalsContext)
+  const { handleCloseModalRegisterUserSuccess } = useContext(ModalsContext)
 
   const goToLogin = () => {
     handleCloseModalRegisterUserSuccess()
-    handleOpenModalLogin()
   }
 
   return (

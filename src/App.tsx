@@ -1,11 +1,11 @@
 import "./App.css";
-import FormExample from "./components/Input/formExample";
-import ModalCreateAd from "./components/Modais";
+import Modals from "./components/Modais";
 import RoutesMain from "./routes";
 
 const App = () => {
   return <>
     <RoutesMain />
+    <Modals />
   </>
 
 }

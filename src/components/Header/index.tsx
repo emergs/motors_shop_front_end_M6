@@ -21,11 +21,11 @@ const Header = () => {
 
   const { user, addCount, resetUser } = useContext(SellerContext)
 
-  const { handleOpenModalRegisterUser, handleOpenModalLogin, handleOpenModalEditProfile, handleOpenModalEditAddress } = useContext(ModalsContext)
+  const { handleOpenModalEditProfile, handleOpenModalEditAddress } = useContext(ModalsContext)
 
   useEffect(() => {
     setUserLength(Object.keys(user).length)
-  }, [userLength])
+  }, [userLength, user])
 
   const handleClick = () => {
     setMenu(!menu);
@@ -37,10 +37,6 @@ const Header = () => {
 
   const redirectLogin = () => {
     navigate('/login', { replace: true })
-    // setTimeout(() => {
-    //   handleOpenModalLogin()
-    // }, 100)
-    // addCount()
   }
 
   const logout = () => {
@@ -50,10 +46,6 @@ const Header = () => {
     localStorage.removeItem('@MotorShopUSERTYPE')
     localStorage.removeItem('@MotorShopUSERNAME')
     resetUser()
-  }
-
-  const openEditAddress = () => {
-    handleOpenModalRegisterUser()
   }
 
   const handleLinkClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) => {
@@ -100,7 +92,7 @@ const Header = () => {
           <hr />
           <span>
           </span>
-          {userLength === 0 ? (
+          {userLength! === 0 ? (
             <>
               <li>
                 <button className="login" onClick={() => redirectLogin()}>Fazer Login</button>
@@ -115,16 +107,16 @@ const Header = () => {
               <Dropdown menuIsOpen={menu}>
                 {user.typeUser === "seller"
                   ?
-                  <ul>
+                  <>
                     <DropdownItem onClick={() => handleOpenModalEditProfile()}>Editar Perfil</DropdownItem>
-                    <li onClick={() => openEditAddress()}>Editar Endereço</li>
-                    <DropdownItem onClick={() => navigate('./admview', { replace: true })}>Meus Anúncios</DropdownItem>
-                    <DropdownItem onClick={() => navigate('../login')}>Sair</DropdownItem>
-                  </ul>
+                    <DropdownItem onClick={() => handleOpenModalEditAddress()}>Editar Endereço</DropdownItem>
+                    <DropdownItem onClick={() => navigate('../admview', { replace: true })}>Meus Anúncios</DropdownItem>
+                    <DropdownItem onClick={() => logout()}>Sair</DropdownItem>
+                  </>
                   :
                   <>
                     <DropdownItem onClick={() => handleOpenModalEditProfile()}>Editar Perfil</DropdownItem>
-                    <DropdownItem onClick={() => openEditAddress()}>Editar Endereço</DropdownItem>
+                    <DropdownItem onClick={() => handleOpenModalEditAddress()}>Editar Endereço</DropdownItem>
                     <DropdownItem onClick={() => logout()}>Sair</DropdownItem>
                   </>
                 }

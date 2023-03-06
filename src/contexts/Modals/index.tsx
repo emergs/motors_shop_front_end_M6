@@ -1,12 +1,6 @@
 import { createContext, ReactNode, useState } from "react";
 
 interface IModalsContext {
-  handleOpenModalRegisterUser: () => void;
-  handleCloseModalRegisterUser: () => void;
-  showModalRegisterUser: boolean;
-  handleOpenModalLogin: () => void;
-  handleCloseModalLogin: () => void;
-  showModalLogin: boolean;
   handleOpenModalRegisterUserSuccess: () => void;
   handleCloseModalRegisterUserSuccess: () => void;
   showModalRegisterUserSuccess: boolean;
@@ -18,6 +12,8 @@ interface IModalsContext {
   showModalEditAddress: boolean;
   showModalCreateAdd: boolean;
   handleModalCreateAdd: () => void;
+  showModalAlerts: boolean;
+  handleModalAlerts: () => void;
 }
 
 interface IModalsProviderProps {
@@ -29,9 +25,6 @@ export const ModalsContext = createContext<IModalsContext>(
 );
 
 const ModalsProvider = ({ children }: IModalsProviderProps) => {
-  const [showModalRegisterUser, setShowModalRegisterUser] =
-    useState<boolean>(false);
-  const [showModalLogin, setShowModalLogin] = useState<boolean>(false);
   const [showModalRegisterUserSuccess, setShowModalRegisterUserSuccess] =
     useState<boolean>(false);
   const [showModalEditProfile, setShowModalEditProfile] =
@@ -39,22 +32,7 @@ const ModalsProvider = ({ children }: IModalsProviderProps) => {
   const [showModalEditAddress, setShowModalEditAddress] =
     useState<boolean>(false);
   const [showModalCreateAdd, setShowModalCreateAdd] = useState(false);
-
-  const handleOpenModalRegisterUser = () => {
-    setShowModalRegisterUser(true);
-  };
-
-  const handleCloseModalRegisterUser = () => {
-    setShowModalRegisterUser(false);
-  };
-
-  const handleOpenModalLogin = () => {
-    setShowModalLogin(true);
-  };
-
-  const handleCloseModalLogin = () => {
-    setShowModalLogin(false);
-  };
+  const [showModalAlerts, setShowModalAlerts] = useState<boolean>(false);
 
   const handleOpenModalRegisterUserSuccess = () => {
     setShowModalRegisterUserSuccess(true);
@@ -82,15 +60,13 @@ const ModalsProvider = ({ children }: IModalsProviderProps) => {
     setShowModalCreateAdd(!showModalCreateAdd);
   };
 
+  const handleModalAlerts = () => {
+    setShowModalAlerts(!showModalAlerts);
+  };
+
   return (
     <ModalsContext.Provider
       value={{
-        handleCloseModalRegisterUser,
-        handleOpenModalRegisterUser,
-        showModalRegisterUser,
-        handleCloseModalLogin,
-        handleOpenModalLogin,
-        showModalLogin,
         handleCloseModalRegisterUserSuccess,
         handleOpenModalRegisterUserSuccess,
         showModalRegisterUserSuccess,
@@ -102,6 +78,8 @@ const ModalsProvider = ({ children }: IModalsProviderProps) => {
         showModalEditAddress,
         showModalCreateAdd,
         handleModalCreateAdd,
+        showModalAlerts,
+        handleModalAlerts,
       }}
     >
       {children}
