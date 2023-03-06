@@ -15,37 +15,44 @@ export interface IUserLogin {
 }
 
 export interface IAddressRegister {
-  cep: string;
-  state: string;
-  city: string;
-  street: string;
-  number: string;
-  complement: string;
+  cep?: string;
+  state?: string;
+  city?: string;
+  street?: string;
+  number?: string;
+  complement?: string;
 }
 
 export interface IUserRegister extends IAddressRegister {
-  name: string;
-  email: string;
-  cpf: string;
-  phone: string;
-  birthdate: string;
-  description: string;
-  typeUser: string;
-  password: string;
-  confirmPassword: string;
+  name?: string;
+  email?: string;
+  cpf?: string;
+  phone?: string;
+  birthdate?: string;
+  description?: string;
+  typeUser?: string;
+  password?: string;
+  confirmPassword?: string;
 }
 
 interface ISellerProviderProps {
   children: ReactNode;
 }
 
+// interface IErrors{
+
+// }
+
 interface ISellerContext {
   userLogin: (data: IUserLogin) => void,
   createUser: (data: IUserRegister) => void,
+  editProfile: (data: IUserRegister) => void,
+  editAddress: (data: IAddressRegister) => void,
   user: any,
   addCount: () => void,
   resetUser: () => void
   setUser: any;
+  error: any;
 }
 
 export const SellerContext = createContext<ISellerContext>(
@@ -54,13 +61,18 @@ export const SellerContext = createContext<ISellerContext>(
 
 const SellerProvider = ({ children }: ISellerProviderProps) => {
   const [user, setUser] = useState<any>({})
+  const [error, setError] = useState<any>({})
   const [count, setCount] = useState<number>(0)
   const [loading, setLoading] = useState<boolean>(true)
 
   const navigate = useNavigate();
 
-  const { handleOpenModalRegisterUserSuccess, handleCloseModalRegisterUser } =
-    useContext(ModalsContext);
+  const {
+    handleOpenModalRegisterUserSuccess,
+    handleModalAlerts,
+    handleCloseModalEditProfile,
+    handleCloseModalEditAddress
+  } = useContext(ModalsContext);
 
   useEffect(() => {
 
@@ -97,6 +109,7 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
 
   //fazer login
   const userLogin = async (data: IUserLogin) => {
+    console.log(data)
     api.post("/login", data).then((res) => {
       const { token, id, typeUser } = res.data
 
@@ -104,9 +117,10 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
       window.localStorage.setItem('@MotorShopTOKEN', token)
       window.localStorage.setItem('@MotorShopUSERID', id)
       window.localStorage.setItem('@MotorShopUSERTYPE', typeUser)
-      
+
       typeUser == "seller" ? navigate("/admview", { replace: true }) : navigate("/home", { replace: true })
 
+      addCount()
     })
   };
 
@@ -134,22 +148,46 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
         address: address,
       };
 
-
+      console.log(user)
       const req = await api.post("/users", user);
-
-      //setUser(req.data);
       setCount(count + 1);
-      // toast.success('Usuário criado com sucesso!')
-      navigate("/login", { replace: true });
       handleOpenModalRegisterUserSuccess();
-      handleCloseModalRegisterUser();
-    } catch (error) {
-      console.error(error);
+    }
+    catch (error: any) {
+      setError(error)
+      addCount()
+      handleModalAlerts()
     }
   };
 
+  const editProfile = async (data: IUserRegister) => {
+    try {
+      const req = await api.patch("/users/profile", data);
+      handleCloseModalEditProfile()
+      addCount()
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
+
+  const editAddress = async (data: IAddressRegister) => {
+    try {
+      const address = { ...data }
+      const addressData = { address }
+      console.log(addressData);
+      const req = await api.patch("/users/profile", addressData);
+      console.log(req);
+      handleCloseModalEditAddress()
+      addCount()
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
-    <SellerContext.Provider value={{ userLogin, createUser, user, addCount, resetUser, setUser }}>
+    <SellerContext.Provider value={{ userLogin, createUser, user, addCount, resetUser, setUser, error, editProfile, editAddress }}>
       {children}
     </SellerContext.Provider>
   );

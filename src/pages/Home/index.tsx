@@ -89,7 +89,7 @@ const Home = () => {
         </HomeContent>
         <Footer />
       </HomePage>
-      <Modals />
+      {/* <Modals /> */}
     </>
   );
 };

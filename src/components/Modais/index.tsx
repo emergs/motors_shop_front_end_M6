@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
 import ReactDOM from "react-dom";
 import { ModalsContext } from "../../contexts/Modals";
+import { SellerContext } from "../../contexts/Seller";
 import EditAddressModal from "./EditAddressModal";
 import EditProfileModal from "./EditProfileModal";
 import LoginModal from "./LoginModal";
+import ModalAlerts from "./ModalAlerts";
 import RegisterUserModal from "./RegisterUser";
 import SucessRegisterUserModal from "./SuccessRegisterUserModal";
 
@@ -12,34 +14,19 @@ import SucessRegisterUserModal from "./SuccessRegisterUserModal";
 const Modals = () => {
 
   const {
-    showModalRegisterUser,
-    showModalLogin,
     showModalRegisterUserSuccess,
     showModalEditProfile,
-    showModalEditAddress
+    showModalEditAddress,
+    showModalAlerts,
   } = useContext(ModalsContext)
+
+  const {
+    error
+  } = useContext(SellerContext)
 
 
   return (
     <>
-      <>
-        {showModalRegisterUser &&
-          ReactDOM.createPortal(
-            <>
-              <RegisterUserModal />
-            </>,
-            document.getElementById("root") as HTMLElement
-          )}
-      </>
-      <>
-        {showModalLogin &&
-          ReactDOM.createPortal(
-            <>
-              <LoginModal />
-            </>,
-            document.getElementById("root") as HTMLElement
-          )}
-      </>
       <>
         {showModalRegisterUserSuccess &&
           ReactDOM.createPortal(
@@ -63,6 +50,15 @@ const Modals = () => {
           ReactDOM.createPortal(
             <>
               <EditAddressModal />
+            </>,
+            document.getElementById("root") as HTMLElement
+          )}
+      </>
+      <>
+        {showModalAlerts &&
+          ReactDOM.createPortal(
+            <>
+              <ModalAlerts error="Erro ao criar conta" title="erro" content="Tente novamente" />
             </>,
             document.getElementById("root") as HTMLElement
           )}
