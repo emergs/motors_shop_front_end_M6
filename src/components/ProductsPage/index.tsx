@@ -1,3 +1,5 @@
+import moment from "moment";
+import "moment/locale/pt-br";
 import Button from "../Button";
 import Footer from "../Footer";
 import Header from "../Header";
@@ -47,11 +49,11 @@ const ProductsPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             const result = await api.get(`/vehicle/${productId}`);
-            // console.log(result.data.users.name);
             const idLogado = localStorage.getItem("@MotorShopUSERID");
             if (idLogado) {
                 setUserLoggedId(idLogado);
             }
+            moment.locale("pt-br");
 
             setVehicle(result.data);
             setComments(result.data.comments);
@@ -59,7 +61,6 @@ const ProductsPage = () => {
             let iniciais = "";
             for (let i = 0; i < nome.length && i < 2; i++) {
                 iniciais += nome[i][0];
-                // console.log(iniciais);
             }
             setNameSplited(iniciais);
             setLoading(false);
@@ -68,13 +69,16 @@ const ProductsPage = () => {
         fetchData();
     }, [setComments, setLoading]);
 
-    // console.log(vehicle?.users.name);
+    function timePost(time: string) {
+        moment.locale("pt-br");
+        const updatedTime = moment(time).fromNow();
+
+        return updatedTime;
+    }
 
     const { register, handleSubmit, reset } = useForm<FormValues>();
 
     function onHandleSubmit(data: FormValues) {
-        // console.log(data);
-
         const token = localStorage.getItem("@MotorShopTOKEN");
 
         api.post(`/vehicle/comment/${productId}`, data, {
@@ -83,11 +87,8 @@ const ProductsPage = () => {
             },
         })
             .then((response) => {
-                // console.log(response.data);
-
                 const fetchData = async () => {
                     const result = await api.get(`/vehicle/${productId}`);
-                    // console.log(result.data.comments);
                     setVehicle(result.data);
                     setComments(result.data.comments);
                     let nome = result.data.users.name.split(" ");
@@ -113,6 +114,16 @@ const ProductsPage = () => {
     // ];
 
     // let nome = vehicle?.users.name;
+
+    function localeString(value: any) {
+        let stringToNumber = Number(value);
+        let newBValue = stringToNumber.toLocaleString("pt-br", {
+            style: "currency",
+            currency: "BRL",
+        });
+
+        return newBValue;
+    }
 
     if (loading) {
         return <div>Carregando...</div>;
@@ -141,7 +152,8 @@ const ProductsPage = () => {
                                             <p>{vehicle?.year}</p>
                                             <p>{`${vehicle?.km}km`}</p>
                                         </div>
-                                        <h3>{`R$ ${vehicle?.value}`}</h3>
+                                        <h3>{Number(vehicle?.value).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h3>
+                                        {/* <h3>{localeString(vehicle?.value)}</h3> */}
                                     </div>
                                     <Button
                                         width="80px"
@@ -250,11 +262,17 @@ const ProductsPage = () => {
                                                             src={ellipse3}
                                                             alt=""
                                                         />
-                                                        <span>há 3 dias</span>
+                                                        <span>
+                                                            {timePost(
+                                                                e.updatedAt
+                                                            )}
+                                                        </span>
                                                         {e.users.id ==
                                                         userLoggedId ? (
-                                                            <KebabMenu 
-                                                                productId={productId}
+                                                            <KebabMenu
+                                                                productId={
+                                                                    productId
+                                                                }
                                                                 commentId={e.id}
                                                             />
                                                         ) : (

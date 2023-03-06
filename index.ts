@@ -2,8 +2,10 @@
 import moment from 'moment';
 import 'moment/locale/pt-br.js';
 
+let value = 180000
 
-
+let newBValue = value.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+console.log(newBValue)
 
 let test = {
     id: "0722990f-c38c-4e4c-a65f-714eba8d8012",

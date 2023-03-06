@@ -6,6 +6,8 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
+import moment from 'moment';
+import 'moment/locale/pt-br.js';
 import {
   ICommentProps,
   IVehicleProps,
@@ -60,6 +62,8 @@ interface ISellerContext {
   setComments: any
   userLoggedId: any
   setUserLoggedId: any
+  postTime: any
+  setPostTime: any
 }
 
 export const SellerContext = createContext<ISellerContext>(
@@ -74,6 +78,7 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
   const [nameSplited, setNameSplited] = useState<string>("");
   const [comments, setComments] = useState<ICommentProps[]>([]);
   const [userLoggedId, setUserLoggedId] = useState<String>("");
+  const [postTime, setPostTime ] = useState<String>('')
 
   const navigate = useNavigate();
 
@@ -182,6 +187,8 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
         setComments,
         userLoggedId,
         setUserLoggedId,
+        postTime,
+        setPostTime
       }}
     >
       {children}
