@@ -40,11 +40,6 @@ const ProductsPage = () => {
         userLoggedId,
         setUserLoggedId,
     } = useContext(SellerContext);
-    //   const [vehicle, setVehicle] = useState<IVehicleProps>();
-    //   const [nameSplited, setNameSplited] = useState<string>("");
-    //   const [comments, setComments] = useState<ICommentProps[]>([]);
-    //   const [loading, setLoading] = useState<Boolean>(true);
-    //   const [userLoggedId, setUserLoggedId] = useState<String>('')
 
     useEffect(() => {
         const fetchData = async () => {
@@ -70,10 +65,63 @@ const ProductsPage = () => {
     }, [setComments, setLoading]);
 
     function timePost(time: string) {
-        moment.locale("pt-br");
-        const updatedTime = moment(time).fromNow();
+        // moment.locale("pt-br");
+        // const updatedTime = moment(time).fromNow();
 
-        return updatedTime;
+        // return updatedTime;
+        const updatedTime = new Date(time);
+        const now = new Date();
+        const diff = now.getTime() - updatedTime.getTime();
+        const seconds = Math.floor(diff / 1000);
+
+        if (seconds < 60) {
+            if (seconds === 1) {
+                return `há ${seconds} segundo`;
+            }
+            return `há ${seconds} segundos`;
+        }
+
+        const minutes = Math.floor(seconds / 60);
+
+        if (minutes < 60) {
+            if (minutes === 1) {
+                return `há ${minutes} minuto`;
+            }
+            return `há ${minutes} minutos`;
+        }
+
+        const hours = Math.floor(minutes / 60);
+
+        if (hours < 24) {
+            if (hours === 1) {
+                return `há ${hours} hora`;
+            }
+            return `há ${hours} horas`;
+        }
+
+        const days = Math.floor(hours / 24);
+
+        if (days < 30) {
+            if (days === 1) {
+                return `há ${days} dia`;
+            }
+            return `há ${days} dias`;
+        }
+
+        const months = Math.floor(days / 30);
+
+        if (months < 12) {
+            if (months === 1) {
+                return `há ${months} mes`;
+            }
+            return `há ${months} meses`;
+        }
+
+        const years = Math.floor(months / 12);
+        if (years === 1) {
+            return `há ${years} ano`;
+        }
+        return `há ${years} anos`;
     }
 
     const { register, handleSubmit, reset } = useForm<FormValues>();
@@ -152,7 +200,14 @@ const ProductsPage = () => {
                                             <p>{vehicle?.year}</p>
                                             <p>{`${vehicle?.km}km`}</p>
                                         </div>
-                                        <h3>{Number(vehicle?.value).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h3>
+                                        <h3>
+                                            {Number(
+                                                vehicle?.value
+                                            ).toLocaleString("pt-br", {
+                                                style: "currency",
+                                                currency: "BRL",
+                                            })}
+                                        </h3>
                                         {/* <h3>{localeString(vehicle?.value)}</h3> */}
                                     </div>
                                     <Button
@@ -160,6 +215,13 @@ const ProductsPage = () => {
                                         height="30px"
                                         backgroundColor="var(--color-brand-1)"
                                         color="var(--white-fixed)"
+                                        // onClick={handleRedirect}
+                                        onClick={() =>
+                                            window.open(
+                                                `https://wa.me/+55${vehicle.users.phone}`,
+                                                "_blank"
+                                            )
+                                        }
                                     >
                                         Comprar
                                     </Button>
