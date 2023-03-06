@@ -260,6 +260,7 @@ export const Comments = styled.div`
                         font-size: 12px;
                         font-family: "Inter";
                         color: var(--grey-2);
+                        margin-right: 20px;
                     }
                     img {
                         height: 6px;

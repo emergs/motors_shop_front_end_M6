@@ -21,7 +21,7 @@ const Header = () => {
 
   const { user, addCount, resetUser } = useContext(SellerContext)
 
-  const { handleOpenModalRegisterUser, handleOpenModalLogin, handleOpenModalEditProfile, handleOpenModalEditAddress } = useContext(ModalsContext)
+  const { handleOpenModalEditProfile, handleOpenModalEditAddress } = useContext(ModalsContext)
 
   useEffect(() => {
     setUserLength(Object.keys(user).length)

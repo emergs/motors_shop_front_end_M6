@@ -1,3 +1,5 @@
+import moment from "moment";
+import "moment/locale/pt-br";
 import Button from "../Button";
 import Footer from "../Footer";
 import Header from "../Header";
@@ -12,10 +14,13 @@ import {
 import ellipse3 from "../../assets/images/ellipse3.png";
 import { useForm } from "react-hook-form";
 import MyDiv from "../NoImageColor";
-import {  useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import api from "../../services/api";
 import { ICommentProps, IVehicleProps } from "./interfaces";
+import { FiDelete } from "react-icons/fi";
+import KebabMenu from "../kebbabMenu";
+import { SellerContext } from "../../contexts/Seller";
 
 interface FormValues {
     comment: string;
@@ -23,34 +28,57 @@ interface FormValues {
 
 const ProductsPage = () => {
     const { productId } = useParams();
+    const {
+        loading,
+        setLoading,
+        vehicle,
+        setVehicle,
+        nameSplited,
+        setNameSplited,
+        comments,
+        setComments,
+        userLoggedId,
+        setUserLoggedId,
+    } = useContext(SellerContext);
+    //   const [vehicle, setVehicle] = useState<IVehicleProps>();
+    //   const [nameSplited, setNameSplited] = useState<string>("");
+    //   const [comments, setComments] = useState<ICommentProps[]>([]);
+    //   const [loading, setLoading] = useState<Boolean>(true);
+    //   const [userLoggedId, setUserLoggedId] = useState<String>('')
 
-    const [vehicle, setVehicle] = useState<IVehicleProps>();
-    const [nameSplited, setNameSplited] = useState<string>("");
-    const [comments, setComments] = useState<ICommentProps[]>([]);
-    
     useEffect(() => {
         const fetchData = async () => {
             const result = await api.get(`/vehicle/${productId}`);
-            console.log(result.data.comments);
+            const idLogado = localStorage.getItem("@MotorShopUSERID");
+            if (idLogado) {
+                setUserLoggedId(idLogado);
+            }
+            moment.locale("pt-br");
+
             setVehicle(result.data);
             setComments(result.data.comments);
-            let nome = result.data.users.name;
+            let nome = result.data.users.name.split(" ");
             let iniciais = "";
             for (let i = 0; i < nome.length && i < 2; i++) {
                 iniciais += nome[i][0];
             }
             setNameSplited(iniciais);
+            setLoading(false);
         };
 
         fetchData();
-    }, [setComments]);
-    
+    }, [setComments, setLoading]);
+
+    function timePost(time: string) {
+        moment.locale("pt-br");
+        const updatedTime = moment(time).fromNow();
+
+        return updatedTime;
+    }
 
     const { register, handleSubmit, reset } = useForm<FormValues>();
 
     function onHandleSubmit(data: FormValues) {
-        // console.log(data);
-
         const token = localStorage.getItem("@MotorShopTOKEN");
 
         api.post(`/vehicle/comment/${productId}`, data, {
@@ -59,22 +87,19 @@ const ProductsPage = () => {
             },
         })
             .then((response) => {
-                console.log(response.data)
-                
                 const fetchData = async () => {
                     const result = await api.get(`/vehicle/${productId}`);
-                    // console.log(result.data.comments);
                     setVehicle(result.data);
                     setComments(result.data.comments);
-                    let nome = result.data.users.name;
+                    let nome = result.data.users.name.split(" ");
                     let iniciais = "";
                     for (let i = 0; i < nome.length && i < 2; i++) {
                         iniciais += nome[i][0];
                     }
-                    setNameSplited(iniciais);
+
+                    // setNameSplited(iniciais);
                 };
-                fetchData()
-                
+                fetchData();
             })
             .catch((error) => {
                 console.log(error);
@@ -89,6 +114,20 @@ const ProductsPage = () => {
     // ];
 
     // let nome = vehicle?.users.name;
+
+    function localeString(value: any) {
+        let stringToNumber = Number(value);
+        let newBValue = stringToNumber.toLocaleString("pt-br", {
+            style: "currency",
+            currency: "BRL",
+        });
+
+        return newBValue;
+    }
+
+    if (loading) {
+        return <div>Carregando...</div>;
+    }
 
     return (
         <Container>
@@ -113,7 +152,8 @@ const ProductsPage = () => {
                                             <p>{vehicle?.year}</p>
                                             <p>{`${vehicle?.km}km`}</p>
                                         </div>
-                                        <h3>{`R$ ${vehicle?.value}`}</h3>
+                                        <h3>{Number(vehicle?.value).toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</h3>
+                                        {/* <h3>{localeString(vehicle?.value)}</h3> */}
                                     </div>
                                     <Button
                                         width="80px"
@@ -202,7 +242,7 @@ const ProductsPage = () => {
                                 <h2>Comentários</h2>
                                 <ul>
                                     {comments ? (
-                                        comments.map((e) => {
+                                        comments.map((e: ICommentProps) => {
                                             return (
                                                 <li key={e.id}>
                                                     <div className="commentsInfo">
@@ -222,7 +262,22 @@ const ProductsPage = () => {
                                                             src={ellipse3}
                                                             alt=""
                                                         />
-                                                        <span>há 3 dias</span>
+                                                        <span>
+                                                            {timePost(
+                                                                e.updatedAt
+                                                            )}
+                                                        </span>
+                                                        {e.users.id ==
+                                                        userLoggedId ? (
+                                                            <KebabMenu
+                                                                productId={
+                                                                    productId
+                                                                }
+                                                                commentId={e.id}
+                                                            />
+                                                        ) : (
+                                                            <></>
+                                                        )}
                                                     </div>
                                                     <p>{e.comment}</p>
                                                 </li>
