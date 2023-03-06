@@ -23,7 +23,7 @@ const KebabMenu: React.FC<KebabMenuProps> = ({ commentId, productId }) => {
         return () => {
             document.removeEventListener("click", handleClickOutside);
         };
-    }, [menuRef]);
+    }, [menuRef, setMenuOpen]);
 
     function handleClickDelete() {
         const token = localStorage.getItem("@MotorShopTOKEN");
@@ -54,7 +54,7 @@ const KebabMenu: React.FC<KebabMenuProps> = ({ commentId, productId }) => {
     }
 
     return (
-        <Container>
+        <Container  ref={menuRef}>
             <KebabIcon onClick={() => setMenuOpen(!menuOpen)} />
             {menuOpen && (
                 <Menu>
