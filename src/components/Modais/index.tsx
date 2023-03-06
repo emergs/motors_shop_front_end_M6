@@ -6,7 +6,6 @@ import EditAddressModal from "./EditAddressModal";
 import EditProfileModal from "./EditProfileModal";
 import LoginModal from "./LoginModal";
 import ModalAlerts from "./ModalAlerts";
-import RegisterUserModal from "./RegisterUser";
 import SucessRegisterUserModal from "./SuccessRegisterUserModal";
 
 
