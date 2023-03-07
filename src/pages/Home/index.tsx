@@ -3,21 +3,34 @@ import Footer from "../../components/Footer"
 import Header from "../../components/Header"
 import { HomeContent, HomePage } from "./style"
 import Auction from "../../components/Auction"
-import ModalCreateAd from "../../components/Modais";
 import { Card, List } from "../ProfileViewAdm/styles"
-import { vehicles } from "../../database"
-import { Fragment } from "react"
-import Modalteste from "../../components/Modais"
-import Modals from "../../components/Modais"
+import { useEffect, useState } from "react"
+import api from "../../services/api"
+import { IVehicle } from "../ProfileViewAdm/interfaces"
+
 
 const Home = () => {
+  const [vehicles, setVehicles] = useState<IVehicle[]>([])
+  const [motorcicles, setMotorcicles] = useState<IVehicle[]>([])
+  const [cars, setCars] = useState<IVehicle[]>([])
 
-  const buttonAtributes = {
-    border: "1px solid var(--grey-0)",
-    padding: "10px",
-    hoverBackground: "var(--grey-1)",
-    hoverColor: "var(--white-fixed)",
-  };
+  useEffect(() => {
+    const retrieveUser = async () => {
+      await api.get("/vehicle")
+        .then((res) => {
+          console.log(res.data)
+          setVehicles(res.data);
+          setMotorcicles(
+            res.data.filter((v: IVehicle) => v.type === "motorcycle")
+          );
+          setCars(
+            res.data.filter((v: IVehicle) => v.type === "car")
+          );
+        })
+        .catch((err) => console.error(err));
+    };
+    retrieveUser();
+  }, []);
 
   return (
     <>
@@ -37,52 +50,44 @@ const Home = () => {
           <div className="main-list-vehicles">
             <h2 id="car">Carros</h2>
             <List>
-              {vehicles.map((e) =>
-                e.category === "car" ? (
-                  <li key={e.id}>
-                    <Card>
-                      <img src={e.img[0]} alt={e.name} />
-                      <div className="details-container">
-                        <h3>{e.name}</h3>
-                        <p>
-                          {e.info.length > 90 ? e.info.slice(0, 85) + "..." : e.info}
-                        </p>
-                        <p>
-                          <span>{e.km}</span>
-                          <span>{e.year}</span>
-                          <span>R$ {e.price}</span>
-                        </p>
-                      </div>
-                    </Card>
-                  </li>
-                ) : (
-                  <Fragment />
-                )
+              {cars?.map((e) =>
+                <li key={e.id}>
+                  <Card>
+                    <img src={e.imgCap} alt={e.title} />
+                    <div className="details-container">
+                      <h3>{e.title}</h3>
+                      <p>
+                        {e.description.length > 90 ? e.description.slice(0, 85) + "..." : e.description}
+                      </p>
+                      <p>
+                        <span>{e.km}</span>
+                        <span>{e.year}</span>
+                        <span>R$ {e.price}</span>
+                      </p>
+                    </div>
+                  </Card>
+                </li>
               )}
             </List>
             <h2 id="motorcycle">Motos</h2>
             <List>
-              {vehicles.map((e) =>
-                e.category === "motorcicle" ? (
-                  <li key={e.id}>
-                    <Card>
-                      <img src={e.img[0]} alt={e.name} />
-                      <div className="details-container">
-                        <h3>{e.name}</h3>
-                        <p>
-                          {e.info.length > 90 ? e.info.slice(0, 85) + "..." : e.info}
-                        </p>
-                        <p>
-                          <span>{e.km}</span>
-                          <span>{e.year}</span>
-                          <span>R$ {e.price}</span>
-                        </p>
-                      </div>
-                    </Card>
-                  </li>
-                ) : (
-                  <Fragment />
-                )
+              {motorcicles?.map((e) =>
+                <li key={e.id}>
+                  <Card>
+                    <img src={e.imgCap} alt={e.title} />
+                    <div className="details-container">
+                      <h3>{e.title}</h3>
+                      <p>
+                        {e.description.length > 90 ? e.description.slice(0, 85) + "..." : e.description}
+                      </p>
+                      <p>
+                        <span>{e.km}</span>
+                        <span>{e.year}</span>
+                        <span>R$ {e.price}</span>
+                      </p>
+                    </div>
+                  </Card>
+                </li>
               )}
             </List>
           </div>
