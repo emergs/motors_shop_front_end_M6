@@ -54,7 +54,7 @@ interface ISellerContext {
   createUser: (data: IUserRegister) => void,
   editProfile: (data: IUserRegister) => void,
   editAddress: (data: IAddressRegister) => void,
-  user: any,
+  user: IUserRegister,
   addCount: () => void,
   resetUser: () => void
   setUser: any;

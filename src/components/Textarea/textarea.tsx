@@ -11,13 +11,14 @@ const Textarea: React.FC<InputProps> = ({
   control,
   height,
   width,
+  defaultValue,
   className,
 }) => {
   const {
     field: { ref, ...inputProps },
     fieldState: { invalid, error },
   } = useController({
-    defaultValue: "",
+    defaultValue: defaultValue,
     name,
     control,
     rules: {

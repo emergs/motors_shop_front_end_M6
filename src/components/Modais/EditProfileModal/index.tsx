@@ -13,7 +13,7 @@ import { FormBase } from "../LoginModal/style"
 const EditProfileModal = () => {
 
   const { handleCloseModalEditProfile } = useContext(ModalsContext)
-  const { editProfile } = useContext(SellerContext)
+  const { editProfile, user } = useContext(SellerContext)
 
   const { control, handleSubmit } = useForm()
 
@@ -25,12 +25,13 @@ const EditProfileModal = () => {
       <h3>Editar Perfil</h3>
       <span className="title-form">Informações pessoais</span>
       <FormBase onSubmit={handleSubmit(editProfile)}>
-        <Input label="Nome " name="name" type="text" placeholder="Digite seu Nome" control={control} />
-        <Input label="Email " name="email" type="email" placeholder="seuemail@mail.com" control={control} />
-        <Input label="CPF " name="cpf" type="text" placeholder="000.000.000-00" control={control} />
-        <Input label="Telefone " name="phone" type="text" placeholder="(00)00000-0000" control={control} />
-        <Input label="Data de nascimento " name="birthdate" type="date" placeholder="00/00/0000" control={control} />
-        <Textarea label="Descrição " name="description" placeholder="Digite algo que julgar útil" control={control} />
+        {/* <input type="text" defaultValue={} /> */}
+        <Input label="Nome " name="name" type="text" placeholder="Digite seu Nome" control={control} defaultValue={user?.name} />
+        <Input label="Email " name="email" type="email" placeholder="seuemail@mail.com" control={control} defaultValue={user?.email} />
+        {/* <Input label="CPF " name="cpf" type="text" placeholder="000.000.000-00" control={control} /> */}
+        <Input label="Telefone " name="phone" type="text" placeholder="(00)00000-0000" control={control} defaultValue={user?.phone} />
+        <Input label="Data de nascimento " name="birthdate" type="date" placeholder="00/00/0000" control={control} defaultValue={user?.birthdate} />
+        <Textarea label="Descrição " name="description" placeholder="Digite algo que julgar útil" control={control} defaultValue={user?.description} />
         <Button >Salvar</Button>
       </FormBase>
     </BaseModal>
