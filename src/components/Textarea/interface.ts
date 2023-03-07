@@ -6,4 +6,5 @@ export interface InputProps {
   width?: string;
   height?: string;
   className?: string;
+  defaultValue?: string;
 }

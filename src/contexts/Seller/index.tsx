@@ -29,6 +29,19 @@ export interface IAddressRegister {
   complement?: string;
 }
 
+export interface IUserEdition {
+  name?: string;
+  email?: string;
+  cpf?: string;
+  phone?: string;
+  birthdate?: string;
+  description?: string;
+  typeUser?: string;
+  password?: string;
+  confirmPassword?: string;
+  address?: IAddressRegister
+}
+
 export interface IUserRegister extends IAddressRegister {
   name?: string;
   email?: string;
@@ -54,7 +67,7 @@ interface ISellerContext {
   createUser: (data: IUserRegister) => void,
   editProfile: (data: IUserRegister) => void,
   editAddress: (data: IAddressRegister) => void,
-  user: any,
+  user: IUserEdition,
   addCount: () => void,
   resetUser: () => void
   setUser: any;
