@@ -39,7 +39,8 @@ export interface IUserEdition {
   typeUser?: string;
   password?: string;
   confirmPassword?: string;
-  address?: IAddressRegister
+  address?: IAddressRegister;
+  profileImage?: string;
 }
 
 export interface IUserRegister extends IAddressRegister {
