@@ -6,6 +6,10 @@ const HomePage = styled.main`
 `
 
 const HomeContent = styled.section`
+  a{
+    text-decoration: none;
+  }
+
   .main{
     display: flex;
     flex-direction: column;
