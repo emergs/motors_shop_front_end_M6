@@ -59,7 +59,7 @@ const Home = () => {
           <Auction />
           {/* <VehicleList vehicleList={vehicles} /> */}
           <div className="main-list-vehicles">
-            <h2 ref={sectionCar}>Carros</h2>
+            <h2 id='car' ref={sectionCar}>Carros</h2>
             <List>
               {cars?.map((e) =>
                 <li key={e.id}>
@@ -82,7 +82,7 @@ const Home = () => {
                 </li>
               )}
             </List>
-            <h2 ref={sectionMotorcycle}>Motos</h2>
+            <h2 id='motorcycle' ref={sectionMotorcycle}>Motos</h2>
             <List>
               {motorcicles?.map((e) =>
                 <li key={e.id}>
