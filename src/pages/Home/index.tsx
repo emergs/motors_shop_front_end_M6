@@ -63,7 +63,7 @@ const Home = () => {
             <List>
               {cars?.map((e) =>
                 <li key={e.id}>
-                  <Link to={`../product/${e.id}`} onClick={() => window.scrollTo(0, 0)}>
+                  <Link to={`../product/${e.id}`} onClick={() => window.scrollTo(0,0)}>
                     <Card>
                       <img src={e.imgCap} alt={e.title} />
                       <div className="details-container">
