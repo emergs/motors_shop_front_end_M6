@@ -5,6 +5,7 @@ import { FormBase } from "../../components/Modais/LoginModal/style";
 const RegisterPage = styled.main`
 display: flex;
 justify-content: center;
+background-color: var(--grey-8);
 
 .form-base-duo-column{
     display: flex;
@@ -33,10 +34,20 @@ const Content = styled.div`
 margin: 22px 16px;
 padding: 22px 28px;
 width:343px;
+background-color: var(--grey-10);
+border-radius: 4px;
 
 h2{
   font:var(--heading-5-500);
   margin-bottom: 32px;
+}
+
+.title-form{
+  font:var(--body-2-500);
+}
+
+@media(min-width: 768px){
+  width: 411px;
 }
 `
 

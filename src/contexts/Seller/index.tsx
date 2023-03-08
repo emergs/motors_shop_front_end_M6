@@ -59,10 +59,6 @@ interface ISellerProviderProps {
   children: ReactNode;
 }
 
-// interface IErrors{
-
-// }
-
 interface ISellerContext {
   userLogin: (data: IUserLogin) => void,
   createUser: (data: IUserRegister) => void,
@@ -187,7 +183,8 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
       handleOpenModalRegisterUserSuccess();
     }
     catch (error: any) {
-      setError(error)
+      setError(error.response?.data?.message)
+      console.log(error)
       addCount()
       handleModalAlerts()
     }
