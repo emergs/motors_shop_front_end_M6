@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { RiCloseFill } from "react-icons/ri";
+import { useNavigate } from "react-router";
 import { ModalsContext } from "../../../contexts/Modals";
 import BaseModal from "../../BaseModal";
 import Button from "../../Button";
@@ -7,9 +8,11 @@ import { ModalSuccess } from "./style";
 
 const SucessRegisterUserModal = () => {
 
+  const navigate = useNavigate()
   const { handleCloseModalRegisterUserSuccess } = useContext(ModalsContext)
 
   const goToLogin = () => {
+    navigate('./login', { replace: true })
     handleCloseModalRegisterUserSuccess()
   }
 

@@ -57,7 +57,7 @@ const Modals = () => {
         {showModalAlerts &&
           ReactDOM.createPortal(
             <>
-              <ModalAlerts error="Erro ao criar conta" title="erro" content="Tente novamente" />
+              <ModalAlerts error="Erro ao criar conta" title={error} content="Tente novamente" />
             </>,
             document.getElementById("root") as HTMLElement
           )}
