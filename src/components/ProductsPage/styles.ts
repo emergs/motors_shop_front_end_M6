@@ -1,29 +1,30 @@
 import styled from "styled-components";
 
 const colors = [
-    '--random-1',
-    '--random-2',
-    '--random-3',
-    '--random-4',
-    '--random-5',
-    '--random-6',
-    '--random-7',
-    '--random-8',
-    '--random-9',
-    '--random-10',
-    '--random-11',
-    '--random-12'
-  ];
-  
-  // selecione um número aleatório de 0 a 11 para escolher a cor
-  const randomIndex = Math.floor(Math.random() * colors.length);
-  
-  // selecione a cor correspondente com base no índice aleatório
-  const color = `var(${colors[randomIndex]})`;
+    "--random-1",
+    "--random-2",
+    "--random-3",
+    "--random-4",
+    "--random-5",
+    "--random-6",
+    "--random-7",
+    "--random-8",
+    "--random-9",
+    "--random-10",
+    "--random-11",
+    "--random-12",
+];
+
+// selecione um número aleatório de 0 a 11 para escolher a cor
+const randomIndex = Math.floor(Math.random() * colors.length);
+
+// selecione a cor correspondente com base no índice aleatório
+const color = `var(${colors[randomIndex]})`;
 
 export const Container = styled.div`
     width: 100%;
     height: 100%;
+    /* background-color: black; */
 `;
 
 export const TestDiv = styled.div`
@@ -42,7 +43,6 @@ export const TestDiv = styled.div`
             flex-direction: row;
             align-items: flex-start;
             justify-content: space-around;
-            
         }
         .leftContent {
             max-width: 720px;
@@ -58,7 +58,8 @@ export const TestDiv = styled.div`
 `;
 
 export const ProductPage = styled.div`
-    /* background-color: red; */
+    /* background-color: black; */
+
     width: 100vw;
 
     /* height: 100vh; */
@@ -214,7 +215,7 @@ export const RightContent = styled.div`
     }
     @media screen and (min-width: 768px) {
         max-width: 440px;
-        li{
+        li {
             height: 108px;
             width: 108px;
         }
@@ -323,8 +324,10 @@ export const Comments = styled.div`
     @media screen and (min-width: 768px) {
         display: flex;
         justify-content: space-around;
+
         .blank {
             width: 440px;
+            background-color: #f1f3f5;
         }
         .commentsAll {
             max-width: 720px;
