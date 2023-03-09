@@ -3,21 +3,46 @@ import Footer from "../../components/Footer"
 import Header from "../../components/Header"
 import { HomeContent, HomePage } from "./style"
 import Auction from "../../components/Auction"
-import ModalCreateAd from "../../components/Modais";
 import { Card, List } from "../ProfileViewAdm/styles"
-import { vehicles } from "../../database"
-import { Fragment } from "react"
-import Modalteste from "../../components/Modais"
-import Modals from "../../components/Modais"
+import { useEffect, useRef, useState } from "react"
+import api from "../../services/api"
+
+import { Link } from "react-router-dom"
+import { IVehicles } from "./interfaces"
+
 
 const Home = () => {
+  const [vehicles, setVehicles] = useState<IVehicles[]>([])
+  const [motorcicles, setMotorcicles] = useState<IVehicles[]>([])
+  const [cars, setCars] = useState<IVehicles[]>([])
+  const sectionCar = useRef<HTMLHeadingElement>(null)
+  const sectionMotorcycle = useRef<HTMLHeadingElement>(null)
 
-  const buttonAtributes = {
-    border: "1px solid var(--grey-0)",
-    padding: "10px",
-    hoverBackground: "var(--grey-1)",
-    hoverColor: "var(--white-fixed)",
-  };
+  useEffect(() => {
+    const retrieveUser = async () => {
+      await api.get("/vehicle")
+        .then((res) => {
+          console.log(res.data)
+          setVehicles(res.data);
+          setMotorcicles(
+            res.data.filter((v: IVehicles) => v.type === "motorcycle")
+          );
+          setCars(
+            res.data.filter((v: IVehicles) => v.type === "car")
+          );
+        })
+        .catch((err) => console.error(err));
+    };
+    retrieveUser();
+  }, []);
+
+  const goToCarSection = () => {
+    sectionCar.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const goToMotorcycleSection = () => {
+    sectionMotorcycle.current?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
     <>
@@ -28,68 +53,74 @@ const Home = () => {
             <h1>Velocidade e experiência em um lugar feito para você</h1>
             <span>Um ambiente feito para você explorar o seu melhor</span>
             <div className="main-buttons-group">
-              <Button>Carros</Button>
-              <Button>Motos</Button>
+              <Button onClick={goToCarSection}>Carros</Button>
+              <Button onClick={goToMotorcycleSection}>Motos</Button>
             </div>
           </div>
           <Auction />
           {/* <VehicleList vehicleList={vehicles} /> */}
           <div className="main-list-vehicles">
-            <h2 id="car">Carros</h2>
+            <h2 id='car' ref={sectionCar}>Carros</h2>
             <List>
-              {vehicles.map((e) =>
-                e.category === "car" ? (
-                  <li key={e.id}>
+              {cars?.map((e) =>
+                <li key={e.id}>
+                  <Link to={`../product/${e.id}`} onClick={() => window.scrollTo(0,0)}>
                     <Card>
-                      <img src={e.img[0]} alt={e.name} />
+                      <img src={e.imageGalery.photos[0].urlImage} alt={e.title} />
                       <div className="details-container">
-                        <h3>{e.name}</h3>
+                        <h3>{e.title}</h3>
                         <p>
-                          {e.info.length > 90 ? e.info.slice(0, 85) + "..." : e.info}
+                          {e.description.length > 90 ? e.description.slice(0, 85) + "..." : e.description}
                         </p>
                         <p>
                           <span>{e.km}</span>
                           <span>{e.year}</span>
-                          <span>R$ {e.price}</span>
+                          <span>{Number(
+                                                e.value
+                                            ).toLocaleString("pt-br", {
+                                                style: "currency",
+                                                currency: "BRL",
+                                            })}</span>
                         </p>
                       </div>
                     </Card>
-                  </li>
-                ) : (
-                  <Fragment />
-                )
+                  </Link>
+                </li>
               )}
             </List>
-            <h2 id="motorcycle">Motos</h2>
+            <h2 id='motorcycle' ref={sectionMotorcycle}>Motos</h2>
             <List>
-              {vehicles.map((e) =>
-                e.category === "motorcicle" ? (
-                  <li key={e.id}>
+              {motorcicles?.map((e) =>
+                <li key={e.id}>
+                  <Link to={`../product/${e.id}`} onClick={() => window.scrollTo(0, 0)}>
                     <Card>
-                      <img src={e.img[0]} alt={e.name} />
+                      <img src={e.imageGalery.photos[0].urlImage} alt={e.title} />
                       <div className="details-container">
-                        <h3>{e.name}</h3>
+                        <h3>{e.title}</h3>
                         <p>
-                          {e.info.length > 90 ? e.info.slice(0, 85) + "..." : e.info}
+                          {e.description.length > 90 ? e.description.slice(0, 85) + "..." : e.description}
                         </p>
                         <p>
                           <span>{e.km}</span>
                           <span>{e.year}</span>
-                          <span>R$ {e.price}</span>
+                          <span>{Number(
+                                                e.value
+                                            ).toLocaleString("pt-br", {
+                                                style: "currency",
+                                                currency: "BRL",
+                                            })}</span>
                         </p>
                       </div>
-                    </Card>
-                  </li>
-                ) : (
-                  <Fragment />
-                )
+                    </Card>k
+                  </Link>
+                </li>
               )}
             </List>
           </div>
         </HomeContent>
         <Footer />
       </HomePage>
-      <Modals />
+      {/* <Modals /> */}
     </>
   );
 };

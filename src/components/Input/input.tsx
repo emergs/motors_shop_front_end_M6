@@ -14,13 +14,14 @@ const Input: React.FC<InputProps> = ({
   width,
   inputMode,
   className,
+  defaultValue,
   onClick,
 }) => {
   const {
     field: { ref, ...inputProps },
     fieldState: { invalid, error },
   } = useController({
-    defaultValue: "",
+    defaultValue: defaultValue,
     name,
     control,
     rules: {

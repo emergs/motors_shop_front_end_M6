@@ -13,20 +13,20 @@ import BaseLogin from "../../LoginBase";
 
 const LoginModal = () => {
 
-  const { handleCloseModalLogin } = useContext(ModalsContext)
+  // const { handleCloseModalLogin } = useContext(ModalsContext)
 
   const { userLogin } = useContext(SellerContext)
 
   const { control, handleSubmit } = useForm<IUserLogin>()
 
   const navigate = useNavigate()
-  function onClickSend(){
-    navigate('/home', {replace: true})
+  function onClickSend() {
+    navigate('/home', { replace: true })
   }
 
   return (
     <BaseLogin padding={'44px 28px'}>
-      <button className="close-modal" onClick={() => handleCloseModalLogin()}>
+      <button className="close-modal">
         <RiCloseFill />
       </button>
       <h2>Login</h2>

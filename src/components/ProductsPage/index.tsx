@@ -1,3 +1,5 @@
+import moment from "moment";
+import "moment/locale/pt-br";
 import Button from "../Button";
 import Footer from "../Footer";
 import Header from "../Header";
@@ -12,19 +14,24 @@ import {
 import ellipse3 from "../../assets/images/ellipse3.png";
 import { useForm } from "react-hook-form";
 import MyDiv from "../NoImageColor";
-import { useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { Key, useContext, useEffect, useState } from "react";
 import api from "../../services/api";
-import { ICommentProps, IVehicleProps } from "./interfaces";
+import { ICommentProps, IPhoto, IVehicleProps } from "./interfaces";
 import { FiDelete } from "react-icons/fi";
 import KebabMenu from "../kebbabMenu";
 import { SellerContext } from "../../contexts/Seller";
+import EditModal from "../EditCommentModal";
+import ImageModal from "../ImageModal";
 
-interface FormValues {
+export interface FormCommentValues {
     comment: string;
 }
 
 const ProductsPage = () => {
+    
+    const navigate = useNavigate()
+    
     const { productId } = useParams();
     const {
         loading,
@@ -37,29 +44,31 @@ const ProductsPage = () => {
         setComments,
         userLoggedId,
         setUserLoggedId,
+        isOpenEdit,
+        setIsOpenEdit,
+        setVehicleGalery,
+        vehicleGalery,
+        isImageOpen,
+        setIsImageOpen,
+        setImageLink
     } = useContext(SellerContext);
-    //   const [vehicle, setVehicle] = useState<IVehicleProps>();
-    //   const [nameSplited, setNameSplited] = useState<string>("");
-    //   const [comments, setComments] = useState<ICommentProps[]>([]);
-    //   const [loading, setLoading] = useState<Boolean>(true);
-    //   const [userLoggedId, setUserLoggedId] = useState<String>('')
 
     useEffect(() => {
         const fetchData = async () => {
             const result = await api.get(`/vehicle/${productId}`);
-            // console.log(result.data.users.name);
             const idLogado = localStorage.getItem("@MotorShopUSERID");
             if (idLogado) {
                 setUserLoggedId(idLogado);
             }
-
+            moment.locale("pt-br");
+            // console.log(result.data.imageGalery.photos[0].urlImage)
             setVehicle(result.data);
             setComments(result.data.comments);
+            setVehicleGalery(result.data.imageGalery.photos);
             let nome = result.data.users.name.split(" ");
             let iniciais = "";
             for (let i = 0; i < nome.length && i < 2; i++) {
                 iniciais += nome[i][0];
-                // console.log(iniciais);
             }
             setNameSplited(iniciais);
             setLoading(false);
@@ -68,13 +77,69 @@ const ProductsPage = () => {
         fetchData();
     }, [setComments, setLoading]);
 
-    // console.log(vehicle?.users.name);
+    function timePost(time: string) {
+        // moment.locale("pt-br");
+        // const updatedTime = moment(time).fromNow();
 
-    const { register, handleSubmit, reset } = useForm<FormValues>();
+        // return updatedTime;
+        const updatedTime = new Date(time);
+        const now = new Date();
+        const diff = now.getTime() - updatedTime.getTime();
+        const seconds = Math.floor(diff / 1000);
 
-    function onHandleSubmit(data: FormValues) {
-        // console.log(data);
+        if (seconds < 60) {
+            if (seconds === 1) {
+                return `há ${seconds} segundo`;
+            }
+            return `há ${seconds} segundos`;
+        }
 
+        const minutes = Math.floor(seconds / 60);
+
+        if (minutes < 60) {
+            if (minutes === 1) {
+                return `há ${minutes} minuto`;
+            }
+            return `há ${minutes} minutos`;
+        }
+
+        const hours = Math.floor(minutes / 60);
+
+        if (hours < 24) {
+            if (hours === 1) {
+                return `há ${hours} hora`;
+            }
+            return `há ${hours} horas`;
+        }
+
+        const days = Math.floor(hours / 24);
+
+        if (days < 30) {
+            if (days === 1) {
+                return `há ${days} dia`;
+            }
+            return `há ${days} dias`;
+        }
+
+        const months = Math.floor(days / 30);
+
+        if (months < 12) {
+            if (months === 1) {
+                return `há ${months} mes`;
+            }
+            return `há ${months} meses`;
+        }
+
+        const years = Math.floor(months / 12);
+        if (years === 1) {
+            return `há ${years} ano`;
+        }
+        return `há ${years} anos`;
+    }
+
+    const { register, handleSubmit, reset } = useForm<FormCommentValues>();
+
+    function onHandleSubmit(data: FormCommentValues) {
         const token = localStorage.getItem("@MotorShopTOKEN");
 
         api.post(`/vehicle/comment/${productId}`, data, {
@@ -83,13 +148,11 @@ const ProductsPage = () => {
             },
         })
             .then((response) => {
-                // console.log(response.data);
-
                 const fetchData = async () => {
                     const result = await api.get(`/vehicle/${productId}`);
-                    // console.log(result.data.comments);
                     setVehicle(result.data);
                     setComments(result.data.comments);
+                    setVehicle;
                     let nome = result.data.users.name.split(" ");
                     let iniciais = "";
                     for (let i = 0; i < nome.length && i < 2; i++) {
@@ -106,13 +169,15 @@ const ProductsPage = () => {
         reset();
     }
 
-    // let myArr = [
-    //     { id: "0", name: "Fernando Henrique Sousa", abre: "FH", image: null },
-    //     { id: "1", name: "João Vitor", abre: "JV", image: null },
-    //     { id: "2", name: "Fabio Augusto", abre: "FA", image: null },
-    // ];
+    function localeString(value: any) {
+        let stringToNumber = Number(value);
+        let newBValue = stringToNumber.toLocaleString("pt-br", {
+            style: "currency",
+            currency: "BRL",
+        });
 
-    // let nome = vehicle?.users.name;
+        return newBValue;
+    }
 
     if (loading) {
         return <div>Carregando...</div>;
@@ -127,7 +192,9 @@ const ProductsPage = () => {
                         <div className="leftContent">
                             <div className="imageMain">
                                 <img
-                                    src={vehicle?.imgCap}
+                                    src={
+                                        vehicle?.imageGalery.photos[0].urlImage
+                                    }
                                     alt={vehicle?.title}
                                     className="mainImg"
                                 />
@@ -141,13 +208,28 @@ const ProductsPage = () => {
                                             <p>{vehicle?.year}</p>
                                             <p>{`${vehicle?.km}km`}</p>
                                         </div>
-                                        <h3>{`R$ ${vehicle?.value}`}</h3>
+                                        <h3>
+                                            {Number(
+                                                vehicle?.value
+                                            ).toLocaleString("pt-br", {
+                                                style: "currency",
+                                                currency: "BRL",
+                                            })}
+                                        </h3>
+                                        {/* <h3>{localeString(vehicle?.value)}</h3> */}
                                     </div>
                                     <Button
                                         width="80px"
                                         height="30px"
                                         backgroundColor="var(--color-brand-1)"
                                         color="var(--white-fixed)"
+                                        // onClick={handleRedirect}
+                                        onClick={() =>
+                                            window.open(
+                                                `https://wa.me/+55${vehicle.users.phone}`,
+                                                "_blank"
+                                            )
+                                        }
                                     >
                                         Comprar
                                     </Button>
@@ -163,48 +245,33 @@ const ProductsPage = () => {
                             <div className="allPics">
                                 <h2>Fotos</h2>
                                 <ul>
-                                    <li>
-                                        <img
-                                            src="https://cdn.discordapp.com/attachments/674032411092320324/1078080333397893181/image.png"
-                                            alt=""
-                                        />
-                                    </li>
-                                    <li>
-                                        <img
-                                            src="https://cdn.discordapp.com/attachments/674032411092320324/1078080333397893181/image.png"
-                                            alt=""
-                                        />
-                                    </li>
-                                    <li>
-                                        <img
-                                            src="https://cdn.discordapp.com/attachments/674032411092320324/1078080333397893181/image.png"
-                                            alt=""
-                                        />
-                                    </li>
-                                    <li>
-                                        <img
-                                            src="https://cdn.discordapp.com/attachments/674032411092320324/1078080333397893181/image.png"
-                                            alt=""
-                                        />
-                                    </li>
-                                    <li>
-                                        <img
-                                            src="https://cdn.discordapp.com/attachments/674032411092320324/1078080333397893181/image.png"
-                                            alt=""
-                                        />
-                                    </li>
-                                    <li>
-                                        <img
-                                            src="https://cdn.discordapp.com/attachments/674032411092320324/1078080333397893181/image.png"
-                                            alt=""
-                                        />
-                                    </li>
-                                    <li>
-                                        <img
-                                            src="https://cdn.discordapp.com/attachments/674032411092320324/1078080333397893181/image.png"
-                                            alt="teste"
-                                        />
-                                    </li>
+                                    {vehicleGalery.length > 0 ? (
+                                        vehicleGalery.map((e: IPhoto) => {
+                                            return (
+                                                <li
+                                                    key={e.id}
+                                                    onClick={() => {
+                                                        setIsImageOpen(true);
+                                                        setImageLink(e.urlImage)
+                                                    }}
+                                                >
+                                                    <img
+                                                        src={e.urlImage}
+                                                        alt={e.id}
+                                                    />
+                                                    {isImageOpen && (
+                                                        <ImageModal
+                                                            urlImage={
+                                                                e.urlImage
+                                                            }
+                                                        />
+                                                    )}
+                                                </li>
+                                            );
+                                        })
+                                    ) : (
+                                        <></>
+                                    )}
                                 </ul>
                             </div>
                             <div className="advertiser">
@@ -214,6 +281,9 @@ const ProductsPage = () => {
                                 <h3>{vehicle?.users.name}</h3>
                                 <p>{vehicle?.users.description}</p>
                                 <Button
+                                    onClick={()=> {
+                                        navigate(`/profilepublicview/${vehicle.users.id}`)
+                                    }}
                                     color="var(--white-fixed)"
                                     backgroundColor="var(--grey-0)"
                                     width="206px"
@@ -250,11 +320,17 @@ const ProductsPage = () => {
                                                             src={ellipse3}
                                                             alt=""
                                                         />
-                                                        <span>há 3 dias</span>
+                                                        <span>
+                                                            {timePost(
+                                                                e.updatedAt
+                                                            )}
+                                                        </span>
                                                         {e.users.id ==
                                                         userLoggedId ? (
-                                                            <KebabMenu 
-                                                                productId={productId}
+                                                            <KebabMenu
+                                                                productId={
+                                                                    productId
+                                                                }
                                                                 commentId={e.id}
                                                             />
                                                         ) : (
@@ -268,38 +344,6 @@ const ProductsPage = () => {
                                     ) : (
                                         <></>
                                     )}
-                                    {/* {myArr.map((e) => {
-                                        return (
-                                            <li key={e.id}>
-                                                <div className="commentsInfo">
-                                                    {e.image ? (
-                                                        <></>
-                                                    ) : (
-                                                        <MyDiv name={e.name} />
-                                                    )}
-
-                                                    <h3>{e.name}</h3>
-                                                    <img
-                                                        src={ellipse3}
-                                                        alt=""
-                                                    />
-                                                    <span>há 3 dias</span>
-                                                </div>
-                                                <p>
-                                                    Lorem Ipsum is simply dummy
-                                                    text of the printing and
-                                                    typesetting industry. Lorem
-                                                    Ipsum has been the
-                                                    industry's standard dummy
-                                                    text ever since the 1500s,
-                                                    when an unknown printer took
-                                                    a galley of type and
-                                                    scrambled it to make a type
-                                                    specimen book.
-                                                </p>
-                                            </li>
-                                        );
-                                    })} */}
                                 </ul>
                             </div>
                             <div className="commentsPost">
@@ -330,6 +374,7 @@ const ProductsPage = () => {
                         </div>
                         <div className="blank"></div>
                     </Comments>
+                    {isOpenEdit && <EditModal />}
 
                     <Footer />
                 </TestDiv>

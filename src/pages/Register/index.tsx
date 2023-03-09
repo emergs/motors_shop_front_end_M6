@@ -5,6 +5,7 @@ import BaseModal from "../../components/BaseModal"
 import Button from "../../components/Button"
 import Header from "../../components/Header"
 import Input from "../../components/Input/input"
+import Modals from "../../components/Modais"
 import Textarea from "../../components/Textarea/textarea"
 import { ModalsContext } from "../../contexts/Modals"
 import { IUserRegister, SellerContext } from "../../contexts/Seller"
@@ -12,7 +13,7 @@ import { Content, FormBaseRegister, RegisterPage, Wrapper } from "./style"
 
 const Register = () => {
 
-  const { handleCloseModalRegisterUser, handleOpenModalRegisterUserSuccess } = useContext(ModalsContext)
+  const { handleOpenModalRegisterUserSuccess } = useContext(ModalsContext)
   const { createUser } = useContext(SellerContext)
 
   const { control, handleSubmit, register } = useForm<IUserRegister>()
@@ -69,6 +70,7 @@ const Register = () => {
               height="48px"
               backgroundColor="var(--color-brand-1)"
               color="var(--white-fixed)"
+              type="submit"
             // onClick={() => successRegister()}
             >Finalizar cadastro
             </Button>

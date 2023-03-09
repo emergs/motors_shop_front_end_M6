@@ -9,6 +9,7 @@ const NavigationStyled = styled.div`
   align-items: center;
   position: relative;
   border: 1px solid #DEE2E6;
+  background-color: var(--white-fixed);
 
   .hamburger {
     display: block;
@@ -203,6 +204,7 @@ const DropdownItem = styled.a`
   display: flex;
   align-items: center;
   padding-left: 12px;
+  cursor:pointer;
   &:hover {
     background-color: #ddd;
     @media (min-width: 768px) {

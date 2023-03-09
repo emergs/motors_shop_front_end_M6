@@ -4,7 +4,7 @@ const AuctionStyled = styled.section`
   padding: 2.375rem 0.75rem;
 
   @media(min-width: 768px){
-    padding: 100px 60px;
+    padding: 100px 60px 0px 60px;
   }
 
 
@@ -14,12 +14,16 @@ const AuctionStyled = styled.section`
   }
 
   ul{
-    height: 31rem;
     display: flex;
     gap:0.5rem;
     overflow-y: hidden;
     overflow-x: scroll;
     margin-bottom: 67px;
+  }
+
+  ul::-webkit-scrollbar{
+    scrollbar-width: none;
+    color: red;
   }
 
   .card{
@@ -29,6 +33,12 @@ const AuctionStyled = styled.section`
     display: flex;
     flex-direction: column;
     position: relative;
+    cursor: pointer;
+  }
+
+
+  .card:hover{
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.71) 0%, #000000 100%);
   }
 
   .card-info{
