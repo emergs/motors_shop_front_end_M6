@@ -14,7 +14,7 @@ import {
 import ellipse3 from "../../assets/images/ellipse3.png";
 import { useForm } from "react-hook-form";
 import MyDiv from "../NoImageColor";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Key, useContext, useEffect, useState } from "react";
 import api from "../../services/api";
 import { ICommentProps, IPhoto, IVehicleProps } from "./interfaces";
@@ -29,6 +29,9 @@ export interface FormCommentValues {
 }
 
 const ProductsPage = () => {
+    
+    const navigate = useNavigate()
+    
     const { productId } = useParams();
     const {
         loading,
@@ -278,6 +281,9 @@ const ProductsPage = () => {
                                 <h3>{vehicle?.users.name}</h3>
                                 <p>{vehicle?.users.description}</p>
                                 <Button
+                                    onClick={()=> {
+                                        navigate(`/profilepublicview/${vehicle.users.id}`)
+                                    }}
                                     color="var(--white-fixed)"
                                     backgroundColor="var(--grey-0)"
                                     width="206px"

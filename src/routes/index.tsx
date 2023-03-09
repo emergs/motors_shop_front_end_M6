@@ -13,6 +13,7 @@ const RoutesMain = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/admview" element={<AdmPage />} />
       <Route path="/product/:productId" element={<ProductsPage />} />
+      <Route path='profilepublicview/:userId' />
       <Route path="*" element={<Navigate to="/home" />} />
     </Routes>
   );
