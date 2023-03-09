@@ -159,17 +159,37 @@ export const Card = styled.div`
 `;
 
 export const ModalContainer = styled.div`
-  position: absolute;
+  position: fixed;
 
   top: 0;
   z-index: 9999999;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 
   width: 100vw;
-  height: 200vh;
+  height: 100vh;
 
   background-color: #0000004a;
+`;
+
+export const Modal = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 35vw;
+  height: 95vh;
+  background-color: var(--white-fixed);
+  border-radius: 10px;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  ::-webkit-scrollbar-thumb {
+    display: none;
+  }
+
+  span {
+    width: 90%;
+  }
 `;
