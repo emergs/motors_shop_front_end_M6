@@ -22,6 +22,7 @@ import { FiDelete } from "react-icons/fi";
 import KebabMenu from "../kebbabMenu";
 import { SellerContext } from "../../contexts/Seller";
 import EditModal from "../EditCommentModal";
+import ImageModal from "../ImageModal";
 
 export interface FormCommentValues {
     comment: string;
@@ -44,6 +45,9 @@ const ProductsPage = () => {
         setIsOpenEdit,
         setVehicleGalery,
         vehicleGalery,
+        isImageOpen,
+        setIsImageOpen,
+        setImageLink
     } = useContext(SellerContext);
 
     useEffect(() => {
@@ -162,14 +166,6 @@ const ProductsPage = () => {
         reset();
     }
 
-    // let myArr = [
-    //     { id: "0", name: "Fernando Henrique Sousa", abre: "FH", image: null },
-    //     { id: "1", name: "João Vitor", abre: "JV", image: null },
-    //     { id: "2", name: "Fabio Augusto", abre: "FA", image: null },
-    // ];
-
-    // let nome = vehicle?.users.name;
-
     function localeString(value: any) {
         let stringToNumber = Number(value);
         let newBValue = stringToNumber.toLocaleString("pt-br", {
@@ -249,18 +245,30 @@ const ProductsPage = () => {
                                     {vehicleGalery.length > 0 ? (
                                         vehicleGalery.map((e: IPhoto) => {
                                             return (
-                                                <li key={e.id}>
+                                                <li
+                                                    key={e.id}
+                                                    onClick={() => {
+                                                        setIsImageOpen(true);
+                                                        setImageLink(e.urlImage)
+                                                    }}
+                                                >
                                                     <img
                                                         src={e.urlImage}
                                                         alt={e.id}
                                                     />
+                                                    {isImageOpen && (
+                                                        <ImageModal
+                                                            urlImage={
+                                                                e.urlImage
+                                                            }
+                                                        />
+                                                    )}
                                                 </li>
                                             );
                                         })
                                     ) : (
                                         <></>
                                     )}
-                                    
                                 </ul>
                             </div>
                             <div className="advertiser">
