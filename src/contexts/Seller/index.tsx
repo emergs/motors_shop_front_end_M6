@@ -10,6 +10,7 @@ import moment from 'moment';
 import 'moment/locale/pt-br.js';
 import {
   ICommentProps,
+  IPhoto,
   IVehicleProps,
 } from "../../components/ProductsPage/interfaces";
 import api from "../../services/api";
@@ -87,6 +88,8 @@ interface ISellerContext {
   setCommentId: any
   productId: any
   setProductId: any
+  vehicleGalery: any
+  setVehicleGalery: any
 }
 
 export const SellerContext = createContext<ISellerContext>(
@@ -106,6 +109,7 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
   const [isOpenEdit, setIsOpenEdit] = useState<Boolean>(false)
   const [commentId, setCommentId ] = useState<String>('')
   const [productId, setProductId ] = useState<String>('')
+  const [vehicleGalery, setVehicleGalery] = useState<IPhoto[]>([])
 
   
 
@@ -256,7 +260,9 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
         commentId,
         setCommentId,
         productId,
-        setProductId
+        setProductId,
+        setVehicleGalery,
+        vehicleGalery
         
       }}
     >
