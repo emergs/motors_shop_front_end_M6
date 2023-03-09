@@ -1,8 +1,7 @@
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import Auction from "../../components/Auction";
 import ModalCreateAd from "../../components/Modais";
-import { PageContainer, List, ModalContainer } from "./styles";
+import { PageContainer, List, ModalContainer, Modal } from "./styles";
 // import { vehicles } from "../../database";
 import Button from "../../components/Button";
 import { Fragment, useContext, useEffect, useState } from "react";
@@ -10,11 +9,11 @@ import Card from "../../components/Card";
 import { IUser, IVehicle } from "./interfaces";
 import VehicleList from "../../components/List";
 import api from "../../services/api";
-import MyDiv from "../../components/NoImageColor";
 import ReactDOM from "react-dom";
 import FormCreateAd from "../../components/FormCreateAd/form";
 import { SellerContext } from "../../contexts/Seller";
 import { ModalsContext } from "../../contexts/Modals";
+import { TiUser } from "react-icons/ti";
 
 const AdmPage = () => {
   const { user, setUser } = useContext(SellerContext);
@@ -26,7 +25,6 @@ const AdmPage = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("@MotorShopTOKEN");
-    console.log(token);
 
     if (token) {
       const retrieveUser = async () => {
@@ -77,12 +75,13 @@ const AdmPage = () => {
       <section className="profile-cover">
         <div className="profile-card">
           <figure>
-            {user && user.profileImage ? (
+            <TiUser size={100} color={"white"} />
+            {/* {user && user.profileImage ? (
               <img src={user.profileImage} alt="user profile photo" />
             ) : (
               <span>{user ? user.name : ""}</span>
               // <></>
-            )}
+            )} */}
           </figure>
           <h2>{user.name}</h2>
           <p>{user.description}</p>
@@ -112,7 +111,9 @@ const AdmPage = () => {
         {showModalCreateAdd ? (
           ReactDOM.createPortal(
             <ModalContainer>
-              <FormCreateAd />
+              <Modal>
+                <FormCreateAd />
+              </Modal>
             </ModalContainer>,
             document.getElementById("root") as HTMLElement
           )

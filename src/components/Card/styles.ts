@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ICardAtributes } from "./interfaces";
 
 export const CardModel = styled.div<ICardAtributes>`
-  position: ${({ position }) => position};
+  position: ${({ position }) => (position ? position : "relative")};
   display: ${({ display }) => display};
   flex-direction: ${({ flexDirection }) => flexDirection};
   width: ${({ width }) => width};
@@ -63,6 +63,7 @@ export const CardModel = styled.div<ICardAtributes>`
         border: 1px solid var(--grey-0);
         padding: 10px;
         background-color: transparent;
+        border-radius: 10px;
         &:hover {
           color: var(--white-fixed);
           background-color: var(--grey-1);
@@ -91,6 +92,11 @@ export const CardModel = styled.div<ICardAtributes>`
       position: absolute;
       color: ${({ priceColor }) => (priceColor ? priceColor : "var(--grey-0)")};
       background-color: transparent;
+      right: 0;
+    }
+    .price {
+      position: absolute;
+
       right: 0;
     }
   }
