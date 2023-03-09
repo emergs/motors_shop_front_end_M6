@@ -203,6 +203,7 @@ const DropdownItem = styled.a`
   display: flex;
   align-items: center;
   padding-left: 12px;
+  cursor:pointer;
   &:hover {
     background-color: #ddd;
     @media (min-width: 768px) {
