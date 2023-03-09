@@ -5,7 +5,7 @@ import { Dropdown, DropdownItem, Menu, NameUser, NavigationStyled } from "./styl
 import imgLogo from "../../assets/logo.svg"
 import { FiMenu } from "react-icons/fi"
 import { ModalsContext } from "../../contexts/Modals";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SellerContext } from "../../contexts/Seller";
 
 export interface IDropDownProps extends HTMLAttributes<HTMLDivElement> {
@@ -64,9 +64,9 @@ const Header = () => {
 
   return (
     <NavigationStyled>
-      <a href="/home" className="brand-name">
+      <Link to="./home" className="brand-name">
         <img src={imgLogo} alt="logo" />
-      </a>
+      </Link>
       <button
         className="hamburger"
         onClick={() => setIsNavExpanded(!isNavExpanded)}
