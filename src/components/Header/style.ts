@@ -9,6 +9,7 @@ const NavigationStyled = styled.div`
   align-items: center;
   position: relative;
   border: 1px solid #DEE2E6;
+  background-color: var(--white-fixed);
 
   .hamburger {
     display: block;

@@ -10,6 +10,7 @@ import moment from 'moment';
 import 'moment/locale/pt-br.js';
 import {
   ICommentProps,
+  IPhoto,
   IVehicleProps,
 } from "../../components/ProductsPage/interfaces";
 import api from "../../services/api";
@@ -73,14 +74,26 @@ interface ISellerContext {
   setLoading: any
   vehicle: any
   setVehicle: any
-  nameSplited: any
+  nameSplited: string;
   setNameSplited: any
-  comments: any
+  comments: any;
   setComments: any
   userLoggedId: any
   setUserLoggedId: any
   postTime: any
   setPostTime: any
+  isOpenEdit: any
+  setIsOpenEdit: any
+  commentId: any
+  setCommentId: any
+  productId: any
+  setProductId: any
+  vehicleGalery: any
+  setVehicleGalery: any
+  isImageOpen: any
+  setIsImageOpen: any
+  imageLink: any
+  setImageLink: any
 }
 
 export const SellerContext = createContext<ISellerContext>(
@@ -97,6 +110,14 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
   const [comments, setComments] = useState<ICommentProps[]>([]);
   const [userLoggedId, setUserLoggedId] = useState<String>("");
   const [postTime, setPostTime] = useState<String>('')
+  const [isOpenEdit, setIsOpenEdit] = useState<Boolean>(false)
+  const [commentId, setCommentId ] = useState<String>('')
+  const [productId, setProductId ] = useState<String>('')
+  const [vehicleGalery, setVehicleGalery] = useState<IPhoto[]>([])
+  const [isImageOpen, setIsImageOpen] = useState<Boolean>(false)
+  const [imageLink, setImageLink] = useState<String>('')
+
+  
 
   const navigate = useNavigate();
 
@@ -239,7 +260,20 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
         userLoggedId,
         setUserLoggedId,
         postTime,
-        setPostTime
+        setPostTime,
+        isOpenEdit,
+        setIsOpenEdit,
+        commentId,
+        setCommentId,
+        productId,
+        setProductId,
+        setVehicleGalery,
+        vehicleGalery,
+        isImageOpen,
+        setIsImageOpen,
+        imageLink,
+        setImageLink
+        
       }}
     >
       {children}

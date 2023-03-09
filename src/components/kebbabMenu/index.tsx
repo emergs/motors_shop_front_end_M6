@@ -8,7 +8,7 @@ const KebabMenu: React.FC<KebabMenuProps> = ({ commentId, productId }) => {
     const [menuOpen, setMenuOpen] = useState<Boolean>(false);
     const menuRef = useRef<HTMLDivElement>(null);
 
-    const { setVehicle, setComments } = useContext(SellerContext);
+    const { setVehicle, setComments, isOpenEdit, setIsOpenEdit, setCommentId, setProductId } = useContext(SellerContext);
 
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
@@ -53,12 +53,19 @@ const KebabMenu: React.FC<KebabMenuProps> = ({ commentId, productId }) => {
             });
     }
 
+    function handleEditClick(){
+        setIsOpenEdit(true)
+        setCommentId(commentId)
+        setProductId(productId)
+    }
+    
+
     return (
         <Container  ref={menuRef}>
             <KebabIcon onClick={() => setMenuOpen(!menuOpen)} />
             {menuOpen && (
                 <Menu>
-                    <MenuItem>Editar</MenuItem>
+                    <MenuItem onClick={handleEditClick}>Editar</MenuItem>
                     <MenuItem onClick={handleClickDelete}>Excluir</MenuItem>
                 </Menu>
             )}

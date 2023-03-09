@@ -6,14 +6,15 @@ import Auction from "../../components/Auction"
 import { Card, List } from "../ProfileViewAdm/styles"
 import { useEffect, useRef, useState } from "react"
 import api from "../../services/api"
-import { IVehicle } from "../ProfileViewAdm/interfaces"
+
 import { Link } from "react-router-dom"
+import { IVehicles } from "./interfaces"
 
 
 const Home = () => {
-  const [vehicles, setVehicles] = useState<IVehicle[]>([])
-  const [motorcicles, setMotorcicles] = useState<IVehicle[]>([])
-  const [cars, setCars] = useState<IVehicle[]>([])
+  const [vehicles, setVehicles] = useState<IVehicles[]>([])
+  const [motorcicles, setMotorcicles] = useState<IVehicles[]>([])
+  const [cars, setCars] = useState<IVehicles[]>([])
   const sectionCar = useRef<HTMLHeadingElement>(null)
   const sectionMotorcycle = useRef<HTMLHeadingElement>(null)
 
@@ -24,10 +25,10 @@ const Home = () => {
           console.log(res.data)
           setVehicles(res.data);
           setMotorcicles(
-            res.data.filter((v: IVehicle) => v.type === "motorcycle")
+            res.data.filter((v: IVehicles) => v.type === "motorcycle")
           );
           setCars(
-            res.data.filter((v: IVehicle) => v.type === "car")
+            res.data.filter((v: IVehicles) => v.type === "car")
           );
         })
         .catch((err) => console.error(err));
@@ -59,13 +60,13 @@ const Home = () => {
           <Auction />
           {/* <VehicleList vehicleList={vehicles} /> */}
           <div className="main-list-vehicles">
-            <h2 ref={sectionCar}>Carros</h2>
+            <h2 id='car' ref={sectionCar}>Carros</h2>
             <List>
               {cars?.map((e) =>
                 <li key={e.id}>
-                  <Link to={`../product/${e.id}`}>
+                  <Link to={`../product/${e.id}`} onClick={() => window.scrollTo(0,0)}>
                     <Card>
-                      <img src={e.imgCap} alt={e.title} />
+                      <img src={e.imageGalery.photos[0].urlImage} alt={e.title} />
                       <div className="details-container">
                         <h3>{e.title}</h3>
                         <p>
@@ -74,7 +75,12 @@ const Home = () => {
                         <p>
                           <span>{e.km}</span>
                           <span>{e.year}</span>
-                          <span>R$ {e.price}</span>
+                          <span>{Number(
+                                                e.value
+                                            ).toLocaleString("pt-br", {
+                                                style: "currency",
+                                                currency: "BRL",
+                                            })}</span>
                         </p>
                       </div>
                     </Card>
@@ -82,13 +88,13 @@ const Home = () => {
                 </li>
               )}
             </List>
-            <h2 ref={sectionMotorcycle}>Motos</h2>
+            <h2 id='motorcycle' ref={sectionMotorcycle}>Motos</h2>
             <List>
               {motorcicles?.map((e) =>
                 <li key={e.id}>
-                  <Link to={`../product/${e.id}`}>
+                  <Link to={`../product/${e.id}`} onClick={() => window.scrollTo(0, 0)}>
                     <Card>
-                      <img src={e.imgCap} alt={e.title} />
+                      <img src={e.imageGalery.photos[0].urlImage} alt={e.title} />
                       <div className="details-container">
                         <h3>{e.title}</h3>
                         <p>
@@ -97,7 +103,12 @@ const Home = () => {
                         <p>
                           <span>{e.km}</span>
                           <span>{e.year}</span>
-                          <span>R$ {e.price}</span>
+                          <span>{Number(
+                                                e.value
+                                            ).toLocaleString("pt-br", {
+                                                style: "currency",
+                                                currency: "BRL",
+                                            })}</span>
                         </p>
                       </div>
                     </Card>

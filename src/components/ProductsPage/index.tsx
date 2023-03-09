@@ -15,14 +15,16 @@ import ellipse3 from "../../assets/images/ellipse3.png";
 import { useForm } from "react-hook-form";
 import MyDiv from "../NoImageColor";
 import { useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { Key, useContext, useEffect, useState } from "react";
 import api from "../../services/api";
-import { ICommentProps, IVehicleProps } from "./interfaces";
+import { ICommentProps, IPhoto, IVehicleProps } from "./interfaces";
 import { FiDelete } from "react-icons/fi";
 import KebabMenu from "../kebbabMenu";
 import { SellerContext } from "../../contexts/Seller";
+import EditModal from "../EditCommentModal";
+import ImageModal from "../ImageModal";
 
-interface FormValues {
+export interface FormCommentValues {
     comment: string;
 }
 
@@ -39,6 +41,13 @@ const ProductsPage = () => {
         setComments,
         userLoggedId,
         setUserLoggedId,
+        isOpenEdit,
+        setIsOpenEdit,
+        setVehicleGalery,
+        vehicleGalery,
+        isImageOpen,
+        setIsImageOpen,
+        setImageLink
     } = useContext(SellerContext);
 
     useEffect(() => {
@@ -49,9 +58,10 @@ const ProductsPage = () => {
                 setUserLoggedId(idLogado);
             }
             moment.locale("pt-br");
-
+            // console.log(result.data.imageGalery.photos[0].urlImage)
             setVehicle(result.data);
             setComments(result.data.comments);
+            setVehicleGalery(result.data.imageGalery.photos);
             let nome = result.data.users.name.split(" ");
             let iniciais = "";
             for (let i = 0; i < nome.length && i < 2; i++) {
@@ -124,9 +134,9 @@ const ProductsPage = () => {
         return `há ${years} anos`;
     }
 
-    const { register, handleSubmit, reset } = useForm<FormValues>();
+    const { register, handleSubmit, reset } = useForm<FormCommentValues>();
 
-    function onHandleSubmit(data: FormValues) {
+    function onHandleSubmit(data: FormCommentValues) {
         const token = localStorage.getItem("@MotorShopTOKEN");
 
         api.post(`/vehicle/comment/${productId}`, data, {
@@ -139,6 +149,7 @@ const ProductsPage = () => {
                     const result = await api.get(`/vehicle/${productId}`);
                     setVehicle(result.data);
                     setComments(result.data.comments);
+                    setVehicle;
                     let nome = result.data.users.name.split(" ");
                     let iniciais = "";
                     for (let i = 0; i < nome.length && i < 2; i++) {
@@ -154,14 +165,6 @@ const ProductsPage = () => {
             });
         reset();
     }
-
-    // let myArr = [
-    //     { id: "0", name: "Fernando Henrique Sousa", abre: "FH", image: null },
-    //     { id: "1", name: "João Vitor", abre: "JV", image: null },
-    //     { id: "2", name: "Fabio Augusto", abre: "FA", image: null },
-    // ];
-
-    // let nome = vehicle?.users.name;
 
     function localeString(value: any) {
         let stringToNumber = Number(value);
@@ -186,7 +189,9 @@ const ProductsPage = () => {
                         <div className="leftContent">
                             <div className="imageMain">
                                 <img
-                                    src={vehicle?.imgCap}
+                                    src={
+                                        vehicle?.imageGalery.photos[0].urlImage
+                                    }
                                     alt={vehicle?.title}
                                     className="mainImg"
                                 />
@@ -237,48 +242,33 @@ const ProductsPage = () => {
                             <div className="allPics">
                                 <h2>Fotos</h2>
                                 <ul>
-                                    <li>
-                                        <img
-                                            src="https://cdn.discordapp.com/attachments/674032411092320324/1078080333397893181/image.png"
-                                            alt=""
-                                        />
-                                    </li>
-                                    <li>
-                                        <img
-                                            src="https://cdn.discordapp.com/attachments/674032411092320324/1078080333397893181/image.png"
-                                            alt=""
-                                        />
-                                    </li>
-                                    <li>
-                                        <img
-                                            src="https://cdn.discordapp.com/attachments/674032411092320324/1078080333397893181/image.png"
-                                            alt=""
-                                        />
-                                    </li>
-                                    <li>
-                                        <img
-                                            src="https://cdn.discordapp.com/attachments/674032411092320324/1078080333397893181/image.png"
-                                            alt=""
-                                        />
-                                    </li>
-                                    <li>
-                                        <img
-                                            src="https://cdn.discordapp.com/attachments/674032411092320324/1078080333397893181/image.png"
-                                            alt=""
-                                        />
-                                    </li>
-                                    <li>
-                                        <img
-                                            src="https://cdn.discordapp.com/attachments/674032411092320324/1078080333397893181/image.png"
-                                            alt=""
-                                        />
-                                    </li>
-                                    <li>
-                                        <img
-                                            src="https://cdn.discordapp.com/attachments/674032411092320324/1078080333397893181/image.png"
-                                            alt="teste"
-                                        />
-                                    </li>
+                                    {vehicleGalery.length > 0 ? (
+                                        vehicleGalery.map((e: IPhoto) => {
+                                            return (
+                                                <li
+                                                    key={e.id}
+                                                    onClick={() => {
+                                                        setIsImageOpen(true);
+                                                        setImageLink(e.urlImage)
+                                                    }}
+                                                >
+                                                    <img
+                                                        src={e.urlImage}
+                                                        alt={e.id}
+                                                    />
+                                                    {isImageOpen && (
+                                                        <ImageModal
+                                                            urlImage={
+                                                                e.urlImage
+                                                            }
+                                                        />
+                                                    )}
+                                                </li>
+                                            );
+                                        })
+                                    ) : (
+                                        <></>
+                                    )}
                                 </ul>
                             </div>
                             <div className="advertiser">
@@ -348,38 +338,6 @@ const ProductsPage = () => {
                                     ) : (
                                         <></>
                                     )}
-                                    {/* {myArr.map((e) => {
-                                        return (
-                                            <li key={e.id}>
-                                                <div className="commentsInfo">
-                                                    {e.image ? (
-                                                        <></>
-                                                    ) : (
-                                                        <MyDiv name={e.name} />
-                                                    )}
-
-                                                    <h3>{e.name}</h3>
-                                                    <img
-                                                        src={ellipse3}
-                                                        alt=""
-                                                    />
-                                                    <span>há 3 dias</span>
-                                                </div>
-                                                <p>
-                                                    Lorem Ipsum is simply dummy
-                                                    text of the printing and
-                                                    typesetting industry. Lorem
-                                                    Ipsum has been the
-                                                    industry's standard dummy
-                                                    text ever since the 1500s,
-                                                    when an unknown printer took
-                                                    a galley of type and
-                                                    scrambled it to make a type
-                                                    specimen book.
-                                                </p>
-                                            </li>
-                                        );
-                                    })} */}
                                 </ul>
                             </div>
                             <div className="commentsPost">
@@ -410,6 +368,7 @@ const ProductsPage = () => {
                         </div>
                         <div className="blank"></div>
                     </Comments>
+                    {isOpenEdit && <EditModal />}
 
                     <Footer />
                 </TestDiv>
