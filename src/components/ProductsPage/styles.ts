@@ -174,6 +174,12 @@ export const RightContent = styled.div`
         justify-content: center;
         align-items: center;
 
+        transition: all 1s ease-in-out;
+        transform-origin: top;
+        &:hover {
+            transform: scale(1.2);
+        }
+
         img {
             height: 40px;
             width: 80px;
