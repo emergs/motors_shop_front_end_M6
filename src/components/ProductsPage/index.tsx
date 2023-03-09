@@ -21,8 +21,9 @@ import { ICommentProps, IVehicleProps } from "./interfaces";
 import { FiDelete } from "react-icons/fi";
 import KebabMenu from "../kebbabMenu";
 import { SellerContext } from "../../contexts/Seller";
+import EditModal from "../EditCommentModal";
 
-interface FormValues {
+export interface FormCommentValues {
     comment: string;
 }
 
@@ -39,6 +40,8 @@ const ProductsPage = () => {
         setComments,
         userLoggedId,
         setUserLoggedId,
+        isOpenEdit,
+        setIsOpenEdit,
     } = useContext(SellerContext);
 
     useEffect(() => {
@@ -124,9 +127,9 @@ const ProductsPage = () => {
         return `há ${years} anos`;
     }
 
-    const { register, handleSubmit, reset } = useForm<FormValues>();
+    const { register, handleSubmit, reset } = useForm<FormCommentValues>();
 
-    function onHandleSubmit(data: FormValues) {
+    function onHandleSubmit(data: FormCommentValues) {
         const token = localStorage.getItem("@MotorShopTOKEN");
 
         api.post(`/vehicle/comment/${productId}`, data, {
@@ -410,6 +413,7 @@ const ProductsPage = () => {
                         </div>
                         <div className="blank"></div>
                     </Comments>
+                    {isOpenEdit && <EditModal />}
 
                     <Footer />
                 </TestDiv>
