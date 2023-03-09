@@ -1,6 +1,6 @@
 ﻿# Bem vindo ao Motors Shop
 
-O Projeto Motors Shop se trata de um e-commerce de veículos destinado a pessoas que queiram vender ou comprar, os veículos são categorizados em dois tipos: carros e moto
+O Projeto Motors Shop se trata de um e-commerce de veículos destinado a pessoas que queiram vender ou comprar, os veículos são categorizados em dois tipos: carros e motos
 
 
 # Features
@@ -8,7 +8,7 @@ O Projeto Motors Shop se trata de um e-commerce de veículos destinado a pessoas
 - Edição dos dados do usuário
 - Criação , edição, recuperação e deleção de anúncios (somente anunciante)
 - Comentários (somente para usuários logados)
-- Acesso aos veículos (não necessita de cadastro)
+- Acesso aos veículos (não necessita de cadastro, todos podem acessar)
 
 # Tecnologias
 ## Front-end
@@ -23,4 +23,19 @@ O Projeto Motors Shop se trata de um e-commerce de veículos destinado a pessoas
 - *[MomentJS](https://momentjs.com/)* : Biblioteca para manipulação de tempo
 
 ## Como executar
-A aplicação está hospedada em 
+A aplicação está hospedada em https://motors-shop-front-end-m6.vercel.app/
+
+### Executar Localmente
+1. Clone o repositório do back-end em: https://github.com/Grupo26/motors_shop_back_end_M6
+2. Caso não tenha o banco de dados PostgreSQL, instale-o em: https://www.postgresql.org/download/
+3. Crie uma base de dados e insira as credenciais do banco no arquivo .env
+4. No diretório do projeto, instale as dependências necessárias com o comando:
+	```yarn install```
+5. Rode a aplicação com o comando:
+``yarn dev``
+
+6. Clone este repositório
+7. No diretório do projeto, instale as dependências necessárias com o comando:
+	```yarn install```
+8.  Rode a aplicação com o comando:  
+    `yarn dev`
