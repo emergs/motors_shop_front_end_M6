@@ -90,6 +90,10 @@ interface ISellerContext {
   setProductId: any
   vehicleGalery: any
   setVehicleGalery: any
+  isImageOpen: any
+  setIsImageOpen: any
+  imageLink: any
+  setImageLink: any
 }
 
 export const SellerContext = createContext<ISellerContext>(
@@ -110,6 +114,8 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
   const [commentId, setCommentId ] = useState<String>('')
   const [productId, setProductId ] = useState<String>('')
   const [vehicleGalery, setVehicleGalery] = useState<IPhoto[]>([])
+  const [isImageOpen, setIsImageOpen] = useState<Boolean>(false)
+  const [imageLink, setImageLink] = useState<String>('')
 
   
 
@@ -262,7 +268,11 @@ const SellerProvider = ({ children }: ISellerProviderProps) => {
         productId,
         setProductId,
         setVehicleGalery,
-        vehicleGalery
+        vehicleGalery,
+        isImageOpen,
+        setIsImageOpen,
+        imageLink,
+        setImageLink
         
       }}
     >
