@@ -65,7 +65,7 @@ const VehicleList = ({
             </motion.li>
           ))
         ) : (
-          <span>Nenhum anúncio cadastrado</span>
+          <Fragment />
         )}
       </List>
     </Container>
