@@ -1,21 +1,11 @@
 export interface FormValues {
   title: string;
-  adType?: string;
-  type?: string;
-  year: string;
-  km: string;
-  value: string;
+  ad: string;
+  vehicle: string;
+  year: number;
+  km: number;
+  price: number;
   description: string;
-  imageGalery?: Blob[];
-}
-
-export interface EditFormValues {
-  title?: string;
-  adType?: string;
-  type?: string;
-  year?: string;
-  km?: string;
-  value?: string;
-  description?: string;
-  imageGalery?: Blob[];
+  imgCap: string;
+  imgGalery: string[];
 }

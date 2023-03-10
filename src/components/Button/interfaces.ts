@@ -16,8 +16,6 @@ export interface IButtonProps extends HTMLAttributes<HTMLButtonElement> {
   top?: string;
   bottom?: string;
   zIndex?: string;
-  value?: string | number;
-  disabled?: boolean;
   // hover atributes
   hoverColor?: string;
   hoverBackground?: string;

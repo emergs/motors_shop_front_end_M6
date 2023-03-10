@@ -22,8 +22,6 @@ const Button = ({
   bottom,
   zIndex,
   onClick,
-  value,
-  disabled,
 }: IButtonProps) => {
   return (
     <StyledButton
@@ -46,8 +44,6 @@ const Button = ({
       zIndex={zIndex}
       onClick={onClick}
       type={type}
-      value={value}
-      {...(disabled ? { disabled } : "")}
     >
       {children}
     </StyledButton>

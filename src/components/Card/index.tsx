@@ -3,20 +3,18 @@ import { ICardProps } from "./interfaces";
 import Button from "../Button";
 import { FiClock } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { useState } from "react";
-import { RxDoubleArrowLeft, RxDoubleArrowRight } from "react-icons/rx";
+
 
 const Card = ({
   id,
   type,
-  imageGalery,
+  imgCap,
   title,
   description,
   km,
   year,
   value,
-  //   time_auction,
+//   time_auction,
   //atributes
   position = "relative",
   display = "flex",
@@ -44,8 +42,6 @@ const Card = ({
   priceColor,
   timeDisplay: spanDisplay,
 }: ICardProps) => {
-  const [imageIndex, setImageIndex] = useState(0);
-
   const buttonAtributes = {
     border: buttonBorder,
     padding: buttonPadding,
@@ -55,6 +51,7 @@ const Card = ({
     backgroundColor: buttonBackground,
   };
 
+  
   return (
     <CardModel
       position={position}
@@ -77,71 +74,22 @@ const Card = ({
       buttonContainerBackground={buttonContainerBackground}
       timeDisplay={spanDisplay}
     >
-      {imageIndex >= 1 ? (
-        <Button
-          hoverBackground="#edeafdb2"
-          hoverBorder="1px solid var(--color-brand-1)"
-          color="var(--color-brand-1)"
-          position="absolute"
-          zIndex="99999"
-          left="0"
-          top="30"
-          padding="10px"
-          onClick={() => {
-            setImageIndex(imageIndex - 1);
-          }}
-        >
-          <RxDoubleArrowLeft size={20} />
-        </Button>
-      ) : (
-        <></>
-      )}
-      {imageIndex < imageGalery?.photos.length - 1 ? (
-        <Button
-          hoverBackground="#edeafdb2"
-          hoverBorder="1px solid var(--color-brand-1)"
-          color="var(--color-brand-1)"
-          position="absolute"
-          zIndex="1"
-          top="30"
-          right="0"
-          padding="10px"
-          onClick={() => {
-            setImageIndex(imageIndex + 1);
-          }}
-        >
-          <RxDoubleArrowRight size={20} />
-        </Button>
-      ) : (
-        <></>
-      )}
-      {imageGalery.photos && imageGalery.photos.length > 0 ? (
-        <img src={imageGalery.photos[imageIndex].urlImage} alt={title} />
-      ) : (
-        <></>
-      )}
-
+      <img src={imgCap} alt={title} />
       <div className="details-container">
         <span className="time">
           {/* <FiClock /> {time_auction} */}
           <FiClock /> {"teste"}
         </span>
         <h3>{title}</h3>
-        <p>
-          {description.length > 85
-            ? description.slice(0, 75) + "..."
-            : description}
-        </p>
+        <p>{description.length > 85 ? description.slice(0, 75) + "..." : description}</p>
         <p>
           <span>{`km ${km}`}</span>
           <span>{year}</span>
-          <span className="price">R$ {value}</span>
+          <span>R$ {value}</span>
         </p>
         <div className="button-container">
           <Button {...buttonAtributes}>Editar</Button>
-          <Link to={`/product/${id}`} onClick={() => window.scrollTo(0, 0)}>
-            Ver como
-          </Link>
+          <Link to={`/product/${id}`} onClick={() => window.scrollTo(0, 0)}>Ver como</Link>
         </div>
       </div>
     </CardModel>
