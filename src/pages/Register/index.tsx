@@ -10,6 +10,7 @@ import Textarea from "../../components/Textarea/textarea"
 import { ModalsContext } from "../../contexts/Modals"
 import { IUserRegister, SellerContext } from "../../contexts/Seller"
 import { Content, FormBaseRegister, RegisterPage, Wrapper } from "./style"
+import Footer from "../../components/Footer"
 
 const Register = () => {
 
@@ -49,7 +50,7 @@ const Register = () => {
                 <Input label="Complemento " name="complement" type="text" placeholder="Apto 1" control={control} />
               </div>
             </FormBaseRegister>
-            <span className="type-account-title">Tipo de conta</span>
+            <span className="title-form">Tipo de conta</span>
             <Wrapper>
               <input type="radio" id="option-1" value="buyer" {...register("typeUser")} defaultChecked />
               <input type="radio" id="option-2" value="seller" {...register("typeUser")} />
@@ -77,6 +78,7 @@ const Register = () => {
           </form>
         </Content >
       </RegisterPage>
+      <Footer/>
     </>
   )
 }

@@ -2,16 +2,18 @@ import Footer from "../../components/Footer"
 import Header from "../../components/Header"
 import LoginTest from "../../components/LoginTest"
 import Modals from "../../components/Modais"
+import { Content, RegisterPage } from "../Register/style"
 
-import { Content } from "./style"
 
 const LoginUser = () => {
   return (
     <>
       <Header />
-      <Content>
-        <LoginTest/>
-      </Content>
+      <RegisterPage>
+        <Content>
+          <LoginTest />
+        </Content>
+      </RegisterPage>
       <Footer />
     </>
   )

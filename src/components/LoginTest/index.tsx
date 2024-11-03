@@ -1,28 +1,23 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { RiCloseFill } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import { ModalsContext } from "../../contexts/Modals";
 import { IUserLogin, SellerContext } from "../../contexts/Seller";
 import Button from "../Button";
 import Input from "../Input/input";
-import BaseLogin from "../LoginBase";
 import { FormBase } from "./style";
 
 const LoginTest = () => {
-  // const { handleCloseModalLogin } = useContext(ModalsContext);
-
   const { userLogin } = useContext(SellerContext);
 
   const { control, handleSubmit } = useForm<IUserLogin>();
 
   const navigate = useNavigate();
   function onClickSend() {
-    navigate("/home", { replace: true });
+    navigate("/register", { replace: true });
   }
 
   return (
-    <BaseLogin padding={"44px 28px"}>
+    <>
       <h2>Login</h2>
       <FormBase onSubmit={handleSubmit(userLogin)}>
         <Input
@@ -63,7 +58,7 @@ const LoginTest = () => {
           </Button>
         </div>
       </FormBase>
-    </BaseLogin>
+    </>
   );
 };
 
